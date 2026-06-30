@@ -1,0 +1,67 @@
+// BihariBhojan — Prisma schema (SQLite, zero-config & free for local/dev).
+// For production swap datasource provider to "postgresql" and set DATABASE_URL.
+
+generator client {
+  provider      = "prisma-client-js"
+  // `native` for local dev; the debian target matches the Docker/Azure runtime.
+  binaryTargets = ["native", "debian-openssl-3.0.x"]
+}
+
+datasource db {
+  provider = "sqlserver"
+  url      = env("DATABASE_URL")
+}
+
+model Category {
+  id        String    @id @default(cuid())
+  name      String
+  slug      String    @unique
+  emoji     String
+  tagline   String?
+  sortOrder Int       @default(0)
+  products  Product[]
+}
+
+model Product {
+  id          String   @id @default(cuid())
+  name        String
+  slug        String   @unique
+  description String
+  price       Int // in paise-free rupees (whole ₹)
+  oldPrice    Int?
+  image       String // emoji or remote url
+  isVeg       Boolean  @default(true)
+  spiceLevel  Int      @default(1) // 0..3
+  isBestseller Boolean @default(false)
+  isSignature Boolean  @default(false)
+  rating      Float    @default(4.5)
+  reviews     Int      @default(0)
+  prepTime    Int      @default(25) // minutes
+  serves      String   @default("1")
+  region      String?  // e.g. "Champaran", "Gaya", "Silao"
+  tags        String   @default("") // comma separated
+  categoryId  String
+  category    Category @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  createdAt   DateTime @default(now())
+
+  @@index([categoryId])
+}
+
+model Order {
+  id            String   @id @default(cuid())
+  orderNumber   String   @unique
+  customerName  String
+  phone         String
+  email         String?
+  address       String
+  city          String   @default("")
+  pincode       String   @default("")
+  notes         String?
+  paymentMethod String   @default("COD")
+  items         String // JSON string of line items
+  subtotal      Int
+  deliveryFee   Int      @default(0)
+  total         Int
+  status        String   @default("PLACED")
+  createdAt     DateTime @default(now())
+}
