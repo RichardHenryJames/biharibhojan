@@ -59,15 +59,18 @@ try {
   $env:CLIENT_IP = (Invoke-RestMethod -Uri 'https://api.ipify.org')
   Write-Host "==> This machine's public IP: $env:CLIENT_IP"
 
-  # Provision infra. Postgres Flexible Server occasionally returns a transient
-  # InternalServerError — retry a few times before giving up.
+  # ---- Phase 1: provision infra (ACR, SQL, env, identity) WITHOUT the app ----
+  # The Container App is deployed in phase 2 with the real image, so its revision
+  # is healthy on first try (no placeholder-image port mismatch).
+  $env:DEPLOY_APP = 'false'
+  $env:CONTAINER_IMAGE = ''
   $maxAttempts = 3
   for ($attempt = 1; $attempt -le $maxAttempts; $attempt++) {
-    Write-Host "==> Provisioning Azure resources (Bicep) - attempt $attempt/$maxAttempts (Postgres can take ~8-10 min)..." -ForegroundColor Cyan
+    Write-Host "==> [Phase 1] Provisioning infra (Bicep) - attempt $attempt/$maxAttempts (SQL can take a few min)..." -ForegroundColor Cyan
     Invoke-Az @(
       'deployment', 'group', 'create',
       '--resource-group', $ResourceGroup,
-      '--name', $DeploymentName,
+      '--name', "$DeploymentName-infra",
       '--parameters', 'infra/main.bicepparam',
       '--output', 'none'
     ) -AllowFail
@@ -75,25 +78,31 @@ try {
     if ($LASTEXITCODE -eq 0) { break }
 
     if ($attempt -eq $maxAttempts) {
-      throw "Infrastructure deployment failed after $maxAttempts attempts. Inspect: az deployment operation group list -g $ResourceGroup -n $DeploymentName"
+      throw "Infra deployment failed after $maxAttempts attempts. Inspect: az deployment operation group list -g $ResourceGroup -n $DeploymentName-infra"
     }
 
-    Write-Host '   Deployment failed (often a transient error). Cleaning up any failed SQL server and retrying in 30s...' -ForegroundColor Yellow
+    # A cancelled/failed earlier run can leave the SQL logical server with an
+    # in-flight control-plane op ('UpsertLogicalServerRequestAlreadyInProgress').
+    # Delete it and BLOCK until it's fully gone before retrying (the delete itself
+    # queues behind the stuck op, so a fixed sleep isn't enough).
+    Write-Host '   Failed (often transient). Cleaning up SQL server and waiting for it to fully delete...' -ForegroundColor Yellow
     $failed = az sql server list -g $ResourceGroup --query "[?starts_with(name, 'biharibhojan-sql')].name" -o tsv 2>$null
     foreach ($srv in ($failed | Where-Object { $_ })) {
       Invoke-Az @('sql', 'server', 'delete', '-g', $ResourceGroup, '-n', $srv, '--yes') -AllowFail
+      for ($w = 0; $w -lt 20; $w++) {
+        Start-Sleep -Seconds 15
+        az sql server show -g $ResourceGroup -n $srv --query 'state' -o tsv 2>$null | Out-Null
+        if ($LASTEXITCODE -ne 0) { break } # show fails once the server is gone
+      }
     }
-    Start-Sleep -Seconds 30
+    Start-Sleep -Seconds 20
   }
 
-  $outputs = az deployment group show -g $ResourceGroup -n $DeploymentName --query properties.outputs -o json | ConvertFrom-Json
-  $acrName = $outputs.acrName.value
-  $appName = $outputs.containerAppName.value
-  $sqlFqdn = $outputs.sqlServerFqdn.value
-  $fqdn    = $outputs.containerAppFqdn.value
-
-  if (-not $acrName -or -not $appName -or -not $sqlFqdn) {
-    throw "Deployment outputs are incomplete (acr='$acrName', app='$appName', sql='$sqlFqdn')."
+  $infra = az deployment group show -g $ResourceGroup -n "$DeploymentName-infra" --query properties.outputs -o json | ConvertFrom-Json
+  $acrName = $infra.acrName.value
+  $sqlFqdn = $infra.sqlServerFqdn.value
+  if (-not $acrName -or -not $sqlFqdn) {
+    throw "Phase 1 outputs incomplete (acr='$acrName', sql='$sqlFqdn')."
   }
 
   Write-Host '==> Building container image in the cloud (az acr build)...' -ForegroundColor Cyan
@@ -106,8 +115,20 @@ try {
   npx prisma db seed
   if ($LASTEXITCODE -ne 0) { throw 'prisma db seed failed' }
 
-  Write-Host '==> Pointing the Container App at the freshly built image...' -ForegroundColor Cyan
-  Invoke-Az @('containerapp', 'update', '-g', $ResourceGroup, '-n', $appName, '--image', "$acrName.azurecr.io/biharibhojan:latest", '--output', 'none')
+  # ---- Phase 2: deploy the Container App with the real, freshly-built image ----
+  Write-Host '==> [Phase 2] Deploying the Container App with the built image...' -ForegroundColor Cyan
+  $env:DEPLOY_APP = 'true'
+  $env:CONTAINER_IMAGE = "$acrName.azurecr.io/biharibhojan:latest"
+  Invoke-Az @(
+    'deployment', 'group', 'create',
+    '--resource-group', $ResourceGroup,
+    '--name', "$DeploymentName-app",
+    '--parameters', 'infra/main.bicepparam',
+    '--output', 'none'
+  )
+
+  $app = az deployment group show -g $ResourceGroup -n "$DeploymentName-app" --query properties.outputs -o json | ConvertFrom-Json
+  $fqdn = $app.containerAppFqdn.value
 
   Write-Host ''
   Write-Host "  Deployed!  https://$fqdn" -ForegroundColor Green

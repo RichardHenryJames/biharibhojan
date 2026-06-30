@@ -1,5 +1,5 @@
 // BihariBhojan — cheap + scalable Azure stack.
-// Azure Container Apps (scale-to-zero) + PostgreSQL Flexible (Burstable) + ACR + Log Analytics.
+// Azure Container Apps (scale-to-zero) + Azure SQL (Basic) + ACR + Log Analytics.
 
 targetScope = 'resourceGroup'
 
@@ -10,6 +10,9 @@ param appName string = 'biharibhojan'
 
 @description('Azure region for all resources.')
 param location string = resourceGroup().location
+
+@description('Salt for the SQL server name. Change this to get a fresh server name if a prior name is stuck/locked.')
+param dbServerSalt string = 'a'
 
 @description('Azure SQL administrator login.')
 param dbAdminLogin string = 'bihariadmin'
@@ -24,8 +27,11 @@ param dbName string = 'biharibhojan'
 @description('Public IP allowed to reach Azure SQL directly (for prisma db push/seed). Empty = skip.')
 param clientIpAddress string = ''
 
-@description('Container image. A public placeholder is used on the first deploy, then swapped for the ACR image.')
-param containerImage string = 'mcr.microsoft.com/k8se/quickstart:latest'
+@description('Container image for the app. Required when deployApp is true.')
+param containerImage string = ''
+
+@description('Whether to deploy the Container App. Phase 1 (infra+ACR) sets false; phase 2 (after image build) sets true.')
+param deployApp bool = true
 
 @description('Minimum replicas. 0 = scale to zero (cheapest).')
 @minValue(0)
@@ -45,7 +51,8 @@ var tags = {
 
 var resourceToken = uniqueString(subscription().id, resourceGroup().id, appName)
 var acrName = toLower('${appName}acr${resourceToken}')
-var sqlServerName = toLower('${appName}-sql-${resourceToken}')
+var sqlServerName = toLower('${appName}-sql-${dbServerSalt}-${resourceToken}')
+var acrPullRoleId = subscriptionResourceId('Microsoft.Authorization/roleDefinitions', '7f951dda-4ed3-4680-a7ca-43fe172d538d')
 
 resource logAnalytics 'Microsoft.OperationalInsights/workspaces@2023-09-01' = {
   name: '${appName}-logs'
@@ -68,6 +75,24 @@ resource acr 'Microsoft.ContainerRegistry/registries@2023-11-01-preview' = {
   }
   properties: {
     adminUserEnabled: false
+  }
+}
+
+// User-assigned identity the Container App uses to pull from ACR.
+// Granting AcrPull up front (independent of the app) avoids a first-deploy race.
+resource appIdentity 'Microsoft.ManagedIdentity/userAssignedIdentities@2023-01-31' = {
+  name: '${appName}-id'
+  location: location
+  tags: tags
+}
+
+resource acrPullAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
+  scope: acr
+  name: guid(acr.id, appIdentity.id, acrPullRoleId)
+  properties: {
+    principalId: appIdentity.properties.principalId
+    roleDefinitionId: acrPullRoleId
+    principalType: 'ServicePrincipal'
   }
 }
 
@@ -136,12 +161,15 @@ resource caeEnv 'Microsoft.App/managedEnvironments@2024-03-01' = {
 
 var databaseUrl = 'sqlserver://${sqlServer.properties.fullyQualifiedDomainName}:1433;database=${dbName};user=${dbAdminLogin};password=${dbAdminPassword};encrypt=true;trustServerCertificate=false'
 
-resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
+resource containerApp 'Microsoft.App/containerApps@2024-03-01' = if (deployApp) {
   name: '${appName}-app'
   location: location
   tags: tags
   identity: {
-    type: 'SystemAssigned'
+    type: 'UserAssigned'
+    userAssignedIdentities: {
+      '${appIdentity.id}': {}
+    }
   }
   properties: {
     managedEnvironmentId: caeEnv.id
@@ -162,7 +190,7 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
       registries: [
         {
           server: acr.properties.loginServer
-          identity: 'system'
+          identity: appIdentity.id
         }
       ]
       secrets: [
@@ -211,20 +239,8 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
   }
 }
 
-var acrPullRoleId = subscriptionResourceId('Microsoft.Authorization/roleDefinitions', '7f951dda-4ed3-4680-a7ca-43fe172d538d')
-
-resource acrPullAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
-  scope: acr
-  name: guid(acr.id, containerApp.id, acrPullRoleId)
-  properties: {
-    principalId: containerApp.identity.principalId
-    roleDefinitionId: acrPullRoleId
-    principalType: 'ServicePrincipal'
-  }
-}
-
-output containerAppName string = containerApp.name
-output containerAppFqdn string = containerApp.properties.configuration.ingress.fqdn
+output containerAppName string = deployApp ? containerApp.name : ''
+output containerAppFqdn string = deployApp ? containerApp.properties.configuration.ingress.fqdn : ''
 output acrName string = acr.name
 output acrLoginServer string = acr.properties.loginServer
 output sqlServerFqdn string = sqlServer.properties.fullyQualifiedDomainName
