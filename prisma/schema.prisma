@@ -15,9 +15,11 @@ datasource db {
 model Category {
   id        String    @id @default(cuid())
   name      String
+  nameHi    String?
   slug      String    @unique
   emoji     String
   tagline   String?
+  taglineHi String?
   sortOrder Int       @default(0)
   products  Product[]
 }
@@ -25,8 +27,10 @@ model Category {
 model Product {
   id          String   @id @default(cuid())
   name        String
+  nameHi      String?
   slug        String   @unique
   description String
+  descriptionHi String?
   price       Int // in paise-free rupees (whole ₹)
   oldPrice    Int?
   image       String // emoji or remote url

@@ -5,31 +5,31 @@ import ContactForm from "@/components/contact/ContactForm";
 export const metadata: Metadata = {
   title: "Contact Us",
   description:
-    "Questions, bulk orders or catering? Get in touch with the BihariBhojan team — we're in Patna and ready to help.",
+    "Questions, bulk orders or catering? Get in touch with the BihariBhojan team — we're in Hazaribagh and ready to help.",
 };
 
 const INFO = [
   {
     icon: MapPin,
     title: "Visit the kitchen",
-    lines: ["Boring Road, Patna", "Bihar 800001, India"],
+    lines: ["Vishnupuri, Hazaribagh", "Jharkhand 825301, India"],
   },
   {
     icon: Phone,
     title: "Call us",
-    lines: ["+91 612 345 6789", "Daily, 9 AM – 11 PM"],
+    lines: ["+91 99340 12345", "Daily, 8 AM – 10 PM"],
   },
   {
     icon: Mail,
     title: "Email",
-    lines: ["hello@biharibhojan.com", "orders@biharibhojan.com"],
+    lines: ["ghar@biharibhojan.com", "orders@biharibhojan.com"],
   },
 ];
 
 const FAQS = [
   {
     q: "Which areas do you deliver to?",
-    a: "We currently deliver across Patna and nearby areas, with fresh-cooked orders reaching you in 35–50 minutes. New cities are coming soon.",
+    a: "We currently deliver across Hazaribagh and nearby areas, with fresh-cooked orders reaching you in 30–45 minutes. New areas are coming soon.",
   },
   {
     q: "Do you take bulk or catering orders?",
@@ -37,7 +37,7 @@ const FAQS = [
   },
   {
     q: "Is the food freshly cooked?",
-    a: "Always. Nothing is pre-made or frozen. Your littis hit the coal and your handi starts cooking only after you order.",
+    a: "Always. Nothing is pre-made or frozen. Everything is cooked fresh in our Hazaribagh home kitchen only after you order.",
   },
   {
     q: "What are the payment options?",

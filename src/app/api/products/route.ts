@@ -7,14 +7,16 @@ export const dynamic = "force-dynamic";
 
 type ProductWithCategory = Awaited<
   ReturnType<typeof prisma.product.findMany>
->[number] & { category: { slug: string; name: string } };
+>[number] & { category: { slug: string; name: string; nameHi: string | null } };
 
 function toDTO(p: ProductWithCategory): ProductDTO {
   return {
     id: p.id,
     name: p.name,
+    nameHi: p.nameHi,
     slug: p.slug,
     description: p.description,
+    descriptionHi: p.descriptionHi,
     price: p.price,
     oldPrice: p.oldPrice,
     image: p.image,
@@ -30,6 +32,7 @@ function toDTO(p: ProductWithCategory): ProductDTO {
     tags: p.tags ? p.tags.split(",").filter(Boolean) : [],
     categorySlug: p.category.slug,
     categoryName: p.category.name,
+    categoryNameHi: p.category.nameHi,
   };
 }
 

@@ -3,8 +3,10 @@ import {
   Playfair_Display,
   Plus_Jakarta_Sans,
   Tiro_Devanagari_Hindi,
+  Noto_Sans_Devanagari,
 } from "next/font/google";
 import "./globals.css";
+import { LanguageProvider } from "@/context/LanguageContext";
 import { CartProvider } from "@/context/CartContext";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -30,28 +32,38 @@ const hindi = Tiro_Devanagari_Hindi({
   display: "swap",
 });
 
+// Clean, modern Devanagari for Hindi UI text — the family big Indian apps use.
+const hindiSans = Noto_Sans_Devanagari({
+  subsets: ["latin", "devanagari"],
+  variable: "--font-hindi-sans",
+  weight: ["400", "500", "600", "700", "800"],
+  display: "swap",
+});
+
 export const metadata: Metadata = {
   metadataBase: new URL("https://biharibhojan.com"),
   title: {
-    default: "BihariBhojan — Authentic Bihari Food, Delivered Hot",
+    default: "BihariBhojan — Ghar ka Bihari Khana, Hazaribagh",
     template: "%s · BihariBhojan",
   },
   description:
-    "Order authentic Bihari food online — Litti Chokha, Champaran Handi Mutton, Sattu Paratha, Thekua & Silao Khaja. Coal-roasted, ghee-soaked, delivered hot to your door.",
+    "Order homestyle Bihari food in Hazaribagh — Besan Aloo, Parwal-Aloo Pulao, Chawal-Chokha, Litti Chokha & Sattu Paratha. Fresh-cooked ghar ka khana, delivered hot.",
   keywords: [
-    "Bihari food",
+    "Bihari food Hazaribagh",
+    "ghar ka khana",
+    "homestyle Bihari food",
+    "Besan Aloo",
+    "Parwal Aloo Pulao",
+    "Chawal Chokha",
     "Litti Chokha",
-    "Champaran mutton",
-    "Sattu",
-    "Thekua",
-    "Bihari thali",
-    "order Bihari food online",
+    "Sattu Paratha",
+    "home food delivery Hazaribagh",
   ],
   authors: [{ name: "BihariBhojan" }],
   openGraph: {
-    title: "BihariBhojan — Authentic Bihari Food, Delivered Hot",
+    title: "BihariBhojan — Ghar ka Bihari Khana, Hazaribagh",
     description:
-      "Litti Chokha to Champaran Handi Mutton. Real Bihari flavours, delivered hot.",
+      "Homestyle Besan Aloo, Parwal-Aloo Pulao & Chawal-Chokha. Real ghar ka khana, delivered hot in Hazaribagh.",
     url: "https://biharibhojan.com",
     siteName: "BihariBhojan",
     locale: "en_IN",
@@ -78,15 +90,17 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${display.variable} ${sans.variable} ${hindi.variable}`}
+      className={`${display.variable} ${sans.variable} ${hindi.variable} ${hindiSans.variable}`}
     >
       <body>
-        <CartProvider>
-          <Navbar />
-          <main className="min-h-screen">{children}</main>
-          <Footer />
-          <CartDrawer />
-        </CartProvider>
+        <LanguageProvider>
+          <CartProvider>
+            <Navbar />
+            <main className="min-h-screen">{children}</main>
+            <Footer />
+            <CartDrawer />
+          </CartProvider>
+        </LanguageProvider>
       </body>
     </html>
   );

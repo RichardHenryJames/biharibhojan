@@ -5,17 +5,11 @@ import { useSearchParams } from "next/navigation";
 import { motion } from "framer-motion";
 import { Search, X, Leaf, ArrowUpDown } from "lucide-react";
 import ProductCard from "@/components/ProductCard";
+import { useLanguage } from "@/context/LanguageContext";
 import { cn } from "@/lib/utils";
 import type { ProductDTO, CategoryDTO } from "@/lib/types";
 
 type SortKey = "recommended" | "price-asc" | "price-desc" | "rating";
-
-const SORTS: { key: SortKey; label: string }[] = [
-  { key: "recommended", label: "Recommended" },
-  { key: "rating", label: "Top rated" },
-  { key: "price-asc", label: "Price: Low to High" },
-  { key: "price-desc", label: "Price: High to Low" },
-];
 
 export default function MenuBrowser({
   products,
@@ -25,10 +19,22 @@ export default function MenuBrowser({
   categories: CategoryDTO[];
 }) {
   const params = useSearchParams();
+  const { t, lang } = useLanguage();
   const [activeCat, setActiveCat] = useState<string>(params.get("c") || "all");
   const [query, setQuery] = useState("");
   const [vegOnly, setVegOnly] = useState(false);
   const [sort, setSort] = useState<SortKey>("recommended");
+
+  const SORTS: { key: SortKey; label: string }[] = [
+    { key: "recommended", label: t("menu.sortRecommended") },
+    { key: "rating", label: t("menu.sortRating") },
+    { key: "price-asc", label: t("menu.sortPriceLow") },
+    { key: "price-desc", label: t("menu.sortPriceHigh") },
+  ];
+
+  const catName = (c: CategoryDTO) => (lang === "hi" && c.nameHi ? c.nameHi : c.name);
+  const catTagline = (c: CategoryDTO) =>
+    lang === "hi" && c.taglineHi ? c.taglineHi : c.tagline;
 
   // Keep the URL shareable without triggering a navigation/scroll.
   useEffect(() => {
@@ -60,8 +66,9 @@ export default function MenuBrowser({
     if (!q) return true;
     return (
       p.name.toLowerCase().includes(q) ||
+      (p.nameHi?.includes(query.trim()) ?? false) ||
       p.description.toLowerCase().includes(q) ||
-      p.tags.some((t) => t.toLowerCase().includes(q)) ||
+      p.tags.some((tag) => tag.toLowerCase().includes(q)) ||
       (p.region?.toLowerCase().includes(q) ?? false)
     );
   };
@@ -91,7 +98,7 @@ export default function MenuBrowser({
               <input
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
-                placeholder="Search litti, mutton, thekua…"
+                placeholder={t("menu.searchPlaceholder")}
                 className="w-full rounded-full border border-masala-200 bg-cream-50 py-2.5 pl-11 pr-10 text-sm font-medium text-masala-800 outline-none transition focus:border-saffron-400 focus:ring-2 focus:ring-saffron-200"
               />
               {query && (
@@ -115,7 +122,7 @@ export default function MenuBrowser({
               )}
             >
               <Leaf className="h-4 w-4" />
-              Veg only
+              {t("menu.vegOnly")}
             </button>
 
             <div className="relative">
@@ -139,14 +146,14 @@ export default function MenuBrowser({
             <Pill
               active={activeCat === "all"}
               onClick={() => setActiveCat("all")}
-              label="🍽️ All"
+              label={`🍽️ ${t("menu.all")}`}
             />
             {categories.map((c) => (
               <Pill
                 key={c.slug}
                 active={activeCat === c.slug}
                 onClick={() => setActiveCat(c.slug)}
-                label={`${c.emoji} ${c.name}`}
+                label={`${c.emoji} ${catName(c)}`}
               />
             ))}
           </div>
@@ -154,13 +161,16 @@ export default function MenuBrowser({
       </div>
 
       <p className="mb-6 text-sm font-medium text-masala-500">
-        {total} {total === 1 ? "dish" : "dishes"}
+        {total} {total === 1 ? t("menu.dish") : t("menu.dishes")}
         {activeCat !== "all" && (
           <>
             {" "}
-            in{" "}
+            {t("menu.in")}{" "}
             <span className="font-bold text-masala-800">
-              {categories.find((c) => c.slug === activeCat)?.name}
+              {(() => {
+                const c = categories.find((x) => x.slug === activeCat);
+                return c ? catName(c) : "";
+              })()}
             </span>
           </>
         )}
@@ -169,9 +179,9 @@ export default function MenuBrowser({
       {grouped.length === 0 ? (
         <div className="flex flex-col items-center justify-center gap-3 rounded-3xl border border-dashed border-masala-200 bg-cream-50 py-20 text-center">
           <span className="text-5xl">🔍</span>
-          <p className="font-display text-xl font-bold">No dishes found</p>
+          <p className="font-display text-xl font-bold">{t("menu.noResults")}</p>
           <p className="max-w-sm text-sm text-masala-500">
-            Try a different search or clear the filters to see the full menu.
+            {t("menu.noResultsHint")}
           </p>
           <button
             onClick={() => {
@@ -181,7 +191,7 @@ export default function MenuBrowser({
             }}
             className="btn-ghost mt-2"
           >
-            Reset filters
+            {t("menu.resetFilters")}
           </button>
         </div>
       ) : (
@@ -194,9 +204,9 @@ export default function MenuBrowser({
                 </span>
                 <div>
                   <h2 className="font-display text-2xl font-bold text-masala-900">
-                    {cat.name}
+                    {catName(cat)}
                   </h2>
-                  <p className="text-sm text-masala-500">{cat.tagline}</p>
+                  <p className="text-sm text-masala-500">{catTagline(cat)}</p>
                 </div>
               </div>
               <motion.div

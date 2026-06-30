@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { ArrowRight, Clock, Star, UtensilsCrossed } from "lucide-react";
+import { useLanguage } from "@/context/LanguageContext";
 
 const container = {
   hidden: {},
@@ -15,13 +16,14 @@ const item = {
 
 const floats = [
   // `mobile` cards show on every screen; the others appear from sm+ to avoid clutter.
-  { emoji: "🍖", label: "Champaran Mutton", price: "₹449", cls: "-left-2 top-8 sm:left-0 sm:top-10", delay: "0s", mobile: true },
-  { emoji: "🍪", label: "Thekua", price: "₹149", cls: "-right-1 top-2 sm:right-2 sm:top-0", delay: "1.1s", mobile: true },
-  { emoji: "🥤", label: "Sattu Sharbat", price: "₹69", cls: "-right-3 bottom-24", delay: "0.6s", mobile: false },
-  { emoji: "🫓", label: "Sattu Paratha", price: "₹199", cls: "-left-3 bottom-12", delay: "1.6s", mobile: false },
+  { emoji: "🥔", en: "Besan Aloo", hi: "बेसन आलू", price: "₹99", cls: "-left-2 top-8 sm:left-0 sm:top-10", delay: "0s", mobile: true },
+  { emoji: "🍚", en: "Aloo Pulao", hi: "आलू पुलाव", price: "₹129", cls: "-right-1 top-2 sm:right-2 sm:top-0", delay: "1.1s", mobile: true },
+  { emoji: "🍛", en: "Chawal Chokha", hi: "चावल चोखा", price: "₹89", cls: "-right-3 bottom-24", delay: "0.6s", mobile: false },
+  { emoji: "🫓", en: "Sattu Paratha", hi: "सत्तू पराठा", price: "₹119", cls: "-left-3 bottom-12", delay: "1.6s", mobile: false },
 ];
 
 export default function Hero() {
+  const { t, lang } = useLanguage();
   return (
     <section className="relative overflow-hidden">
       {/* Background decor */}
@@ -40,37 +42,32 @@ export default function Hero() {
               <span className="absolute h-2 w-2 animate-ping rounded-full bg-leaf-500/70" />
               <span className="h-2 w-2 rounded-full bg-leaf-500" />
             </span>
-            Now delivering across Patna · Live kitchen
+            {t("hero.badge")}
           </motion.span>
 
           <motion.h1
             variants={item}
             className="mt-5 font-display text-[2.6rem] font-extrabold leading-[1.02] text-masala-900 sm:text-6xl lg:text-[4.1rem]"
           >
-            The smoky soul of{" "}
-            <span className="text-gradient">Bihar</span>,
+            {t("hero.titleA")}{" "}
+            <span className="text-gradient">{t("hero.titleHighlight")}</span>
             <br />
-            delivered hot.
+            {t("hero.titleB")}
           </motion.h1>
 
           <motion.p
             variants={item}
             className="mt-5 max-w-lg text-base leading-relaxed text-masala-600 sm:text-lg"
           >
-            From coal-roasted{" "}
-            <span className="font-semibold text-masala-800">Litti Chokha</span> to
-            slow-cooked{" "}
-            <span className="font-semibold text-masala-800">Champaran Handi Mutton</span>{" "}
-            — real recipes from Magadh to Mithila, cooked fresh and brought to your
-            door.
+            {t("hero.subtitle")}
           </motion.p>
 
           <motion.div variants={item} className="mt-8 flex flex-wrap items-center gap-3">
             <Link href="/menu" className="btn-primary h-12 px-7 text-base">
-              Order Now <ArrowRight className="h-5 w-5" />
+              {t("hero.orderNow")} <ArrowRight className="h-5 w-5" />
             </Link>
             <Link href="/about" className="btn-ghost h-12 px-6 text-base">
-              Our Story
+              {t("hero.ourStory")}
             </Link>
           </motion.div>
 
@@ -94,7 +91,7 @@ export default function Hero() {
                 <div className="flex items-center gap-1 font-bold text-masala-900">
                   <Star className="h-4 w-4 fill-saffron-500 text-saffron-500" /> 4.9
                 </div>
-                <span className="text-masala-500">12,000+ happy plates</span>
+                <span className="text-masala-500">5,000+ {t("hero.ratingLabel")}</span>
               </div>
             </div>
 
@@ -105,8 +102,8 @@ export default function Hero() {
                 <Clock className="h-5 w-5" />
               </span>
               <div className="text-sm">
-                <div className="font-bold text-masala-900">35–50 min</div>
-                <span className="text-masala-500">avg. delivery</span>
+                <div className="font-bold text-masala-900">30–45 min</div>
+                <span className="text-masala-500">{t("hero.avgDelivery")}</span>
               </div>
             </div>
 
@@ -117,8 +114,8 @@ export default function Hero() {
                 <UtensilsCrossed className="h-5 w-5" />
               </span>
               <div className="text-sm">
-                <div className="font-bold text-masala-900">34+ dishes</div>
-                <span className="text-masala-500">across 6 thalis</span>
+                <div className="font-bold text-masala-900">30+ {t("hero.dishesLabel")}</div>
+                <span className="text-masala-500">{t("hero.acrossThalis")}</span>
               </div>
             </div>
           </motion.div>
@@ -148,16 +145,16 @@ export default function Hero() {
                 />
               ))}
             </div>
-            <span className="text-[6.5rem] drop-shadow-[0_10px_24px_rgba(0,0,0,0.3)] sm:text-[8rem]">🔥</span>
+            <span className="text-[6.5rem] drop-shadow-[0_10px_24px_rgba(0,0,0,0.3)] sm:text-[8rem]">🍲</span>
             <span className="absolute bottom-8 rounded-full bg-masala-900/85 px-4 py-1.5 text-xs font-bold text-cream-50 backdrop-blur sm:text-sm">
-              Litti Chokha · ₹149
+              {lang === "hi" ? "बेसन आलू · ₹99" : "Besan Aloo · ₹99"}
             </span>
           </div>
 
           {/* Floating cards */}
           {floats.map((f) => (
             <div
-              key={f.label}
+              key={f.en}
               className={`absolute ${f.cls} ${f.mobile ? "" : "hidden sm:block"} animate-float`}
               style={{ animationDelay: f.delay }}
             >
@@ -166,7 +163,7 @@ export default function Hero() {
                   {f.emoji}
                 </span>
                 <div className="leading-tight">
-                  <div className="text-xs font-bold text-masala-900">{f.label}</div>
+                  <div className="text-xs font-bold text-masala-900">{lang === "hi" ? f.hi : f.en}</div>
                   <div className="text-xs font-semibold text-chili-600">{f.price}</div>
                 </div>
               </div>
@@ -179,8 +176,8 @@ export default function Hero() {
       <div className="border-y border-masala-100 bg-masala-900 py-3.5">
         <div className="mask-fade-x flex overflow-hidden">
           <div className="flex shrink-0 animate-marquee items-center gap-8 whitespace-nowrap pr-8">
-            {marqueeContent}
-            {marqueeContent}
+            <MarqueeContent />
+            <MarqueeContent />
           </div>
         </div>
       </div>
@@ -188,25 +185,17 @@ export default function Hero() {
   );
 }
 
-const SPECIALS = [
-  "Coal-roasted Litti",
-  "Champaran Handi Mutton",
-  "Sattu Paratha",
-  "Silao Khaja",
-  "Gaya Tilkut",
-  "Dal Pitha",
-  "Thekua",
-  "Sattu Sharbat",
-  "Makhana Kheer",
-];
-
-const marqueeContent = (
-  <>
-    {SPECIALS.map((s) => (
-      <span key={s} className="flex items-center gap-8 text-cream-100/90">
-        <span className="font-display text-lg font-semibold">{s}</span>
-        <span className="text-saffron-400">✦</span>
-      </span>
-    ))}
-  </>
-);
+function MarqueeContent() {
+  const { tRaw } = useLanguage();
+  const specials = tRaw<string[]>("marquee") ?? [];
+  return (
+    <>
+      {specials.map((s, i) => (
+        <span key={`${s}-${i}`} className="flex items-center gap-8 text-cream-100/90">
+          <span className="font-display text-lg font-semibold">{s}</span>
+          <span className="text-saffron-400">✦</span>
+        </span>
+      ))}
+    </>
+  );
+}

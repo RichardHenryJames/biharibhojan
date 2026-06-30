@@ -71,6 +71,7 @@ const config: Config = {
         display: ["var(--font-display)", "Georgia", "serif"],
         sans: ["var(--font-sans)", "system-ui", "sans-serif"],
         hindi: ["var(--font-hindi)", "serif"],
+        "hindi-sans": ["var(--font-hindi-sans)", "system-ui", "sans-serif"],
       },
       boxShadow: {
         soft: "0 2px 8px -2px rgba(36,25,16,0.08), 0 8px 24px -8px rgba(36,25,16,0.12)",

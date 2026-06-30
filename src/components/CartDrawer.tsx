@@ -5,6 +5,7 @@ import { useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Minus, Plus, ShoppingBag, Trash2, Truck, X } from "lucide-react";
 import { useCart } from "@/context/CartContext";
+import { useLanguage } from "@/context/LanguageContext";
 import { cn, formatINR } from "@/lib/utils";
 
 const FREE_DELIVERY_THRESHOLD = 399;
@@ -12,6 +13,7 @@ const FREE_DELIVERY_THRESHOLD = 399;
 export default function CartDrawer() {
   const { isOpen, closeCart, lines, setQty, removeItem, subtotal, count, clear } =
     useCart();
+  const { t } = useLanguage();
 
   useEffect(() => {
     document.body.style.overflow = isOpen ? "hidden" : "";
@@ -46,7 +48,7 @@ export default function CartDrawer() {
               <div className="flex items-center gap-2">
                 <ShoppingBag className="h-5 w-5 text-chili-600" />
                 <h2 className="font-display text-lg font-bold">
-                  Your Thali{" "}
+                  {t("cart.title")}{" "}
                   <span className="text-masala-400">({count})</span>
                 </h2>
               </div>
@@ -65,13 +67,13 @@ export default function CartDrawer() {
                   🍽️
                 </div>
                 <div>
-                  <p className="font-display text-xl font-bold">Your thali is empty</p>
+                  <p className="font-display text-xl font-bold">{t("cart.empty")}</p>
                   <p className="mt-1 text-sm text-masala-500">
-                    Add some Litti Chokha to get started!
+                    {t("cart.emptyHint")}
                   </p>
                 </div>
                 <button onClick={closeCart} className="btn-saffron">
-                  Browse the menu
+                  {t("cart.browse")}
                 </button>
               </div>
             ) : (
@@ -82,12 +84,12 @@ export default function CartDrawer() {
                     <Truck className="h-4 w-4 text-saffron-600" />
                     {remaining > 0 ? (
                       <>
-                        Add <strong>{formatINR(remaining)}</strong> more for{" "}
-                        <strong>free delivery</strong>
+                        {t("cart.addMore")} <strong>{formatINR(remaining)}</strong>{" "}
+                        {t("cart.forFreeDelivery")}
                       </>
                     ) : (
                       <span className="font-semibold text-leaf-700">
-                        🎉 You&apos;ve unlocked free delivery!
+                        🎉 {t("cart.freeUnlocked")}
                       </span>
                     )}
                   </p>
@@ -165,14 +167,14 @@ export default function CartDrawer() {
                     onClick={clear}
                     className="mx-auto mt-2 block text-xs font-medium text-masala-400 hover:text-chili-600"
                   >
-                    Clear cart
+                    {t("cart.clear")}
                   </button>
                 </div>
 
                 {/* Footer */}
                 <div className="border-t border-masala-100 bg-cream-50 p-5">
                   <div className="mb-3 flex items-center justify-between">
-                    <span className="text-sm text-masala-500">Subtotal</span>
+                    <span className="text-sm text-masala-500">{t("cart.subtotal")}</span>
                     <span className="font-display text-2xl font-bold text-masala-900">
                       {formatINR(subtotal)}
                     </span>
@@ -182,10 +184,10 @@ export default function CartDrawer() {
                     onClick={closeCart}
                     className="btn-primary w-full py-3.5 text-base"
                   >
-                    Proceed to Checkout
+                    {t("cart.checkout")}
                   </Link>
                   <p className="mt-2 text-center text-xs text-masala-400">
-                    Taxes calculated at checkout
+                    {t("cart.taxesNote")}
                   </p>
                 </div>
               </>

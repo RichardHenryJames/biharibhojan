@@ -4,8 +4,10 @@ import type { ProductDTO, CategoryDTO } from "./types";
 type DbProduct = {
   id: string;
   name: string;
+  nameHi: string | null;
   slug: string;
   description: string;
+  descriptionHi: string | null;
   price: number;
   oldPrice: number | null;
   image: string;
@@ -19,15 +21,17 @@ type DbProduct = {
   serves: string;
   region: string | null;
   tags: string;
-  category: { slug: string; name: string };
+  category: { slug: string; name: string; nameHi: string | null };
 };
 
 function toDTO(p: DbProduct): ProductDTO {
   return {
     id: p.id,
     name: p.name,
+    nameHi: p.nameHi,
     slug: p.slug,
     description: p.description,
+    descriptionHi: p.descriptionHi,
     price: p.price,
     oldPrice: p.oldPrice,
     image: p.image,
@@ -43,6 +47,7 @@ function toDTO(p: DbProduct): ProductDTO {
     tags: p.tags ? p.tags.split(",").filter(Boolean) : [],
     categorySlug: p.category.slug,
     categoryName: p.category.name,
+    categoryNameHi: p.category.nameHi,
   };
 }
 
@@ -71,9 +76,11 @@ export async function getCategories(): Promise<CategoryDTO[]> {
   });
   return cats.map((c) => ({
     name: c.name,
+    nameHi: c.nameHi,
     slug: c.slug,
     emoji: c.emoji,
     tagline: c.tagline ?? "",
+    taglineHi: c.taglineHi,
     count: c._count.products,
   }));
 }

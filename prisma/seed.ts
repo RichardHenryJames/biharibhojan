@@ -17,9 +17,11 @@ async function main() {
     const category = await prisma.category.create({
       data: {
         name: cat.name,
+        nameHi: cat.nameHi,
         slug: cat.slug,
         emoji: cat.emoji,
         tagline: cat.tagline,
+        taglineHi: cat.taglineHi,
         sortOrder: cat.sortOrder,
       },
     });
@@ -28,8 +30,10 @@ async function main() {
       await prisma.product.create({
         data: {
           name: it.name,
+          nameHi: it.nameHi,
           slug: it.slug,
           description: it.description,
+          descriptionHi: it.descriptionHi,
           price: it.price,
           oldPrice: it.oldPrice ?? null,
           image: it.image,

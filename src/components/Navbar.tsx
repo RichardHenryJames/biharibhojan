@@ -6,18 +6,22 @@ import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Flame, Menu, ShoppingBag, X, MapPin, Phone } from "lucide-react";
 import { useCart } from "@/context/CartContext";
+import { useLanguage } from "@/context/LanguageContext";
+import { BRAND } from "@/data/i18n";
+import LanguageToggle from "@/components/LanguageToggle";
 import { cn } from "@/lib/utils";
 
 const LINKS = [
-  { href: "/", label: "Home" },
-  { href: "/menu", label: "Menu" },
-  { href: "/about", label: "Our Story" },
-  { href: "/contact", label: "Contact" },
+  { href: "/", key: "nav.home" },
+  { href: "/menu", key: "nav.menu" },
+  { href: "/about", key: "nav.about" },
+  { href: "/contact", key: "nav.contact" },
 ];
 
 export default function Navbar() {
   const pathname = usePathname();
   const { count, openCart, hydrated } = useCart();
+  const { t, lang } = useLanguage();
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
 
@@ -37,14 +41,14 @@ export default function Navbar() {
         <div className="container-bb flex h-9 items-center justify-between text-xs">
           <span className="flex items-center gap-2">
             <Flame className="h-3.5 w-3.5 text-saffron-400" />
-            Free delivery on orders over <strong className="text-saffron-300">₹399</strong>
+            {t("nav.freeDelivery")} <strong className="text-saffron-300">₹399</strong>
           </span>
           <span className="flex items-center gap-4">
-            <a href="tel:+916123456789" className="flex items-center gap-1.5 hover:text-saffron-300">
-              <Phone className="h-3.5 w-3.5" /> +91 612 345 6789
+            <a href={`tel:${BRAND.phone.replace(/\s/g, "")}`} className="flex items-center gap-1.5 hover:text-saffron-300">
+              <Phone className="h-3.5 w-3.5" /> {BRAND.phone}
             </a>
             <span className="flex items-center gap-1.5">
-              <MapPin className="h-3.5 w-3.5 text-chili-400" /> Patna · Bihar
+              <MapPin className="h-3.5 w-3.5 text-chili-400" /> {BRAND.city[lang]}
             </span>
           </span>
         </div>
@@ -87,7 +91,7 @@ export default function Navbar() {
                         : "text-masala-600 hover:text-masala-900",
                     )}
                   >
-                    {l.label}
+                    {t(l.key)}
                     {active && (
                       <motion.span
                         layoutId="nav-pill"
@@ -103,13 +107,15 @@ export default function Navbar() {
 
           {/* Actions */}
           <div className="flex items-center gap-2">
+            <LanguageToggle className="hidden sm:inline-flex" />
+
             <Link href="/menu" className="btn-saffron hidden h-11 md:inline-flex">
-              Order Now
+              {t("nav.orderNow")}
             </Link>
 
             <button
               onClick={openCart}
-              aria-label="Open cart"
+              aria-label={t("nav.openCart")}
               className="relative grid h-11 w-11 place-items-center rounded-full border border-masala-200 bg-cream-50 text-masala-800 transition-colors hover:border-saffron-400 hover:text-chili-600"
             >
               <ShoppingBag className="h-5 w-5" />
@@ -159,14 +165,15 @@ export default function Navbar() {
                           : "text-masala-700 hover:bg-cream-200",
                       )}
                     >
-                      {l.label}
+                      {t(l.key)}
                     </Link>
                   </li>
                 ))}
-                <li className="mt-2">
-                  <Link href="/menu" className="btn-saffron w-full">
-                    Order Now
+                <li className="mt-2 flex items-center justify-between gap-3">
+                  <Link href="/menu" className="btn-saffron flex-1">
+                    {t("nav.orderNow")}
                   </Link>
+                  <LanguageToggle />
                 </li>
               </ul>
             </motion.div>

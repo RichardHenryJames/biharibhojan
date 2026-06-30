@@ -1,28 +1,27 @@
+"use client";
+
 import Link from "next/link";
 import { Flame, Instagram, Facebook, Twitter, MapPin, Phone, Mail } from "lucide-react";
-
-const cols = [
-  {
-    title: "Explore",
-    links: [
-      { label: "Full Menu", href: "/menu" },
-      { label: "Litti & Chokha", href: "/menu?c=litti-chokha" },
-      { label: "Champaran Special", href: "/menu?c=champaran-special" },
-      { label: "Mithai & Sweets", href: "/menu?c=mithai-sweets" },
-    ],
-  },
-  {
-    title: "Company",
-    links: [
-      { label: "Our Story", href: "/about" },
-      { label: "Contact Us", href: "/contact" },
-      { label: "Bulk & Catering", href: "/contact" },
-      { label: "Track Order", href: "/contact" },
-    ],
-  },
-];
+import { useLanguage } from "@/context/LanguageContext";
+import { BRAND } from "@/data/i18n";
 
 export default function Footer() {
+  const { t, lang } = useLanguage();
+
+  const exploreLinks = [
+    { label: t("footer.fullMenu"), href: "/menu" },
+    { label: lang === "hi" ? "घर का खाना" : "Ghar ka Khana", href: "/menu?c=ghar-ka-khana" },
+    { label: lang === "hi" ? "लिट्टी और चोखा" : "Litti & Chokha", href: "/menu?c=litti-chokha" },
+    { label: lang === "hi" ? "मिठाई और शर्बत" : "Mithai & Sharbat", href: "/menu?c=mithai-sharbat" },
+  ];
+
+  const companyLinks = [
+    { label: t("nav.about"), href: "/about" },
+    { label: t("nav.contact"), href: "/contact" },
+    { label: t("footer.bulk"), href: "/contact" },
+    { label: t("footer.track"), href: "/contact" },
+  ];
+
   return (
     <footer className="relative mt-24 overflow-hidden bg-masala-950 text-cream-100">
       <div className="absolute inset-0 opacity-[0.06] grain" />
@@ -46,9 +45,7 @@ export default function Footer() {
               </span>
             </Link>
             <p className="mt-5 max-w-xs text-sm leading-relaxed text-cream-100/65">
-              Bringing the smoky, ghee-soaked soul of Bihar to your doorstep —
-              from coal-roasted Litti Chokha to slow-cooked Champaran handi
-              mutton. Cooked fresh, delivered hot.
+              {t("footer.blurb")}
             </p>
             <div className="mt-6 flex gap-3">
               {[Instagram, Facebook, Twitter].map((Icon, i) => (
@@ -64,60 +61,76 @@ export default function Footer() {
             </div>
           </div>
 
-          {cols.map((col) => (
-            <div key={col.title}>
-              <h4 className="font-display text-base font-bold text-cream-50">
-                {col.title}
-              </h4>
-              <ul className="mt-4 space-y-2.5">
-                {col.links.map((l) => (
-                  <li key={l.label}>
-                    <Link
-                      href={l.href}
-                      className="text-sm text-cream-100/65 transition-colors hover:text-saffron-400"
-                    >
-                      {l.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
+          <div>
+            <h4 className="font-display text-base font-bold text-cream-50">
+              {t("footer.explore")}
+            </h4>
+            <ul className="mt-4 space-y-2.5">
+              {exploreLinks.map((l) => (
+                <li key={l.href + l.label}>
+                  <Link
+                    href={l.href}
+                    className="text-sm text-cream-100/65 transition-colors hover:text-saffron-400"
+                  >
+                    {l.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div>
+            <h4 className="font-display text-base font-bold text-cream-50">
+              {t("footer.company")}
+            </h4>
+            <ul className="mt-4 space-y-2.5">
+              {companyLinks.map((l) => (
+                <li key={l.href + l.label}>
+                  <Link
+                    href={l.href}
+                    className="text-sm text-cream-100/65 transition-colors hover:text-saffron-400"
+                  >
+                    {l.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
 
           {/* Contact */}
           <div>
             <h4 className="font-display text-base font-bold text-cream-50">
-              Get in touch
+              {t("footer.getInTouch")}
             </h4>
             <ul className="mt-4 space-y-3 text-sm text-cream-100/70">
               <li className="flex items-start gap-2.5">
                 <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-saffron-400" />
-                Boring Road, Patna, Bihar 800001
+                {BRAND.addressLine[lang]}
               </li>
               <li className="flex items-center gap-2.5">
                 <Phone className="h-4 w-4 shrink-0 text-saffron-400" />
-                +91 612 345 6789
+                {BRAND.phone}
               </li>
               <li className="flex items-center gap-2.5">
                 <Mail className="h-4 w-4 shrink-0 text-saffron-400" />
-                hello@biharibhojan.com
+                {BRAND.email}
               </li>
             </ul>
             <div className="mt-5 inline-flex items-center gap-2 rounded-full bg-leaf-500/15 px-3 py-1.5 text-xs font-semibold text-leaf-400">
               <span className="h-2 w-2 animate-pulse rounded-full bg-leaf-400" />
-              Open daily · 9 AM – 11 PM
+              {t("footer.openNow")}
             </div>
           </div>
         </div>
 
         <div className="mt-14 flex flex-col items-center justify-between gap-4 border-t border-cream-100/10 pt-6 text-sm text-cream-100/50 sm:flex-row">
-          <p>© {new Date().getFullYear()} BihariBhojan. Made with ❤️ in Bihar.</p>
+          <p>© {new Date().getFullYear()} BihariBhojan. {t("footer.madeWith")}</p>
           <p className="flex items-center gap-4">
             <Link href="#" className="hover:text-saffron-400">
-              Privacy
+              {t("footer.privacy")}
             </Link>
             <Link href="#" className="hover:text-saffron-400">
-              Terms
+              {t("footer.terms")}
             </Link>
             <span>biharibhojan.com</span>
           </p>

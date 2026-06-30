@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { Award, Clock, Flame, Minus, Plus, Star, Users } from "lucide-react";
 import { useCart } from "@/context/CartContext";
+import { useLanguage } from "@/context/LanguageContext";
 import { cn, formatINR, gradientFor } from "@/lib/utils";
 import type { ProductDTO } from "@/lib/types";
 
@@ -32,7 +33,11 @@ export default function ProductCard({
   index?: number;
 }) {
   const { addItem, setQty, qtyOf } = useCart();
+  const { t, lang } = useLanguage();
   const qty = qtyOf(item.slug);
+  const name = lang === "hi" && item.nameHi ? item.nameHi : item.name;
+  const description =
+    lang === "hi" && item.descriptionHi ? item.descriptionHi : item.description;
 
   return (
     <motion.article
@@ -62,12 +67,12 @@ export default function ProductCard({
         <div className="absolute left-3 top-3 flex flex-col gap-1.5">
           {item.isSignature && (
             <span className="badge bg-masala-900/90 text-saffron-300 backdrop-blur">
-              <Award className="h-3 w-3" /> Signature
+              <Award className="h-3 w-3" /> {t("product.signature")}
             </span>
           )}
           {item.isBestseller && (
             <span className="badge bg-cream-50/95 text-chili-700 backdrop-blur">
-              ★ Bestseller
+              ★ {t("product.bestseller")}
             </span>
           )}
         </div>
@@ -88,7 +93,7 @@ export default function ProductCard({
       <div className="flex flex-1 flex-col p-5">
         <div className="mb-1 flex items-start justify-between gap-2">
           <h3 className="font-display text-lg font-bold leading-tight text-masala-900">
-            {item.name}
+            {name}
           </h3>
           <SpiceMeter level={item.spiceLevel} />
         </div>
@@ -102,12 +107,12 @@ export default function ProductCard({
             <Clock className="h-3.5 w-3.5" /> {item.prepTime}m
           </span>
           <span className="flex items-center gap-1">
-            <Users className="h-3.5 w-3.5" /> Serves {item.serves}
+            <Users className="h-3.5 w-3.5" /> {t("product.serves")} {item.serves}
           </span>
         </div>
 
         <p className="mb-4 line-clamp-2 text-sm leading-relaxed text-masala-500">
-          {item.description}
+          {description}
         </p>
 
         {/* Footer */}
@@ -128,7 +133,7 @@ export default function ProductCard({
               onClick={() =>
                 addItem({
                   slug: item.slug,
-                  name: item.name,
+                  name: name,
                   price: item.price,
                   image: item.image,
                   isVeg: item.isVeg,
@@ -136,7 +141,7 @@ export default function ProductCard({
               }
               className="btn-primary h-10 px-5 text-sm"
             >
-              <Plus className="h-4 w-4" /> Add
+              <Plus className="h-4 w-4" /> {t("product.add")}
             </button>
           ) : (
             <div className="flex items-center gap-1 rounded-full bg-chili-600 p-1 text-white shadow-warm">

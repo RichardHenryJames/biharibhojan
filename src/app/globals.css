@@ -24,6 +24,22 @@
     background-attachment: fixed;
   }
 
+  /* Hindi mode: use the Devanagari sans for body AND display headings so the
+     whole UI reads natively (big-brand style), not a mismatched Latin serif. */
+  html[data-lang="hi"] body {
+    font-family: var(--font-hindi-sans), var(--font-sans), system-ui, sans-serif;
+  }
+  html[data-lang="hi"] h1,
+  html[data-lang="hi"] h2,
+  html[data-lang="hi"] h3,
+  html[data-lang="hi"] h4,
+  html[data-lang="hi"] .font-display {
+    font-family: var(--font-hindi-sans), var(--font-display), serif;
+    font-weight: 700;
+    letter-spacing: 0;
+    line-height: 1.25;
+  }
+
   ::selection {
     @apply bg-saffron-300/60 text-masala-900;
   }

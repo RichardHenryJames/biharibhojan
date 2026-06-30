@@ -13,9 +13,11 @@ export async function GET() {
     return NextResponse.json(
       cats.map((c) => ({
         name: c.name,
+        nameHi: c.nameHi,
         slug: c.slug,
         emoji: c.emoji,
         tagline: c.tagline ?? "",
+        taglineHi: c.taglineHi,
         count: c._count.products,
       })),
     );
