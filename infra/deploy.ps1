@@ -130,8 +130,31 @@ try {
   $app = az deployment group show -g $ResourceGroup -n "$DeploymentName-app" --query properties.outputs -o json | ConvertFrom-Json
   $fqdn = $app.containerAppFqdn.value
 
+  # ---- Phase 3: re-attach custom domains ----
+  # Redeploying the Container App via Bicep drops custom-domain bindings (they're
+  # not modelled in the template). Re-bind any custom domains that already have a
+  # succeeded managed certificate, so deploys never take the live domain down.
+  Write-Host '==> [Phase 3] Re-attaching custom domains (if any)...' -ForegroundColor Cyan
+  $bound = az containerapp hostname list -g $ResourceGroup -n $appName --query "[].name" -o tsv 2>$null
+  $certs = az containerapp env certificate list -g $ResourceGroup -n 'biharibhojan-env' --managed-certificates-only -o json 2>$null | ConvertFrom-Json
+  foreach ($cert in @($certs | Where-Object { $_.properties.provisioningState -eq 'Succeeded' })) {
+    $domain = $cert.properties.subjectName
+    if ($bound -contains $domain) {
+      Write-Host "   $domain already bound."
+      continue
+    }
+    Write-Host "   Re-binding $domain..."
+    az containerapp hostname add -g $ResourceGroup -n $appName --hostname $domain --output none 2>$null
+    az containerapp hostname bind -g $ResourceGroup -n $appName --hostname $domain --environment 'biharibhojan-env' --certificate $cert.id --output none 2>$null
+  }
+
   Write-Host ''
   Write-Host "  Deployed!  https://$fqdn" -ForegroundColor Green
+  if ($certs) {
+    foreach ($cert in @($certs | Where-Object { $_.properties.provisioningState -eq 'Succeeded' })) {
+      Write-Host "             https://$($cert.properties.subjectName)" -ForegroundColor Green
+    }
+  }
   Write-Host ''
 }
 finally {
