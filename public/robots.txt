@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://biharibhojan.com/sitemap.xml
