@@ -10,6 +10,7 @@ export default function ContactForm() {
   const subjects = tRaw<string[]>("contact.form.subjects") ?? [];
   const [sent, setSent] = useState(false);
   const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   const [form, setForm] = useState({
     name: "",
     email: "",
@@ -24,11 +25,29 @@ export default function ContactForm() {
 
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setError(null);
     setSubmitting(true);
-    // Simulate a network request — wire to your inbox / CRM here.
-    await new Promise((r) => setTimeout(r, 900));
-    setSubmitting(false);
-    setSent(true);
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          ...form,
+          subject: form.subject || subjects[0] || "",
+        }),
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        setError(data.error || t("contact.form.error"));
+        setSubmitting(false);
+        return;
+      }
+      setSubmitting(false);
+      setSent(true);
+    } catch {
+      setError(t("contact.form.error"));
+      setSubmitting(false);
+    }
   };
 
   return (
@@ -51,6 +70,7 @@ export default function ContactForm() {
             <button
               onClick={() => {
                 setSent(false);
+                setError(null);
                 setForm({ name: "", email: "", subject: "", message: "" });
               }}
               className="btn-ghost mt-2"
@@ -106,6 +126,12 @@ export default function ContactForm() {
                 className="input resize-none"
               />
             </Field>
+
+            {error && (
+              <p className="rounded-xl bg-chili-100 px-4 py-2.5 text-sm font-medium text-chili-700">
+                {error}
+              </p>
+            )}
 
             <button
               type="submit"
