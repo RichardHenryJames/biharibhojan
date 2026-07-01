@@ -18,6 +18,26 @@ export const DISH_IMAGE_SLUGS: ReadonlySet<string> = new Set([
   "aloo-chokha",
   "baingan-chokha",
   "thekua",
+  // batch 2
+  "karela-bhujia",
+  "baingan-bhujia",
+  "beans-aloo-bhujia",
+  "band-gobhi-bhujia",
+  "mix-veg-bhujia",
+  "soya-bhujia",
+  "aloo-parwal-sabzi",
+  "lauki-chana-dal",
+  "nenua-ki-sabzi",
+  "tori-ki-sabzi",
+  "lauki-tamatar",
+  "mix-veg-curry",
+  "baingan-aloo-sabzi",
+  "roti",
+  "steamed-rice",
+  "tawa-paratha",
+  "kabuli-chana-masala",
+  "poori",
+  "soya-curry",
 ]);
 
 /** Returns the public path to a dish photo, or null if none exists for the slug. */
