@@ -56,11 +56,17 @@ export default function Footer() {
               {t("footer.blurb")}
             </p>
             <div className="mt-6 flex gap-3">
-              {[Instagram, Facebook, Twitter].map((Icon, i) => (
+              {[
+                { Icon: Instagram, href: "https://www.instagram.com/", label: "Instagram" },
+                { Icon: Facebook, href: "https://www.facebook.com/", label: "Facebook" },
+                { Icon: Twitter, href: "https://x.com/", label: "X" },
+              ].map(({ Icon, href, label }) => (
                 <a
-                  key={i}
-                  href="#"
-                  aria-label="Social link"
+                  key={label}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={label}
                   className="grid h-10 w-10 place-items-center rounded-full border border-cream-100/15 text-cream-100/70 transition-colors hover:border-saffron-400 hover:bg-saffron-400 hover:text-masala-900"
                 >
                   <Icon className="h-5 w-5" />
@@ -134,10 +140,10 @@ export default function Footer() {
         <div className="mt-14 flex flex-col items-center justify-between gap-4 border-t border-cream-100/10 pt-6 text-sm text-cream-100/50 sm:flex-row">
           <p>© {new Date().getFullYear()} BihariBhojan. {t("footer.madeWith")}</p>
           <p className="flex items-center gap-4">
-            <Link href="#" className="hover:text-saffron-400">
+            <Link href="/privacy" className="hover:text-saffron-400">
               {t("footer.privacy")}
             </Link>
-            <Link href="#" className="hover:text-saffron-400">
+            <Link href="/terms" className="hover:text-saffron-400">
               {t("footer.terms")}
             </Link>
             <span>biharibhojan.com</span>
