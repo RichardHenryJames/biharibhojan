@@ -16,10 +16,10 @@ const item = {
 
 const floats = [
   // `mobile` cards show on every screen; the others appear from sm+ to avoid clutter.
-  { emoji: "🥔", en: "Besan Aloo", hi: "बेसन आलू", price: "₹99", cls: "-left-2 top-8 sm:left-0 sm:top-10", delay: "0s", mobile: true },
-  { emoji: "🍚", en: "Aloo Pulao", hi: "आलू पुलाव", price: "₹129", cls: "-right-1 top-2 sm:right-2 sm:top-0", delay: "1.1s", mobile: true },
-  { emoji: "🍛", en: "Chawal Chokha", hi: "चावल चोखा", price: "₹89", cls: "-right-3 bottom-24", delay: "0.6s", mobile: false },
-  { emoji: "🫓", en: "Sattu Paratha", hi: "सत्तू पराठा", price: "₹119", cls: "-left-3 bottom-12", delay: "1.6s", mobile: false },
+  { emoji: "🥔", en: "Aloo Bhujia", hi: "आलू भुजिया", price: "₹59", cls: "-left-2 top-8 sm:left-0 sm:top-10", delay: "0s", mobile: true },
+  { emoji: "🍲", en: "Arhar Dal", hi: "अरहर दाल", price: "₹69", cls: "-right-1 top-2 sm:right-2 sm:top-0", delay: "1.1s", mobile: true },
+  { emoji: "🫘", en: "Rajma Masala", hi: "राजमा मसाला", price: "₹99", cls: "-right-3 bottom-24", delay: "0.6s", mobile: false },
+  { emoji: "🥔", en: "Aloo Chokha", hi: "आलू चोखा", price: "₹49", cls: "-left-3 bottom-12", delay: "1.6s", mobile: false },
 ];
 
 export default function Hero() {
@@ -114,7 +114,7 @@ export default function Hero() {
                 <UtensilsCrossed className="h-5 w-5" />
               </span>
               <div className="text-sm">
-                <div className="font-bold text-masala-900">30+ {t("hero.dishesLabel")}</div>
+                <div className="font-bold text-masala-900">50+ {t("hero.dishesLabel")}</div>
                 <span className="text-masala-500">{t("hero.acrossThalis")}</span>
               </div>
             </div>
@@ -145,9 +145,9 @@ export default function Hero() {
                 />
               ))}
             </div>
-            <span className="text-[6.5rem] drop-shadow-[0_10px_24px_rgba(0,0,0,0.3)] sm:text-[8rem]">🍲</span>
+            <span className="text-[6.5rem] drop-shadow-[0_10px_24px_rgba(0,0,0,0.3)] sm:text-[8rem]">🍛</span>
             <span className="absolute bottom-8 rounded-full bg-masala-900/85 px-4 py-1.5 text-xs font-bold text-cream-50 backdrop-blur sm:text-sm">
-              {lang === "hi" ? "बेसन आलू · ₹99" : "Besan Aloo · ₹99"}
+              {lang === "hi" ? "घर की थाली · ₹149" : "Ghar ki Thali · ₹149"}
             </span>
           </div>
 

@@ -11,18 +11,33 @@ export function formatINR(n: number) {
   return "₹" + Math.round(n).toLocaleString("en-IN");
 }
 
-/** Per-category background gradients used on dish cards & hero chips. */
+/** Per-category bold gradients (used on the Home category tiles). */
 export const categoryGradients: Record<string, string> = {
-  "litti-chokha": "from-saffron-400 via-saffron-500 to-chili-600",
-  "bihari-thali": "from-gold-400 via-saffron-500 to-saffron-700",
-  "champaran-special": "from-chili-500 via-chili-600 to-masala-900",
-  "street-snacks": "from-leaf-400 via-leaf-500 to-leaf-700",
-  "mithai-sweets": "from-gold-400 via-gold-500 to-chili-500",
-  "sharbat-drinks": "from-leaf-400 via-saffron-300 to-saffron-500",
+  "dry-sabzi": "from-leaf-400 via-leaf-500 to-leaf-700",
+  "gravy-sabzi": "from-saffron-400 via-saffron-500 to-chili-600",
+  dal: "from-gold-400 via-saffron-500 to-saffron-700",
+  "rice-roti": "from-saffron-300 via-gold-400 to-gold-600",
+  protein: "from-chili-500 via-chili-600 to-masala-900",
+  sides: "from-leaf-400 via-saffron-300 to-saffron-500",
 };
 
 export function gradientFor(slug?: string) {
   return (slug && categoryGradients[slug]) || "from-saffron-400 via-saffron-500 to-chili-600";
+}
+
+/** Per-category SOFT tints for the dish-card art zone — refined, image-ready
+ *  placeholders (a real photo replaces the emoji later). */
+export const categoryTints: Record<string, string> = {
+  "dry-sabzi": "from-leaf-100 to-cream-200",
+  "gravy-sabzi": "from-saffron-100 to-cream-200",
+  dal: "from-gold-400/15 to-cream-200",
+  "rice-roti": "from-cream-100 to-cream-300",
+  protein: "from-chili-100 to-cream-200",
+  sides: "from-leaf-100 to-saffron-100",
+};
+
+export function tintFor(slug?: string) {
+  return (slug && categoryTints[slug]) || "from-saffron-100 to-cream-200";
 }
 
 /** Deterministic delivery-time copy. */

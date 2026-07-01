@@ -10,9 +10,10 @@ export default function Footer() {
 
   const exploreLinks = [
     { label: t("footer.fullMenu"), href: "/menu" },
-    { label: lang === "hi" ? "घर का खाना" : "Ghar ka Khana", href: "/menu?c=ghar-ka-khana" },
-    { label: lang === "hi" ? "लिट्टी और चोखा" : "Litti & Chokha", href: "/menu?c=litti-chokha" },
-    { label: lang === "hi" ? "मिठाई और शर्बत" : "Mithai & Sharbat", href: "/menu?c=mithai-sharbat" },
+    { label: lang === "hi" ? "सूखी सब्ज़ी" : "Dry Sabzi", href: "/menu?c=dry-sabzi" },
+    { label: lang === "hi" ? "तरी वाली सब्ज़ी" : "Gravy Sabzi", href: "/menu?c=gravy-sabzi" },
+    { label: lang === "hi" ? "दाल" : "Dal", href: "/menu?c=dal" },
+    { label: lang === "hi" ? "चावल और रोटी" : "Rice & Roti", href: "/menu?c=rice-roti" },
   ];
 
   const companyLinks = [

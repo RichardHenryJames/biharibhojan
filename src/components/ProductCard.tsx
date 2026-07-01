@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { Award, Clock, Flame, Minus, Plus, Star, Users } from "lucide-react";
 import { useCart } from "@/context/CartContext";
 import { useLanguage } from "@/context/LanguageContext";
-import { cn, formatINR, gradientFor } from "@/lib/utils";
+import { cn, formatINR, tintFor } from "@/lib/utils";
 import type { ProductDTO } from "@/lib/types";
 
 function SpiceMeter({ level }: { level: number }) {
@@ -41,53 +41,58 @@ export default function ProductCard({
 
   return (
     <motion.article
-      initial={{ opacity: 0, y: 22 }}
+      initial={{ opacity: 0, y: 18 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-40px" }}
-      transition={{ duration: 0.45, delay: Math.min(index * 0.05, 0.3) }}
-      className="group flex flex-col overflow-hidden rounded-3xl border border-masala-100 bg-cream-50 shadow-card transition-shadow hover:shadow-warm"
+      transition={{ duration: 0.4, delay: Math.min(index * 0.03, 0.24) }}
+      className="group flex flex-col overflow-hidden rounded-2xl border border-masala-100/80 bg-cream-50 shadow-card transition-all duration-300 hover:-translate-y-1 hover:border-saffron-200 hover:shadow-warm"
     >
-      {/* Art */}
+      {/* Art zone — fixed aspect ratio, image-ready. Swap the plate for a photo later. */}
       <div
         className={cn(
-          "relative h-44 overflow-hidden bg-gradient-to-br",
-          gradientFor(item.categorySlug),
+          "relative aspect-[5/4] overflow-hidden bg-gradient-to-br",
+          tintFor(item.categorySlug),
         )}
       >
-        <div className="absolute inset-0 opacity-30 grain mix-blend-overlay" />
-        <motion.div
-          className="absolute inset-0 grid place-items-center text-[5.5rem] drop-shadow-[0_8px_16px_rgba(0,0,0,0.25)]"
-          whileHover={{ scale: 1.12, rotate: -4 }}
-          transition={{ type: "spring", stiffness: 240, damping: 14 }}
-        >
-          <span aria-hidden>{item.image}</span>
-        </motion.div>
+        {/* soft radial highlight */}
+        <div className="pointer-events-none absolute -right-6 -top-8 h-28 w-28 rounded-full bg-white/40 blur-2xl" />
+        {/* emoji on a floating plate (placeholder for the real dish photo) */}
+        <div className="absolute inset-0 grid place-items-center">
+          <motion.div
+            className="grid h-[4.6rem] w-[4.6rem] place-items-center rounded-full bg-cream-50 text-[2.4rem] shadow-[0_10px_28px_-8px_rgba(36,25,16,0.35)] ring-1 ring-black/[0.04] sm:h-20 sm:w-20 sm:text-[2.75rem]"
+            whileHover={{ scale: 1.08, y: -2 }}
+            transition={{ type: "spring", stiffness: 260, damping: 16 }}
+          >
+            <span aria-hidden>{item.image}</span>
+          </motion.div>
+        </div>
 
         {/* Top badges */}
-        <div className="absolute left-3 top-3 flex flex-col gap-1.5">
+        <div className="absolute left-2.5 top-2.5 flex flex-col items-start gap-1.5">
           {item.isSignature && (
-            <span className="badge bg-masala-900/90 text-saffron-300 backdrop-blur">
+            <span className="badge bg-masala-900/90 text-saffron-300 shadow-sm backdrop-blur">
               <Award className="h-3 w-3" /> {t("product.signature")}
             </span>
           )}
           {item.isBestseller && (
-            <span className="badge bg-cream-50/95 text-chili-700 backdrop-blur">
+            <span className="badge bg-cream-50/95 text-chili-700 shadow-sm backdrop-blur">
               ★ {t("product.bestseller")}
             </span>
           )}
         </div>
 
-        {/* Veg mark */}
-        <span className="absolute right-3 top-3 grid h-7 w-7 place-items-center rounded-md bg-white/95 shadow-sm">
+        {/* Veg / non-veg mark */}
+        <span className="absolute right-2.5 top-2.5 grid h-6 w-6 place-items-center rounded-md bg-white/95 shadow-sm ring-1 ring-black/[0.03]">
           <span className={cn("diet-mark", item.isVeg ? "diet-veg" : "diet-nonveg")} />
         </span>
 
         {item.region && (
-          <span className="absolute bottom-3 left-3 rounded-full bg-black/35 px-2.5 py-1 text-[11px] font-semibold text-white backdrop-blur">
+          <span className="absolute bottom-2.5 left-2.5 rounded-full bg-masala-900/45 px-2.5 py-1 text-[11px] font-semibold text-cream-50 backdrop-blur">
             📍 {item.region}
           </span>
         )}
       </div>
+
 
       {/* Body */}
       <div className="flex flex-1 flex-col p-5">
