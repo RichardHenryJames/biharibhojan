@@ -47,17 +47,23 @@ export default function Hero() {
 
           <motion.h1
             variants={item}
-            className="mt-5 font-display text-[2.6rem] font-extrabold leading-[1.02] text-masala-900 sm:text-6xl lg:text-[4.1rem]"
+            className="mt-5 font-display text-[3rem] font-extrabold leading-[1.02] tracking-tight text-masala-900 sm:text-[4.2rem] lg:text-[4.6rem]"
           >
-            {t("hero.titleA")}{" "}
-            <span className="text-gradient">{t("hero.titleHighlight")}</span>
-            <br />
-            {t("hero.titleB")}
+            {t("hero.brandA")}
+            {lang === "hi" ? " " : ""}
+            <span className="text-gradient">{t("hero.brandB")}</span>
           </motion.h1>
 
           <motion.p
             variants={item}
-            className="mt-5 max-w-lg text-base leading-relaxed text-masala-600 sm:text-lg"
+            className="mt-3 max-w-lg font-display text-xl font-bold text-masala-800 sm:text-2xl"
+          >
+            {t("hero.tagline")}
+          </motion.p>
+
+          <motion.p
+            variants={item}
+            className="mt-4 max-w-lg text-base leading-relaxed text-masala-600 sm:text-lg"
           >
             {t("hero.subtitle")}
           </motion.p>

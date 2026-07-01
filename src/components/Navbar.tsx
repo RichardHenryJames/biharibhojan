@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
@@ -64,10 +65,15 @@ export default function Navbar() {
       >
         <nav className="container-bb flex h-[var(--header-h)] items-center justify-between gap-4">
           {/* Logo */}
-          <Link href="/" className="group flex items-center gap-3">
-            <span className="relative grid h-11 w-11 place-items-center rounded-2xl bg-gradient-to-br from-saffron-400 to-chili-600 shadow-warm">
-              <Flame className="h-6 w-6 text-white transition-transform group-hover:scale-110" />
-            </span>
+          <Link href="/" className="group flex items-center gap-2.5">
+            <Image
+              src="/biharibhojanlogo-nosub.png"
+              alt="BihariBhojan"
+              width={48}
+              height={48}
+              priority
+              className="h-12 w-12 object-contain transition-transform group-hover:scale-105"
+            />
             <span className="leading-none">
               <span className="block font-display text-xl font-extrabold tracking-tight text-masala-900">
                 Bihari<span className="text-chili-600">Bhojan</span>

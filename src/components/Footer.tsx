@@ -1,7 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { Flame, Instagram, Facebook, Twitter, MapPin, Phone, Mail } from "lucide-react";
+import Image from "next/image";
+import { Instagram, Facebook, Twitter, MapPin, Phone, Mail } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
 import { BRAND } from "@/data/i18n";
 
@@ -33,8 +34,14 @@ export default function Footer() {
           {/* Brand */}
           <div>
             <Link href="/" className="flex items-center gap-3">
-              <span className="grid h-11 w-11 place-items-center rounded-2xl bg-gradient-to-br from-saffron-400 to-chili-600">
-                <Flame className="h-6 w-6 text-white" />
+              <span className="grid h-12 w-12 place-items-center overflow-hidden rounded-2xl bg-cream-50">
+                <Image
+                  src="/biharibhojanlogo-nosub.png"
+                  alt="BihariBhojan"
+                  width={48}
+                  height={48}
+                  className="h-full w-full object-contain"
+                />
               </span>
               <span className="leading-none">
                 <span className="block font-display text-xl font-extrabold">

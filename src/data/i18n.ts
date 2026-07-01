@@ -36,9 +36,9 @@ export const translations: Record<Lang, Dict> = {
     },
     hero: {
       badge: "Now serving fresh in Hazaribagh · Home kitchen",
-      titleA: "Ghar ka",
-      titleHighlight: "Bihari khana",
-      titleB: "delivered hot.",
+      brandA: "Bihari",
+      brandB: "Bhojan",
+      tagline: "Homestyle taste, true Bihari soul.",
       subtitle:
         "Homestyle Aloo Bhujia, Arhar Dal Tadka, Rajma and Aloo Chokha — cooked fresh in our Hazaribagh kitchen, just like maa makes it, and brought warm to your door.",
       orderNow: "Order Now",
@@ -370,9 +370,9 @@ export const translations: Record<Lang, Dict> = {
     },
     hero: {
       badge: "अब हज़ारीबाग़ में ताज़ा परोसा जा रहा है · घर की रसोई",
-      titleA: "घर का",
-      titleHighlight: "बिहारी खाना",
-      titleB: "गरमागरम, आपके दरवाज़े।",
+      brandA: "बिहारी",
+      brandB: "भोजन",
+      tagline: "घर जैसा स्वाद, बिहारी अंदाज़।",
       subtitle:
         "घर जैसा आलू भुजिया, अरहर दाल तड़का, राजमा और आलू चोखा — हमारी हज़ारीबाग़ की रसोई में रोज़ ताज़ा बनता है, बिलकुल माँ के हाथ का स्वाद, और गरमागरम आपके घर तक।",
       orderNow: "अभी ऑर्डर करें",
