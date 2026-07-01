@@ -6,8 +6,9 @@ const prisma = new PrismaClient();
 async function main() {
   console.log("🌱  Seeding BihariBhojan database...");
 
-  // Clean slate (safe for dev seeding)
-  await prisma.order.deleteMany();
+  // Reset the CATALOG only (products + categories). Never touch `order` or
+  // `contactMessage` — the seed runs on every deploy, and wiping orders would
+  // erase real customer order history each time we ship.
   await prisma.product.deleteMany();
   await prisma.category.deleteMany();
 

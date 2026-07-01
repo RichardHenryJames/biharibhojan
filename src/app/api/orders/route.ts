@@ -115,11 +115,3 @@ export async function POST(req: NextRequest) {
     );
   }
 }
-
-export async function GET() {
-  const orders = await prisma.order.findMany({
-    orderBy: { createdAt: "desc" },
-    take: 20,
-  });
-  return NextResponse.json(orders);
-}
