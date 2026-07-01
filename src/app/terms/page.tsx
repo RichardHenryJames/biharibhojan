@@ -4,7 +4,7 @@ import TermsContent from "./TermsContent";
 export const metadata: Metadata = {
   title: "Terms of Service",
   description:
-    "The simple rules for ordering homestyle Bihari food from BihariBhojan — pricing, payment, delivery and cancellations.",
+    "The simple rules for ordering homestyle Bihari food from BihariBhojan: pricing, payment, delivery and cancellations.",
   alternates: { canonical: "https://biharibhojan.com/terms" },
   openGraph: {
     title: "Terms of Service · BihariBhojan",

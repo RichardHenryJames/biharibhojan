@@ -51,9 +51,9 @@ export const menuData: MenuCategory[] = [
         nameHi: "आलू भुजिया",
         slug: "aloo-bhujia",
         description:
-          "Thin potato fingers stir-fried dry with panch-phoran, turmeric and green chilli — crisp-edged and everyday-perfect.",
+          "Thin potato fingers stir-fried dry with panch-phoran, turmeric and green chilli. Crisp-edged and everyday-perfect.",
         descriptionHi:
-          "पतले कटे आलू, पंच-फोरन, हल्दी और हरी मिर्च में सूखे भुने — किनारों से करारे, रोज़ के खाने के लिए बिलकुल सही।",
+          "पतले कटे आलू, पंच-फोरन, हल्दी और हरी मिर्च में सूखे भुने। किनारों से करारे, रोज़ के खाने के लिए बिलकुल सही।",
         price: 59,
         oldPrice: 79,
         image: "🥔",
@@ -75,7 +75,7 @@ export const menuData: MenuCategory[] = [
         description:
           "Fresh okra sliced fine and dry-fried with onion and mustard oil till it's smoky and non-sticky.",
         descriptionHi:
-          "ताज़ी भिंडी बारीक कटी, प्याज़ और सरसों के तेल में सूखी भुनी — धुएँदार और बिलकुल लसदार नहीं।",
+          "ताज़ी भिंडी बारीक कटी, प्याज़ और सरसों के तेल में सूखी भुनी। धुएँदार और बिलकुल लसदार नहीं।",
         price: 69,
         image: "🌿",
         isVeg: true,
@@ -92,9 +92,9 @@ export const menuData: MenuCategory[] = [
         nameHi: "परवल भुजिया",
         slug: "parwal-bhujia",
         description:
-          "Pointed gourd sliced and dry-fried with panch-phoran — a light, classic Bihari seasonal favourite.",
+          "Pointed gourd sliced and dry-fried with panch-phoran. A light, classic Bihari seasonal favourite.",
         descriptionHi:
-          "परवल कटा हुआ, पंच-फोरन में सूखा भुना — हल्की और क्लासिक बिहारी मौसमी पसंद।",
+          "परवल कटा हुआ, पंच-फोरन में सूखा भुना। हल्की और क्लासिक बिहारी मौसमी पसंद।",
         price: 69,
         image: "🥒",
         isVeg: true,
@@ -113,7 +113,7 @@ export const menuData: MenuCategory[] = [
         description:
           "Brinjal cooked down dry with garlic and mustard oil till soft and lightly caramelised.",
         descriptionHi:
-          "बैंगन, लहसुन और सरसों के तेल में सूखा पका — नरम और हल्का भुना हुआ।",
+          "बैंगन, लहसुन और सरसों के तेल में सूखा पका। नरम और हल्का भुना हुआ।",
         price: 59,
         image: "🍆",
         isVeg: true,
@@ -130,9 +130,9 @@ export const menuData: MenuCategory[] = [
         nameHi: "करेला भुजिया",
         slug: "karela-bhujia",
         description:
-          "Bitter gourd rings slow-fried with onion till crisp — the healthy, nostalgic side maa always made.",
+          "Bitter gourd rings slow-fried with onion till crisp. The healthy, nostalgic side maa always made.",
         descriptionHi:
-          "करेले के छल्ले, प्याज़ के साथ धीमे तले जब तक करारे न हो जाएँ — सेहतमंद, यादों वाली वो सब्ज़ी जो माँ हमेशा बनाती थीं।",
+          "करेले के छल्ले, प्याज़ के साथ धीमे तले जब तक करारे न हो जाएँ। सेहतमंद, यादों वाली वो सब्ज़ी जो माँ हमेशा बनाती थीं।",
         price: 59,
         image: "🥬",
         isVeg: true,
@@ -168,9 +168,9 @@ export const menuData: MenuCategory[] = [
         nameHi: "बीन्स आलू भुजिया",
         slug: "beans-aloo-bhujia",
         description:
-          "French beans and potato dry-fried together with a gentle tempering — simple and homely.",
+          "French beans and potato dry-fried together with a gentle tempering. Simple and homely.",
         descriptionHi:
-          "फ्रेंच बीन्स और आलू साथ में सूखे भुने, हल्के तड़के के साथ — सादा और घरेलू।",
+          "फ्रेंच बीन्स और आलू साथ में सूखे भुने, हल्के तड़के के साथ। सादा और घरेलू।",
         price: 69,
         image: "🫛",
         isVeg: true,
@@ -187,9 +187,9 @@ export const menuData: MenuCategory[] = [
         nameHi: "मटर आलू भुजिया",
         slug: "matar-aloo-bhujia",
         description:
-          "Green peas and potato dry-cooked with cumin and coriander — sweet, soft and comforting.",
+          "Green peas and potato dry-cooked with cumin and coriander. Sweet, soft and comforting.",
         descriptionHi:
-          "हरी मटर और आलू, जीरा और धनिया के साथ सूखे पके — मीठे, नरम और सुकून देने वाले।",
+          "हरी मटर और आलू, जीरा और धनिया के साथ सूखे पके। मीठे, नरम और सुकून देने वाले।",
         price: 69,
         image: "🟢",
         isVeg: true,
@@ -226,9 +226,9 @@ export const menuData: MenuCategory[] = [
         nameHi: "सोया भुजिया",
         slug: "soya-bhujia",
         description:
-          "Soya chunks and onion dry-fried with a robust masala — protein-rich and satisfying.",
+          "Soya chunks and onion dry-fried with a robust masala. Protein-rich and satisfying.",
         descriptionHi:
-          "सोया के टुकड़े और प्याज़, दमदार मसाले में सूखे भुने — प्रोटीन से भरपूर और पेट भर देने वाले।",
+          "सोया के टुकड़े और प्याज़, दमदार मसाले में सूखे भुने। प्रोटीन से भरपूर और पेट भर देने वाले।",
         price: 79,
         image: "🟤",
         isVeg: true,
@@ -256,9 +256,9 @@ export const menuData: MenuCategory[] = [
         nameHi: "बेसन आलू सब्ज़ी",
         slug: "besan-aloo-sabzi",
         description:
-          "Soft potatoes simmered in a light, fragrant gram-flour gravy tempered with cumin and garlic — pure comfort.",
+          "Soft potatoes simmered in a light, fragrant gram-flour gravy tempered with cumin and garlic. Pure comfort.",
         descriptionHi:
-          "नरम आलू, हल्की महकती बेसन की तरी में पके — जीरा और लहसुन के छौंक के साथ। बिलकुल सुकून वाला खाना।",
+          "नरम आलू, हल्की महकती बेसन की तरी में पके। जीरा और लहसुन के छौंक के साथ। बिलकुल सुकून वाला खाना।",
         price: 79,
         oldPrice: 99,
         image: "🥘",
@@ -278,9 +278,9 @@ export const menuData: MenuCategory[] = [
         nameHi: "आलू दम",
         slug: "aloo-dum",
         description:
-          "Baby potatoes slow-cooked on dum in a spicy onion-tomato masala with mustard oil — rich and smoky.",
+          "Baby potatoes slow-cooked on dum in a spicy onion-tomato masala with mustard oil. Rich and smoky.",
         descriptionHi:
-          "छोटे आलू, मसालेदार प्याज़-टमाटर की तरी में सरसों के तेल के साथ दम पर धीमे पके — गाढ़ा और धुएँदार।",
+          "छोटे आलू, मसालेदार प्याज़-टमाटर की तरी में सरसों के तेल के साथ दम पर धीमे पके। गाढ़ा और धुएँदार।",
         price: 89,
         image: "🥔",
         isVeg: true,
@@ -298,9 +298,9 @@ export const menuData: MenuCategory[] = [
         nameHi: "आलू परवल सब्ज़ी",
         slug: "aloo-parwal-sabzi",
         description:
-          "Potato and pointed gourd in a light tomato masala — a classic Bihari everyday curry.",
+          "Potato and pointed gourd in a light tomato masala. A classic Bihari everyday curry.",
         descriptionHi:
-          "आलू और परवल, हल्की टमाटर की तरी में — एक क्लासिक बिहारी रोज़ की तरकारी।",
+          "आलू और परवल, हल्की टमाटर की तरी में। एक क्लासिक बिहारी रोज़ की तरकारी।",
         price: 79,
         image: "🥒",
         isVeg: true,
@@ -317,9 +317,9 @@ export const menuData: MenuCategory[] = [
         nameHi: "लौकी चना दाल",
         slug: "lauki-chana-dal",
         description:
-          "Bottle gourd simmered with split chana dal in a light homely masala — soft, wholesome comfort.",
+          "Bottle gourd simmered with split chana dal in a light homely masala. Soft, wholesome comfort.",
         descriptionHi:
-          "लौकी, चना दाल के साथ हल्के घरेलू मसाले में पकी — नरम, सेहतमंद और सुकून देने वाली।",
+          "लौकी, चना दाल के साथ हल्के घरेलू मसाले में पकी। नरम, सेहतमंद और सुकून देने वाली।",
         price: 79,
         image: "🥒",
         isVeg: true,
@@ -336,9 +336,9 @@ export const menuData: MenuCategory[] = [
         nameHi: "लौकी टमाटर",
         slug: "lauki-tamatar",
         description:
-          "Bottle gourd cooked down with ripe tomatoes and cumin — light, tangy and easy on the tummy.",
+          "Bottle gourd cooked down with ripe tomatoes and cumin. Light, tangy and easy on the tummy.",
         descriptionHi:
-          "लौकी, पके टमाटर और जीरे के साथ पकी — हल्की, खट्टी और पेट के लिए आसान।",
+          "लौकी, पके टमाटर और जीरे के साथ पकी। हल्की, खट्टी और पेट के लिए आसान।",
         price: 69,
         image: "🍅",
         isVeg: true,
@@ -355,9 +355,9 @@ export const menuData: MenuCategory[] = [
         nameHi: "कद्दू की सब्ज़ी",
         slug: "kaddu-ki-sabzi",
         description:
-          "Pumpkin cooked sweet-and-tangy with panch-phoran and a hint of jaggery — a festive Bihari classic.",
+          "Pumpkin cooked sweet-and-tangy with panch-phoran and a hint of jaggery. A festive Bihari classic.",
         descriptionHi:
-          "कद्दू, पंच-फोरन और थोड़े गुड़ के साथ खट्टा-मीठा पका — एक त्योहारी बिहारी क्लासिक।",
+          "कद्दू, पंच-फोरन और थोड़े गुड़ के साथ खट्टा-मीठा पका। एक त्योहारी बिहारी क्लासिक।",
         price: 69,
         image: "🎃",
         isVeg: true,
@@ -375,9 +375,9 @@ export const menuData: MenuCategory[] = [
         nameHi: "नेनुआ की सब्ज़ी",
         slug: "nenua-ki-sabzi",
         description:
-          "Ridge gourd cooked soft in its own juices with a light tempering — a monsoon favourite.",
+          "Ridge gourd cooked soft in its own juices with a light tempering. A monsoon favourite.",
         descriptionHi:
-          "नेनुआ अपने ही रस में नरम पका, हल्के तड़के के साथ — बरसात की चहेती सब्ज़ी।",
+          "नेनुआ अपने ही रस में नरम पका, हल्के तड़के के साथ। बरसात की चहेती सब्ज़ी।",
         price: 69,
         image: "🥒",
         isVeg: true,
@@ -394,9 +394,9 @@ export const menuData: MenuCategory[] = [
         nameHi: "तोरी की सब्ज़ी",
         slug: "tori-ki-sabzi",
         description:
-          "Turai simmered gently with onion and tomato — a soft, everyday homestyle curry.",
+          "Turai simmered gently with onion and tomato. A soft, everyday homestyle curry.",
         descriptionHi:
-          "तोरी, प्याज़ और टमाटर के साथ धीमे पकी — नरम, रोज़ की घरेलू तरकारी।",
+          "तोरी, प्याज़ और टमाटर के साथ धीमे पकी। नरम, रोज़ की घरेलू तरकारी।",
         price: 69,
         image: "🥒",
         isVeg: true,
@@ -413,9 +413,9 @@ export const menuData: MenuCategory[] = [
         nameHi: "बैंगन आलू सब्ज़ी",
         slug: "baingan-aloo-sabzi",
         description:
-          "Brinjal and potato in a smoky tomato masala with mustard oil — hearty and full of flavour.",
+          "Brinjal and potato in a smoky tomato masala with mustard oil. Hearty and full of flavour.",
         descriptionHi:
-          "बैंगन और आलू, धुएँदार टमाटर मसाले में सरसों के तेल के साथ — भरपूर और स्वाद से लबालब।",
+          "बैंगन और आलू, धुएँदार टमाटर मसाले में सरसों के तेल के साथ। भरपूर और स्वाद से लबालब।",
         price: 79,
         image: "🍆",
         isVeg: true,
@@ -432,9 +432,9 @@ export const menuData: MenuCategory[] = [
         nameHi: "मिक्स वेज करी",
         slug: "mix-veg-curry",
         description:
-          "Seasonal vegetables in a homely onion-tomato gravy — a wholesome all-in-one sabzi.",
+          "Seasonal vegetables in a homely onion-tomato gravy. A wholesome all-in-one sabzi.",
         descriptionHi:
-          "मौसमी सब्ज़ियाँ, घरेलू प्याज़-टमाटर की तरी में — एक सेहतमंद, सब कुछ एक में सब्ज़ी।",
+          "मौसमी सब्ज़ियाँ, घरेलू प्याज़-टमाटर की तरी में। एक सेहतमंद, सब कुछ एक में सब्ज़ी।",
         price: 89,
         image: "🍛",
         isVeg: true,
@@ -483,9 +483,9 @@ export const menuData: MenuCategory[] = [
         nameHi: "मसूर दाल",
         slug: "masoor-dal",
         description:
-          "Red lentils cooked soft and tempered with onion, garlic and cumin — quick, light and homely.",
+          "Red lentils cooked soft and tempered with onion, garlic and cumin. Quick, light and homely.",
         descriptionHi:
-          "मसूर की दाल नरम पकी, प्याज़, लहसुन और जीरे के तड़के के साथ — झटपट, हल्की और घरेलू।",
+          "मसूर की दाल नरम पकी, प्याज़, लहसुन और जीरे के तड़के के साथ। झटपट, हल्की और घरेलू।",
         price: 59,
         image: "🔴",
         isVeg: true,
@@ -502,9 +502,9 @@ export const menuData: MenuCategory[] = [
         nameHi: "मूंग दाल",
         slug: "moong-dal",
         description:
-          "Light yellow moong dal with a delicate ghee-cumin tadka — gentle and easy to digest.",
+          "Light yellow moong dal with a delicate ghee-cumin tadka. Gentle and easy to digest.",
         descriptionHi:
-          "हल्की पीली मूंग दाल, घी-जीरे के नाज़ुक तड़के के साथ — कोमल और आसानी से पचने वाली।",
+          "हल्की पीली मूंग दाल, घी-जीरे के नाज़ुक तड़के के साथ। कोमल और आसानी से पचने वाली।",
         price: 59,
         image: "🟡",
         isVeg: true,
@@ -521,9 +521,9 @@ export const menuData: MenuCategory[] = [
         nameHi: "चना दाल",
         slug: "chana-dal",
         description:
-          "Split bengal gram cooked hearty with ginger and a fragrant tadka — nutty and filling.",
+          "Split bengal gram cooked hearty with ginger and a fragrant tadka. Nutty and filling.",
         descriptionHi:
-          "चना दाल, अदरक और महकते तड़के के साथ भरपूर पकी — कुरकुरे स्वाद वाली और पेट भरने वाली।",
+          "चना दाल, अदरक और महकते तड़के के साथ भरपूर पकी। कुरकुरे स्वाद वाली और पेट भरने वाली।",
         price: 69,
         image: "🟠",
         isVeg: true,
@@ -540,9 +540,9 @@ export const menuData: MenuCategory[] = [
         nameHi: "उड़द दाल",
         slug: "urad-dal",
         description:
-          "Split black gram dal cooked creamy with garlic and ghee — rich and deeply comforting.",
+          "Split black gram dal cooked creamy with garlic and ghee. Rich and deeply comforting.",
         descriptionHi:
-          "उड़द की दाल, लहसुन और घी के साथ मलाईदार पकी — गाढ़ी और दिल को सुकून देने वाली।",
+          "उड़द की दाल, लहसुन और घी के साथ मलाईदार पकी। गाढ़ी और दिल को सुकून देने वाली।",
         price: 69,
         image: "⚪",
         isVeg: true,
@@ -559,9 +559,9 @@ export const menuData: MenuCategory[] = [
         nameHi: "पंचमेल दाल",
         slug: "panchmel-dal",
         description:
-          "Five lentils cooked together and tempered with ghee, garlic and whole spices — rich and wholesome.",
+          "Five lentils cooked together and tempered with ghee, garlic and whole spices. Rich and wholesome.",
         descriptionHi:
-          "पाँच दालें साथ में पकीं, घी, लहसुन और साबुत मसालों के तड़के के साथ — भरपूर और सेहतमंद।",
+          "पाँच दालें साथ में पकीं, घी, लहसुन और साबुत मसालों के तड़के के साथ। भरपूर और सेहतमंद।",
         price: 79,
         image: "🍲",
         isVeg: true,
@@ -578,9 +578,9 @@ export const menuData: MenuCategory[] = [
         nameHi: "दाल फ्राई",
         slug: "dal-fry",
         description:
-          "Yellow dal fried with onion, tomato and a fragrant masala tadka — restaurant-style at home.",
+          "Yellow dal fried with onion, tomato and a fragrant masala tadka. Restaurant-style at home.",
         descriptionHi:
-          "पीली दाल, प्याज़, टमाटर और महकते मसाला तड़के के साथ फ्राई — घर पर रेस्टोरेंट जैसा स्वाद।",
+          "पीली दाल, प्याज़, टमाटर और महकते मसाला तड़के के साथ फ्राई। घर पर रेस्टोरेंट जैसा स्वाद।",
         price: 69,
         image: "🍲",
         isVeg: true,
@@ -628,9 +628,9 @@ export const menuData: MenuCategory[] = [
         nameHi: "सादा चावल",
         slug: "steamed-rice",
         description:
-          "Fluffy, freshly steamed long-grain rice — the perfect base for any dal or sabzi.",
+          "Fluffy, freshly steamed long-grain rice. The perfect base for any dal or sabzi.",
         descriptionHi:
-          "खिला-खिला, ताज़ा भाप में पका लंबे दाने का चावल — किसी भी दाल या सब्ज़ी के लिए बिलकुल सही।",
+          "खिला-खिला, ताज़ा भाप में पका लंबे दाने का चावल। किसी भी दाल या सब्ज़ी के लिए बिलकुल सही।",
         price: 49,
         image: "🍚",
         isVeg: true,
@@ -647,9 +647,9 @@ export const menuData: MenuCategory[] = [
         nameHi: "जीरा राइस",
         slug: "jeera-rice",
         description:
-          "Basmati rice tossed in ghee-tempered cumin — fragrant and buttery, great with any dal.",
+          "Basmati rice tossed in ghee-tempered cumin. Fragrant and buttery, great with any dal.",
         descriptionHi:
-          "बासमती चावल, घी में भुने जीरे के साथ — महकता और मक्खन जैसा, किसी भी दाल के साथ लाजवाब।",
+          "बासमती चावल, घी में भुने जीरे के साथ। महकता और मक्खन जैसा, किसी भी दाल के साथ लाजवाब।",
         price: 69,
         image: "🍚",
         isVeg: true,
@@ -667,9 +667,9 @@ export const menuData: MenuCategory[] = [
         nameHi: "खिचड़ी",
         slug: "khichdi",
         description:
-          "Rice and moong dal cooked soft together with ghee and cumin — the ultimate one-bowl comfort.",
+          "Rice and moong dal cooked soft together with ghee and cumin. The ultimate one-bowl comfort.",
         descriptionHi:
-          "चावल और मूंग दाल साथ में नरम पके, घी और जीरे के साथ — एक कटोरी में पूरा सुकून।",
+          "चावल और मूंग दाल साथ में नरम पके, घी और जीरे के साथ। एक कटोरी में पूरा सुकून।",
         price: 79,
         image: "🥣",
         isVeg: true,
@@ -687,9 +687,9 @@ export const menuData: MenuCategory[] = [
         nameHi: "रोटी (2 पीस)",
         slug: "roti",
         description:
-          "Soft wholewheat rotis fresh off the tawa — made to order, just like at home.",
+          "Soft wholewheat rotis fresh off the tawa. Made to order, just like at home.",
         descriptionHi:
-          "तवे से उतरी ताज़ी नरम गेहूँ की रोटियाँ — ऑर्डर पर बनीं, बिलकुल घर जैसी।",
+          "तवे से उतरी ताज़ी नरम गेहूँ की रोटियाँ। ऑर्डर पर बनीं, बिलकुल घर जैसी।",
         price: 24,
         image: "🫓",
         isVeg: true,
@@ -725,9 +725,9 @@ export const menuData: MenuCategory[] = [
         nameHi: "पूरी (4 पीस)",
         slug: "poori",
         description:
-          "Golden, puffed wholewheat pooris fried fresh — a weekend-breakfast treat.",
+          "Golden, puffed wholewheat pooris fried fresh. A weekend-breakfast treat.",
         descriptionHi:
-          "सुनहरी, फूली हुई गेहूँ की पूरियाँ, ताज़ा तली — वीकेंड के नाश्ते की दावत।",
+          "सुनहरी, फूली हुई गेहूँ की पूरियाँ, ताज़ा तली। वीकेंड के नाश्ते की दावत।",
         price: 49,
         image: "🟡",
         isVeg: true,
@@ -755,9 +755,9 @@ export const menuData: MenuCategory[] = [
         nameHi: "काला चना घुघनी",
         slug: "kala-chana-ghugni",
         description:
-          "Black chickpeas slow-cooked in a homely masala with onion and ginger — protein-rich and soul-warming.",
+          "Black chickpeas slow-cooked in a homely masala with onion and ginger. Protein-rich and soul-warming.",
         descriptionHi:
-          "काले चने, प्याज़ और अदरक के घरेलू मसाले में धीमे पके — प्रोटीन से भरपूर और दिल को गरमाने वाले।",
+          "काले चने, प्याज़ और अदरक के घरेलू मसाले में धीमे पके। प्रोटीन से भरपूर और दिल को गरमाने वाले।",
         price: 79,
         image: "🫘",
         isVeg: true,
@@ -775,9 +775,9 @@ export const menuData: MenuCategory[] = [
         nameHi: "काबुली चना मसाला",
         slug: "kabuli-chana-masala",
         description:
-          "White chickpeas in a rich onion-tomato masala — the classic chhole, homestyle and hearty.",
+          "White chickpeas in a rich onion-tomato masala. The classic chhole, homestyle and hearty.",
         descriptionHi:
-          "काबुली चने, गाढ़े प्याज़-टमाटर मसाले में — क्लासिक छोले, घर जैसे और भरपूर।",
+          "काबुली चने, गाढ़े प्याज़-टमाटर मसाले में। क्लासिक छोले, घर जैसे और भरपूर।",
         price: 99,
         image: "🧆",
         isVeg: true,
@@ -794,9 +794,9 @@ export const menuData: MenuCategory[] = [
         nameHi: "राजमा मसाला",
         slug: "rajma-masala",
         description:
-          "Kidney beans simmered slow in a thick, spiced tomato gravy — best with hot rice.",
+          "Kidney beans simmered slow in a thick, spiced tomato gravy. Best with hot rice.",
         descriptionHi:
-          "राजमा, गाढ़ी मसालेदार टमाटर की तरी में धीमे पका — गरम चावल के साथ सबसे मज़ेदार।",
+          "राजमा, गाढ़ी मसालेदार टमाटर की तरी में धीमे पका। गरम चावल के साथ सबसे मज़ेदार।",
         price: 99,
         image: "🫘",
         isVeg: true,
@@ -814,9 +814,9 @@ export const menuData: MenuCategory[] = [
         nameHi: "सोया करी",
         slug: "soya-curry",
         description:
-          "Soya chunks in a robust onion-tomato gravy — a light, high-protein everyday curry.",
+          "Soya chunks in a robust onion-tomato gravy. A light, high-protein everyday curry.",
         descriptionHi:
-          "सोया के टुकड़े, दमदार प्याज़-टमाटर की तरी में — हल्की, ज़्यादा प्रोटीन वाली रोज़ की करी।",
+          "सोया के टुकड़े, दमदार प्याज़-टमाटर की तरी में। हल्की, ज़्यादा प्रोटीन वाली रोज़ की करी।",
         price: 89,
         image: "🟤",
         isVeg: true,
@@ -833,9 +833,9 @@ export const menuData: MenuCategory[] = [
         nameHi: "अंडा करी",
         slug: "egg-curry",
         description:
-          "Boiled eggs fried and simmered in a robust mustard-oil masala — best mopped up with rice or roti.",
+          "Boiled eggs fried and simmered in a robust mustard-oil masala. Best mopped up with rice or roti.",
         descriptionHi:
-          "उबले अंडे तले और दमदार सरसों-तेल मसाले में पके — चावल या रोटी के साथ सबसे बढ़िया।",
+          "उबले अंडे तले और दमदार सरसों-तेल मसाले में पके। चावल या रोटी के साथ सबसे बढ़िया।",
         price: 99,
         image: "🥚",
         isVeg: false,
@@ -886,9 +886,9 @@ export const menuData: MenuCategory[] = [
         nameHi: "आलू चोखा",
         slug: "aloo-chokha",
         description:
-          "Mashed roasted potato tempered with mustard oil, onion, garlic and green chilli — the perfect side.",
+          "Mashed roasted potato tempered with mustard oil, onion, garlic and green chilli. The perfect side.",
         descriptionHi:
-          "भुना-मसला आलू, सरसों के तेल, प्याज़, लहसुन और हरी मिर्च के साथ — साथ में खाने के लिए बिलकुल सही।",
+          "भुना-मसला आलू, सरसों के तेल, प्याज़, लहसुन और हरी मिर्च के साथ। साथ में खाने के लिए बिलकुल सही।",
         price: 49,
         image: "🥔",
         isVeg: true,
@@ -906,9 +906,9 @@ export const menuData: MenuCategory[] = [
         nameHi: "बैंगन चोखा",
         slug: "baingan-chokha",
         description:
-          "Smoky fire-roasted brinjal mash with mustard oil, garlic and onion — deep, earthy and delicious.",
+          "Smoky fire-roasted brinjal mash with mustard oil, garlic and onion. Deep, earthy and delicious.",
         descriptionHi:
-          "आग पर भुना बैंगन, सरसों के तेल, लहसुन और प्याज़ के साथ मसला — गहरा, धुएँदार और स्वादिष्ट।",
+          "आग पर भुना बैंगन, सरसों के तेल, लहसुन और प्याज़ के साथ मसला। गहरा, धुएँदार और स्वादिष्ट।",
         price: 49,
         image: "🍆",
         isVeg: true,
@@ -926,9 +926,9 @@ export const menuData: MenuCategory[] = [
         nameHi: "टमाटर चोखा",
         slug: "tamatar-chokha",
         description:
-          "Roasted tomato mashed with garlic, coriander and mustard oil — tangy and vibrant.",
+          "Roasted tomato mashed with garlic, coriander and mustard oil. Tangy and vibrant.",
         descriptionHi:
-          "भुना टमाटर, लहसुन, धनिया और सरसों के तेल के साथ मसला — खट्टा और चटपटा।",
+          "भुना टमाटर, लहसुन, धनिया और सरसों के तेल के साथ मसला। खट्टा और चटपटा।",
         price: 49,
         image: "🍅",
         isVeg: true,
@@ -945,9 +945,9 @@ export const menuData: MenuCategory[] = [
         nameHi: "हरी चटनी",
         slug: "green-chutney",
         description:
-          "Fresh coriander-mint chutney ground with green chilli and lemon — bright and zingy.",
+          "Fresh coriander-mint chutney ground with green chilli and lemon. Bright and zingy.",
         descriptionHi:
-          "ताज़ी धनिया-पुदीना चटनी, हरी मिर्च और नींबू के साथ पिसी — चटपटी और तरोताज़ा।",
+          "ताज़ी धनिया-पुदीना चटनी, हरी मिर्च और नींबू के साथ पिसी। चटपटी और तरोताज़ा।",
         price: 19,
         image: "🌿",
         isVeg: true,
@@ -964,9 +964,9 @@ export const menuData: MenuCategory[] = [
         nameHi: "भुना पापड़ (2 पीस)",
         slug: "papad",
         description:
-          "Crisp roasted urad papad — the crunchy companion every thali needs.",
+          "Crisp roasted urad papad. The crunchy companion every thali needs.",
         descriptionHi:
-          "करारा भुना उड़द पापड़ — हर थाली का ज़रूरी कुरकुरा साथी।",
+          "करारा भुना उड़द पापड़। हर थाली का ज़रूरी कुरकुरा साथी।",
         price: 19,
         image: "🟤",
         isVeg: true,
@@ -983,9 +983,9 @@ export const menuData: MenuCategory[] = [
         nameHi: "मिला अचार",
         slug: "mixed-pickle",
         description:
-          "A spoon of tangy, spicy homemade mixed achar in mustard oil — a little goes a long way.",
+          "A spoon of tangy, spicy homemade mixed achar in mustard oil. A little goes a long way.",
         descriptionHi:
-          "सरसों के तेल में घर का बना खट्टा-तीखा मिला अचार — थोड़ा सा ही काफ़ी है।",
+          "सरसों के तेल में घर का बना खट्टा-तीखा मिला अचार। थोड़ा सा ही काफ़ी है।",
         price: 19,
         image: "🥭",
         isVeg: true,
@@ -1002,9 +1002,9 @@ export const menuData: MenuCategory[] = [
         nameHi: "प्याज़ सलाद",
         slug: "onion-salad",
         description:
-          "Sliced onion, cucumber and tomato with lemon and a pinch of black salt — crisp and fresh.",
+          "Sliced onion, cucumber and tomato with lemon and a pinch of black salt. Crisp and fresh.",
         descriptionHi:
-          "कटा प्याज़, खीरा और टमाटर, नींबू और चुटकी भर काले नमक के साथ — कुरकुरा और ताज़ा।",
+          "कटा प्याज़, खीरा और टमाटर, नींबू और चुटकी भर काले नमक के साथ। कुरकुरा और ताज़ा।",
         price: 25,
         image: "🧅",
         isVeg: true,
@@ -1040,9 +1040,9 @@ export const menuData: MenuCategory[] = [
         nameHi: "सादा दही",
         slug: "plain-curd",
         description:
-          "A bowl of thick, fresh set curd — cooling and perfect alongside a spicy thali.",
+          "A bowl of thick, fresh set curd. Cooling and perfect alongside a spicy thali.",
         descriptionHi:
-          "गाढ़े, ताज़े जमे दही का कटोरा — ठंडक देता और मसालेदार थाली के साथ बिलकुल सही।",
+          "गाढ़े, ताज़े जमे दही का कटोरा। ठंडक देता और मसालेदार थाली के साथ बिलकुल सही।",
         price: 39,
         image: "🥛",
         isVeg: true,
@@ -1059,9 +1059,9 @@ export const menuData: MenuCategory[] = [
         nameHi: "ठेकुआ (250 ग्राम)",
         slug: "thekua",
         description:
-          "Crunchy ghee-and-jaggery wheat cookies pressed in wooden moulds — the taste of Chhath Puja.",
+          "Crunchy ghee-and-jaggery wheat cookies pressed in wooden moulds. The taste of Chhath Puja.",
         descriptionHi:
-          "घी और गुड़ की करारी गेहूँ की कुकीज़, लकड़ी के साँचों में दबाई — छठ पूजा का स्वाद।",
+          "घी और गुड़ की करारी गेहूँ की कुकीज़, लकड़ी के साँचों में दबाई। छठ पूजा का स्वाद।",
         price: 99,
         image: "🍪",
         isVeg: true,

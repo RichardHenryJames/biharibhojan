@@ -44,11 +44,11 @@ const hindiSans = Noto_Sans_Devanagari({
 export const metadata: Metadata = {
   metadataBase: new URL("https://biharibhojan.com"),
   title: {
-    default: "BihariBhojan — Ghar ka Bihari Khana, Hazaribagh",
+    default: "BihariBhojan · Ghar ka Bihari Khana, Hazaribagh",
     template: "%s · BihariBhojan",
   },
   description:
-    "Order homestyle Bihari food in Hazaribagh — Aloo Bhujia, Arhar Dal Tadka, Rajma Masala, Aloo Dum & Aloo Chokha. Fresh-cooked ghar ka khana, delivered hot in 30–45 min.",
+    "Order homestyle Bihari food in Hazaribagh: Aloo Bhujia, Arhar Dal Tadka, Rajma Masala, Aloo Dum & Aloo Chokha. Fresh-cooked ghar ka khana, delivered hot in 30–45 min.",
   applicationName: "BihariBhojan",
   keywords: [
     "Bihari food Hazaribagh",
@@ -81,15 +81,15 @@ export const metadata: Metadata = {
     type: "website",
     url: "https://biharibhojan.com",
     siteName: "BihariBhojan",
-    title: "BihariBhojan — Ghar ka Bihari Khana, Hazaribagh",
+    title: "BihariBhojan · Ghar ka Bihari Khana, Hazaribagh",
     description:
-      "Homestyle Aloo Bhujia, Arhar Dal Tadka & Aloo Chokha — real ghar ka khana, delivered hot in Hazaribagh.",
+      "Homestyle Aloo Bhujia, Arhar Dal Tadka & Aloo Chokha. Real ghar ka khana, delivered hot in Hazaribagh.",
     locale: "hi_IN",
     alternateLocale: ["en_IN"],
   },
   twitter: {
     card: "summary_large_image",
-    title: "BihariBhojan — Ghar ka Bihari Khana, Hazaribagh",
+    title: "BihariBhojan · Ghar ka Bihari Khana, Hazaribagh",
     description:
       "Homestyle Bihari ghar ka khana, fresh-cooked and delivered hot in Hazaribagh.",
   },

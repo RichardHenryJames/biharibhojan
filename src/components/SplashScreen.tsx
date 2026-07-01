@@ -94,7 +94,7 @@ export default function SplashScreen() {
       >
         <Image
           src="/biharibhojanlogo.png"
-          alt="BihariBhojan — घर जैसा स्वाद, बिहारी अंदाज़"
+          alt="BihariBhojan · घर जैसा स्वाद, बिहारी अंदाज़"
           width={320}
           height={320}
           priority

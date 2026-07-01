@@ -9,9 +9,9 @@ import MenuHeader from "@/components/menu/MenuHeader";
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
-  title: "Menu — Aloo Bhujia, Dal Tadka & Ghar ka Khana",
+  title: "Menu · Aloo Bhujia, Dal Tadka & Ghar ka Khana",
   description:
-    "Browse the full BihariBhojan menu: dry sabzi, gravy sabzi, dal, rice & roti, protein and homestyle sides & chokha — fresh-cooked ghar ka khana in Hazaribagh.",
+    "Browse the full BihariBhojan menu: dry sabzi, gravy sabzi, dal, rice & roti, protein and homestyle sides & chokha. Fresh-cooked ghar ka khana in Hazaribagh.",
 };
 
 export default async function MenuPage() {

@@ -47,7 +47,7 @@ export default function ProductCard({
       transition={{ duration: 0.4, delay: Math.min(index * 0.03, 0.24) }}
       className="group flex flex-col overflow-hidden rounded-2xl border border-masala-100/80 bg-cream-50 shadow-card transition-all duration-300 hover:-translate-y-1 hover:border-saffron-200 hover:shadow-warm"
     >
-      {/* Art zone — fixed aspect ratio, image-ready. Swap the plate for a photo later. */}
+      {/* Art zone: fixed aspect ratio, image-ready. Swap the plate for a photo later. */}
       <div
         className={cn(
           "relative aspect-[5/4] overflow-hidden bg-gradient-to-br",

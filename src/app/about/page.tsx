@@ -4,7 +4,7 @@ import AboutContent from "./AboutContent";
 export const metadata: Metadata = {
   title: "Our Story",
   description:
-    "How BihariBhojan began — a home kitchen in Hazaribagh cooking honest, ghee-touched Bihari ghar ka khana in small fresh batches, just like maa makes it.",
+    "How BihariBhojan began: a home kitchen in Hazaribagh cooking honest, ghee-touched Bihari ghar ka khana in small fresh batches, just like maa makes it.",
   alternates: { canonical: "https://biharibhojan.com/about" },
   openGraph: {
     title: "Our Story · BihariBhojan",

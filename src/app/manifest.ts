@@ -2,7 +2,7 @@ import type { MetadataRoute } from "next";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: "BihariBhojan — Ghar ka Bihari Khana",
+    name: "BihariBhojan · Ghar ka Bihari Khana",
     short_name: "BihariBhojan",
     description:
       "Homestyle Bihari food, fresh-cooked and delivered hot in Hazaribagh.",

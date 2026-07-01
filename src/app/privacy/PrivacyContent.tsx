@@ -16,21 +16,21 @@ const CONTENT: Record<
     titleA: "Privacy",
     titleHighlight: "Policy",
     intro:
-      "Your trust matters. Here's exactly what we collect, why, and how we look after it — in plain language.",
+      "Your trust matters. Here's exactly what we collect, why, and how we look after it, in plain language.",
     updated: "Last updated: July 2026",
     contactCta: "Questions about your privacy?",
     sections: [
       {
         heading: "What we collect",
-        body: "When you place an order or contact us, we collect your name, phone number, delivery address, and — only if you choose to share it — your email. We also store the items in your order so we can prepare it.",
+        body: "When you place an order or contact us, we collect your name, phone number, delivery address, and, only if you choose to share it, your email. We also store the items in your order so we can prepare it.",
       },
       {
         heading: "How we use it",
-        body: "We use these details only to prepare, confirm and deliver your order, and to reach you if there's a question about it. That's it — no spam, no selling.",
+        body: "We use these details only to prepare, confirm and deliver your order, and to reach you if there's a question about it. That's it, no spam, no selling.",
       },
       {
         heading: "Payments",
-        body: "You pay by Cash on Delivery or UPI. We never see or store your card, bank or UPI PIN details — UPI payments go directly through your own payment app.",
+        body: "You pay by Cash on Delivery or UPI. We never see or store your card, bank or UPI PIN details. UPI payments go directly through your own payment app.",
       },
       {
         heading: "What stays on your device",
@@ -57,15 +57,15 @@ const CONTENT: Record<
     sections: [
       {
         heading: "हम क्या जानकारी लेते हैं",
-        body: "जब आप ऑर्डर करते हैं या हमसे संपर्क करते हैं, तो हम आपका नाम, फ़ोन नंबर, डिलीवरी का पता और — अगर आप देना चाहें तो — ईमेल लेते हैं। साथ ही आपके ऑर्डर में शामिल व्यंजन भी सहेजते हैं ताकि उसे बना सकें।",
+        body: "जब आप ऑर्डर करते हैं या हमसे संपर्क करते हैं, तो हम आपका नाम, फ़ोन नंबर, डिलीवरी का पता और, अगर आप देना चाहें तो, ईमेल लेते हैं। साथ ही आपके ऑर्डर में शामिल व्यंजन भी सहेजते हैं ताकि उसे बना सकें।",
       },
       {
         heading: "इसका इस्तेमाल कैसे होता है",
-        body: "यह जानकारी सिर्फ़ आपका ऑर्डर बनाने, पक्का करने और आप तक पहुँचाने के लिए, और ज़रूरत पड़ने पर आपसे बात करने के लिए इस्तेमाल होती है। बस इतना ही — न कोई स्पैम, न बेचना।",
+        body: "यह जानकारी सिर्फ़ आपका ऑर्डर बनाने, पक्का करने और आप तक पहुँचाने के लिए, और ज़रूरत पड़ने पर आपसे बात करने के लिए इस्तेमाल होती है। बस इतना ही, न कोई स्पैम, न बेचना।",
       },
       {
         heading: "भुगतान",
-        body: "आप कैश ऑन डिलीवरी या UPI से भुगतान करते हैं। आपके कार्ड, बैंक या UPI पिन की जानकारी हम कभी नहीं देखते या सहेजते — UPI का भुगतान सीधे आपके अपने पेमेंट ऐप से होता है।",
+        body: "आप कैश ऑन डिलीवरी या UPI से भुगतान करते हैं। आपके कार्ड, बैंक या UPI पिन की जानकारी हम कभी नहीं देखते या सहेजते। UPI का भुगतान सीधे आपके अपने पेमेंट ऐप से होता है।",
       },
       {
         heading: "आपके डिवाइस पर क्या रहता है",

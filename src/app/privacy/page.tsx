@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Privacy Policy · BihariBhojan",
     description:
-      "What we collect, why, and how we look after it — in plain language.",
+      "What we collect, why, and how we look after it, in plain language.",
     url: "https://biharibhojan.com/privacy",
     type: "website",
   },

@@ -41,7 +41,7 @@ export const translations: Record<Lang, Dict> = {
       headlineB: "delivered hot.",
       tagline: "Homestyle taste, true Bihari soul.",
       subtitle:
-        "Homestyle Aloo Bhujia, Arhar Dal Tadka, Rajma and Aloo Chokha — cooked fresh in our Hazaribagh kitchen, just like maa makes it, and brought warm to your door.",
+        "Homestyle Aloo Bhujia, Arhar Dal Tadka, Rajma and Aloo Chokha. Cooked fresh in our Hazaribagh kitchen, just like maa makes it, and brought warm to your door.",
       orderNow: "Order Now",
       ourStory: "Our Story",
       ratingLabel: "happy homes fed",
@@ -65,7 +65,7 @@ export const translations: Record<Lang, Dict> = {
       titleA: "Six flavours of",
       titleHighlight: "home",
       subtitle:
-        "From everyday ghar-ka-khana to festive treats — every corner of a Bihari kitchen, on one menu.",
+        "From everyday ghar-ka-khana to festive treats. Every corner of a Bihari kitchen, on one menu.",
       dishes: "dishes",
     },
     bestsellers: {
@@ -82,7 +82,7 @@ export const translations: Record<Lang, Dict> = {
       items: [
         {
           title: "Ghar ka khana, daily",
-          body: "Cooked fresh every morning in small batches — no factory, no frozen shortcuts. Just home food.",
+          body: "Cooked fresh every morning in small batches. No factory, no frozen shortcuts. Just home food.",
         },
         {
           title: "Honest ingredients",
@@ -94,7 +94,7 @@ export const translations: Record<Lang, Dict> = {
         },
         {
           title: "Maa's own recipes",
-          body: "Every dish follows a family recipe from our own kitchen in Bihar — tested by people who grew up on it.",
+          body: "Every dish follows a family recipe from our own kitchen in Bihar. Tested by people who grew up on it.",
         },
       ],
     },
@@ -114,7 +114,7 @@ export const translations: Record<Lang, Dict> = {
         },
         {
           title: "Delivered hot",
-          body: "Fresh, ghee-touched and piping hot — at your door in well under an hour.",
+          body: "Fresh, ghee-touched and piping hot. At your door in well under an hour.",
         },
       ],
     },
@@ -131,7 +131,7 @@ export const translations: Record<Lang, Dict> = {
         },
         {
           quote:
-            "The Arhar Dal Tadka is unreal — light, homely and full of flavour. We order every weekend now.",
+            "The Arhar Dal Tadka is unreal. Light, homely and full of flavour. We order every weekend now.",
           name: "Priya Sinha",
           place: "Korrah, Hazaribagh",
         },
@@ -152,7 +152,7 @@ export const translations: Record<Lang, Dict> = {
     },
     footer: {
       blurb:
-        "Bringing the warm, ghee-touched comfort of a Bihari home kitchen to your doorstep in Hazaribagh — fresh-cooked every day, just like home.",
+        "Bringing the warm, ghee-touched comfort of a Bihari home kitchen to your doorstep in Hazaribagh. Fresh-cooked every day, just like home.",
       explore: "Explore",
       company: "Company",
       getInTouch: "Get in touch",
@@ -169,7 +169,7 @@ export const translations: Record<Lang, Dict> = {
       titleA: "Our",
       titleHighlight: "menu",
       subtitleA: "dishes, freshly cooked to order across",
-      subtitleB: "categories — pick your plate and we'll fire up the tawa.",
+      subtitleB: "categories. Pick your plate and we'll fire up the tawa.",
       searchPlaceholder: "Search besan aloo, dal, rajma…",
       vegOnly: "Veg only",
       sortRecommended: "Recommended",
@@ -215,15 +215,15 @@ export const translations: Record<Lang, Dict> = {
       titleHighlight: "ghar ka khana",
       titleB: "to Hazaribagh",
       intro:
-        "Not oily restaurant food. The simple, fresh, ghee-touched home cooking our mothers and grandmothers made — now delivered to your door in Hazaribagh.",
+        "Not oily restaurant food. The simple, fresh, ghee-touched home cooking our mothers and grandmothers made. Now delivered to your door in Hazaribagh.",
       beganEyebrow: "How it began",
       beganTitle: "Born out of a craving",
       beganP1:
-        "BihariBhojan started with a simple, stubborn craving — for the aloo bhujia and aloo chokha that only ever tasted right at home. We realised our neighbours in Hazaribagh shared the same longing for honest ghar ka khana.",
+        "BihariBhojan started with a simple, stubborn craving: for the aloo bhujia and aloo chokha that only ever tasted right at home. We realised our neighbours in Hazaribagh shared the same longing for honest ghar ka khana.",
       beganP2:
-        "So we set up a small home kitchen in Vishnupuri, cooked in tiny fresh batches, and refused to compromise on a single ingredient — the mustard oil, the sattu, the desi ghee, the seasonal sabzi.",
+        "So we set up a small home kitchen in Vishnupuri, cooked in tiny fresh batches, and refused to compromise on a single ingredient: the mustard oil, the sattu, the desi ghee, the seasonal sabzi.",
       beganP3:
-        "Today, every order is cooked fresh on our home tawa. Whether it's an Arhar Dal Tadka for lunch or a box of Chhath thekua for your parents, we cook it like family — because to us, it is.",
+        "Today, every order is cooked fresh on our home tawa. Whether it's an Arhar Dal Tadka for lunch or a box of Chhath thekua for your parents, we cook it like family, because to us, it is.",
       tasteCta: "Taste it yourself",
       cardTitle: "From a Hazaribagh kitchen",
       cardSub: "to your doorstep",
@@ -236,7 +236,7 @@ export const translations: Record<Lang, Dict> = {
       regionsEyebrow: "What we cook",
       regionsTitleA: "Made fresh,",
       regionsTitleHighlight: "every single day",
-      regionsSubtitle: "Honest home food, the way it's meant to be — nothing pre-made, nothing frozen.",
+      regionsSubtitle: "Honest home food, the way it's meant to be: nothing pre-made, nothing frozen.",
       regions: [
         { emoji: "🥬", region: "Dry sabzi", dish: "Aloo Bhujia · Parwal Bhujia", note: "Everyday bhujiya tempered with panch phoran, garlic and mustard oil." },
         { emoji: "🥘", region: "Gravy sabzi", dish: "Besan Aloo · Aloo Dum", note: "Light, homely curries simmered slow, just like a weekday lunch at home." },
@@ -269,7 +269,7 @@ export const translations: Record<Lang, Dict> = {
       faqTitleHighlight: "questions",
       faqs: [
         { q: "Which areas do you deliver to?", a: "We currently deliver across Hazaribagh and nearby areas, with fresh-cooked orders reaching you in 30–45 minutes. New areas are coming soon." },
-        { q: "Do you take bulk or catering orders?", a: "Absolutely — from house parties to Chhath gatherings. Drop us a message with your headcount and date and we'll craft a menu." },
+        { q: "Do you take bulk or catering orders?", a: "Absolutely. From house parties to Chhath gatherings. Drop us a message with your headcount and date and we'll craft a menu." },
         { q: "Is the food freshly cooked?", a: "Always. Nothing is pre-made or frozen. Everything is cooked fresh in our Hazaribagh home kitchen only after you order." },
         { q: "What are the payment options?", a: "Cash on delivery and UPI/online payment are both supported at checkout." },
       ],
@@ -286,7 +286,7 @@ export const translations: Record<Lang, Dict> = {
         sending: "Sending…",
         error: "Couldn't send your message. Please try again.",
         sentTitle: "Message sent!",
-        sentBody: "Thanks {name} — our team will get back to you within a few hours. Meanwhile, go grab some khana! 🔥",
+        sentBody: "Thanks {name}. Our team will get back to you within a few hours. Meanwhile, go grab some khana! 🔥",
         sendAnother: "Send another",
         friend: "friend",
       },
@@ -332,7 +332,7 @@ export const translations: Record<Lang, Dict> = {
         copied: "Copied!",
         showQr: "Show QR code",
         hideQr: "Hide QR code",
-        note: "Pay the amount above, then place your order — we'll confirm it on a quick call.",
+        note: "Pay the amount above, then place your order. We'll confirm it on a quick call.",
       },
       orderSummary: "Order summary",
       subtotal: "Subtotal",
@@ -348,7 +348,7 @@ export const translations: Record<Lang, Dict> = {
     },
     orderSuccess: {
       title: "Order placed! 🍲",
-      body: "Your food is heading to the kitchen — the coal is already glowing. You'll get a call to confirm shortly.",
+      body: "Your food is heading to the kitchen. The coal is already glowing. You'll get a call to confirm shortly.",
       orderNumber: "Order number",
       estDelivery: "Estimated delivery",
       deliveryTime: "35–50 min",
@@ -367,7 +367,7 @@ export const translations: Record<Lang, Dict> = {
       contact: "संपर्क",
       orderNow: "अभी ऑर्डर करें",
       openCart: "कार्ट खोलें",
-      freeDelivery: "इससे ऊपर के ऑर्डर पर फ्री डिलीवरी —",
+      freeDelivery: "इससे ऊपर के ऑर्डर पर फ्री डिलीवरी:",
     },
     hero: {
       badge: "अब हज़ारीबाग़ में ताज़ा परोसा जा रहा है · घर की रसोई",
@@ -376,7 +376,7 @@ export const translations: Record<Lang, Dict> = {
       headlineB: "आपके दरवाज़े।",
       tagline: "घर जैसा स्वाद, बिहारी अंदाज़।",
       subtitle:
-        "घर जैसा आलू भुजिया, अरहर दाल तड़का, राजमा और आलू चोखा — हमारी हज़ारीबाग़ की रसोई में रोज़ ताज़ा बनता है, बिलकुल माँ के हाथ का स्वाद, और गरमागरम आपके घर तक।",
+        "घर जैसा आलू भुजिया, अरहर दाल तड़का, राजमा और आलू चोखा। हमारी हज़ारीबाग़ की रसोई में रोज़ ताज़ा बनता है, बिलकुल माँ के हाथ का स्वाद, और गरमागरम आपके घर तक।",
       orderNow: "अभी ऑर्डर करें",
       ourStory: "हमारी कहानी",
       ratingLabel: "घरों ने चखा",
@@ -400,7 +400,7 @@ export const translations: Record<Lang, Dict> = {
       titleA: "घर के",
       titleHighlight: "छह स्वाद",
       subtitle:
-        "रोज़ के घर के खाने से लेकर त्योहारी पकवानों तक — बिहारी रसोई का हर कोना, एक ही मेन्यू में।",
+        "रोज़ के घर के खाने से लेकर त्योहारी पकवानों तक। बिहारी रसोई का हर कोना, एक ही मेन्यू में।",
       dishes: "व्यंजन",
     },
     bestsellers: {
@@ -417,7 +417,7 @@ export const translations: Record<Lang, Dict> = {
       items: [
         {
           title: "रोज़ का घर का खाना",
-          body: "हर सुबह छोटे बैच में ताज़ा बनता है — न फैक्ट्री, न फ्रोज़न शॉर्टकट। बस घर का खाना।",
+          body: "हर सुबह छोटे बैच में ताज़ा बनता है। न फैक्ट्री, न फ्रोज़न शॉर्टकट। बस घर का खाना।",
         },
         {
           title: "ईमानदार सामग्री",
@@ -429,7 +429,7 @@ export const translations: Record<Lang, Dict> = {
         },
         {
           title: "माँ के अपने नुस्ख़े",
-          body: "हर व्यंजन हमारी अपनी बिहारी रसोई की पुश्तैनी रेसिपी से बनता है — उन्हीं हाथों से, जो इसी खाने पर पले-बढ़े।",
+          body: "हर व्यंजन हमारी अपनी बिहारी रसोई की पुश्तैनी रेसिपी से बनता है। उन्हीं हाथों से, जो इसी खाने पर पले-बढ़े।",
         },
       ],
     },
@@ -449,7 +449,7 @@ export const translations: Record<Lang, Dict> = {
         },
         {
           title: "गरमागरम पहुँचाते हैं",
-          body: "ताज़ा, घी से महकता और गरमागरम — एक घंटे से भी कम में आपके दरवाज़े।",
+          body: "ताज़ा, घी से महकता और गरमागरम। एक घंटे से भी कम में आपके दरवाज़े।",
         },
       ],
     },
@@ -466,7 +466,7 @@ export const translations: Record<Lang, Dict> = {
         },
         {
           quote:
-            "अरहर दाल तड़का लाजवाब है — हल्का, घरेलू और स्वाद से भरपूर। अब तो हर वीकेंड ऑर्डर करते हैं।",
+            "अरहर दाल तड़का लाजवाब है। हल्का, घरेलू और स्वाद से भरपूर। अब तो हर वीकेंड ऑर्डर करते हैं।",
           name: "प्रिया सिन्हा",
           place: "कोररा, हज़ारीबाग़",
         },
@@ -487,7 +487,7 @@ export const translations: Record<Lang, Dict> = {
     },
     footer: {
       blurb:
-        "बिहारी घर की रसोई की वही घी-महकती गरमाहट, हज़ारीबाग़ में आपके दरवाज़े तक — रोज़ ताज़ा बना, बिलकुल घर जैसा।",
+        "बिहारी घर की रसोई की वही घी-महकती गरमाहट, हज़ारीबाग़ में आपके दरवाज़े तक। रोज़ ताज़ा बना, बिलकुल घर जैसा।",
       explore: "एक्सप्लोर करें",
       company: "कंपनी",
       getInTouch: "संपर्क करें",
@@ -503,7 +503,7 @@ export const translations: Record<Lang, Dict> = {
       eyebrow: "पूरा खाना",
       titleA: "हमारा",
       titleHighlight: "मेन्यू",
-      subtitleA: "व्यंजन, ऑर्डर पर ताज़ा बने —",
+      subtitleA: "व्यंजन, ऑर्डर पर ताज़ा बने,",
       subtitleB: "श्रेणियों में। अपनी थाली चुनिए, हम तवा चढ़ाते हैं।",
       searchPlaceholder: "बेसन आलू, दाल, राजमा खोजें…",
       vegOnly: "सिर्फ़ वेज",
@@ -514,7 +514,7 @@ export const translations: Record<Lang, Dict> = {
       all: "सभी",
       dish: "व्यंजन",
       dishes: "व्यंजन",
-      in: "—",
+      in: "·",
       noResults: "कोई व्यंजन नहीं मिला",
       noResultsHint:
         "कोई और चीज़ खोजें या फ़िल्टर हटाकर पूरा मेन्यू देखें।",
@@ -550,15 +550,15 @@ export const translations: Record<Lang, Dict> = {
       titleHighlight: "घर का खाना",
       titleB: "पहुँचाना",
       intro:
-        "तैलीय रेस्टोरेंट वाला खाना नहीं। वही सादा, ताज़ा, घी-महकता घर का खाना जो हमारी माँ और नानी-दादी बनाती थीं — अब हज़ारीबाग़ में आपके दरवाज़े।",
+        "तैलीय रेस्टोरेंट वाला खाना नहीं। वही सादा, ताज़ा, घी-महकता घर का खाना जो हमारी माँ और नानी-दादी बनाती थीं। अब हज़ारीबाग़ में आपके दरवाज़े।",
       beganEyebrow: "शुरुआत कैसे हुई",
       beganTitle: "एक तलब से जन्मा",
       beganP1:
-        "BihariBhojan की शुरुआत एक सादी-सी ज़िद से हुई — उस आलू भुजिया और आलू चोखे के लिए जो सिर्फ़ घर पर सही बनता था। हमें एहसास हुआ कि हज़ारीबाग़ में हमारे पड़ोसी भी सच्चे घर के खाने को तरसते हैं।",
+        "BihariBhojan की शुरुआत एक सादी-सी ज़िद से हुई। उस आलू भुजिया और आलू चोखे के लिए जो सिर्फ़ घर पर सही बनता था। हमें एहसास हुआ कि हज़ारीबाग़ में हमारे पड़ोसी भी सच्चे घर के खाने को तरसते हैं।",
       beganP2:
-        "तो हमने विष्णुपुरी में एक छोटी-सी घरेलू रसोई खोली, छोटे ताज़े बैच में पकाया, और एक भी चीज़ पर समझौता नहीं किया — सरसों का तेल, सत्तू, देसी घी और मौसमी सब्ज़ी।",
+        "तो हमने विष्णुपुरी में एक छोटी-सी घरेलू रसोई खोली, छोटे ताज़े बैच में पकाया, और एक भी चीज़ पर समझौता नहीं किया: सरसों का तेल, सत्तू, देसी घी और मौसमी सब्ज़ी।",
       beganP3:
-        "आज हर ऑर्डर हमारे घर के तवे पर ताज़ा बनता है। चाहे दोपहर का अरहर दाल तड़का हो या माँ-पापा के लिए छठ का ठेकुआ — हम इसे घर जैसे बनाते हैं, क्योंकि हमारे लिए यह घर ही है।",
+        "आज हर ऑर्डर हमारे घर के तवे पर ताज़ा बनता है। चाहे दोपहर का अरहर दाल तड़का हो या माँ-पापा के लिए छठ का ठेकुआ। हम इसे घर जैसे बनाते हैं, क्योंकि हमारे लिए यह घर ही है।",
       tasteCta: "खुद चखिए",
       cardTitle: "हज़ारीबाग़ की रसोई से",
       cardSub: "आपके दरवाज़े तक",
@@ -571,10 +571,10 @@ export const translations: Record<Lang, Dict> = {
       regionsEyebrow: "हम क्या बनाते हैं",
       regionsTitleA: "रोज़ ताज़ा",
       regionsTitleHighlight: "बनाया गया",
-      regionsSubtitle: "सच्चा घर का खाना, जैसा होना चाहिए — कुछ भी पहले से बना नहीं, कुछ भी फ़्रोज़न नहीं।",
+      regionsSubtitle: "सच्चा घर का खाना, जैसा होना चाहिए। कुछ भी पहले से बना नहीं, कुछ भी फ़्रोज़न नहीं।",
       regions: [
         { emoji: "🥬", region: "सूखी सब्ज़ी", dish: "आलू भुजिया · परवल भुजिया", note: "पंच फोरन, लहसुन और सरसों के तेल के छौंक वाली रोज़ की भुजिया।" },
-        { emoji: "🥘", region: "तरी वाली सब्ज़ी", dish: "बेसन आलू · आलू दम", note: "धीमी आँच पर बनी हल्की, घरेलू सब्ज़ियाँ — बिलकुल घर के दोपहर जैसी।" },
+        { emoji: "🥘", region: "तरी वाली सब्ज़ी", dish: "बेसन आलू · आलू दम", note: "धीमी आँच पर बनी हल्की, घरेलू सब्ज़ियाँ। बिलकुल घर के दोपहर जैसी।" },
         { emoji: "🍲", region: "दाल", dish: "अरहर दाल तड़का", note: "धीरे पकी दालें, घी-लहसुन के धुएँदार तड़के के साथ।" },
         { emoji: "🫘", region: "प्रोटीन", dish: "राजमा · काला चना घुघनी", note: "राजमा, घुघनी और चना, गाढ़े और घरेलू स्वाद तक पके।" },
       ],
@@ -604,7 +604,7 @@ export const translations: Record<Lang, Dict> = {
       faqTitleHighlight: "सवाल",
       faqs: [
         { q: "आप किन इलाक़ों में डिलीवरी करते हैं?", a: "फ़िलहाल हम हज़ारीबाग़ और आस-पास के इलाक़ों में डिलीवरी करते हैं, ताज़ा बना ऑर्डर 30–45 मिनट में आप तक पहुँचता है। नए इलाक़े जल्द ही जुड़ेंगे।" },
-        { q: "क्या आप बल्क या कैटरिंग ऑर्डर लेते हैं?", a: "बिलकुल — घर की पार्टी से लेकर छठ की दावत तक। बस अपने मेहमानों की संख्या और तारीख़ बता दीजिए, हम मेन्यू तैयार कर देंगे।" },
+        { q: "क्या आप बल्क या कैटरिंग ऑर्डर लेते हैं?", a: "बिलकुल। घर की पार्टी से लेकर छठ की दावत तक। बस अपने मेहमानों की संख्या और तारीख़ बता दीजिए, हम मेन्यू तैयार कर देंगे।" },
         { q: "क्या खाना ताज़ा बनता है?", a: "हमेशा। कुछ भी पहले से बना या फ़्रोज़न नहीं होता। सब कुछ हमारी हज़ारीबाग़ की घर की रसोई में आपके ऑर्डर के बाद ही ताज़ा बनता है।" },
         { q: "पेमेंट के क्या विकल्प हैं?", a: "चेकआउट पर कैश ऑन डिलीवरी और UPI/ऑनलाइन पेमेंट, दोनों उपलब्ध हैं।" },
       ],
@@ -621,7 +621,7 @@ export const translations: Record<Lang, Dict> = {
         sending: "भेजा जा रहा है…",
         error: "संदेश भेजा नहीं जा सका। कृपया दोबारा कोशिश करें।",
         sentTitle: "संदेश भेज दिया!",
-        sentBody: "धन्यवाद {name} — हमारी टीम कुछ ही घंटों में आपसे संपर्क करेगी। तब तक, कुछ गरमागरम खाना मँगाइए! 🔥",
+        sentBody: "धन्यवाद {name}। हमारी टीम कुछ ही घंटों में आपसे संपर्क करेगी। तब तक, कुछ गरमागरम खाना मँगाइए! 🔥",
         sendAnother: "एक और भेजें",
         friend: "दोस्त",
       },
@@ -667,7 +667,7 @@ export const translations: Record<Lang, Dict> = {
         copied: "कॉपी हो गया!",
         showQr: "QR कोड दिखाएँ",
         hideQr: "QR कोड छिपाएँ",
-        note: "ऊपर दी गई राशि का भुगतान करें, फिर अपना ऑर्डर करें — हम एक छोटे कॉल पर उसकी पुष्टि कर देंगे।",
+        note: "ऊपर दी गई राशि का भुगतान करें, फिर अपना ऑर्डर करें। हम एक छोटे कॉल पर उसकी पुष्टि कर देंगे।",
       },
       orderSummary: "ऑर्डर का ब्यौरा",
       subtotal: "सबटोटल",
@@ -683,7 +683,7 @@ export const translations: Record<Lang, Dict> = {
     },
     orderSuccess: {
       title: "ऑर्डर हो गया! 🍲",
-      body: "आपका खाना रसोई की ओर बढ़ चला है — कोयला अभी से दहक रहा है। पुष्टि के लिए आपको जल्द ही कॉल आएगा।",
+      body: "आपका खाना रसोई की ओर बढ़ चला है। कोयला अभी से दहक रहा है। पुष्टि के लिए आपको जल्द ही कॉल आएगा।",
       orderNumber: "ऑर्डर नंबर",
       estDelivery: "अनुमानित डिलीवरी",
       deliveryTime: "35–50 मिनट",

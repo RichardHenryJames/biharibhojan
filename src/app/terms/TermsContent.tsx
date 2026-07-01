@@ -25,7 +25,7 @@ const CONTENT: Record<
       },
       {
         heading: "Payment",
-        body: "Pay by Cash on Delivery or UPI. For UPI, please pay to the UPI ID shown at checkout — we begin preparing your order once payment is confirmed.",
+        body: "Pay by Cash on Delivery or UPI. For UPI, please pay to the UPI ID shown at checkout. We begin preparing your order once payment is confirmed.",
       },
       {
         heading: "Delivery",
@@ -33,7 +33,7 @@ const CONTENT: Record<
       },
       {
         heading: "Cancellations & refunds",
-        body: "Plans change — just call us as soon as you can. If we've already cooked your food we may not be able to refund it, but we'll always try to be fair.",
+        body: "Plans change. Just call us as soon as you can. If we've already cooked your food we may not be able to refund it, but we'll always try to be fair.",
       },
       {
         heading: "Our food",
@@ -59,7 +59,7 @@ const CONTENT: Record<
       },
       {
         heading: "भुगतान",
-        body: "कैश ऑन डिलीवरी या UPI से भुगतान करें। UPI के लिए, कृपया चेकआउट पर दिखाए गए UPI ID पर भुगतान करें — भुगतान की पुष्टि होते ही हम आपका ऑर्डर बनाना शुरू कर देते हैं।",
+        body: "कैश ऑन डिलीवरी या UPI से भुगतान करें। UPI के लिए, कृपया चेकआउट पर दिखाए गए UPI ID पर भुगतान करें। भुगतान की पुष्टि होते ही हम आपका ऑर्डर बनाना शुरू कर देते हैं।",
       },
       {
         heading: "डिलीवरी",
@@ -67,7 +67,7 @@ const CONTENT: Record<
       },
       {
         heading: "रद्द करना और रिफ़ंड",
-        body: "इरादे बदलते हैं — बस जितनी जल्दी हो सके हमें कॉल कर दें। अगर आपका खाना बन चुका है तो शायद रिफ़ंड न हो पाए, पर हम हमेशा सही करने की कोशिश करेंगे।",
+        body: "इरादे बदलते हैं। बस जितनी जल्दी हो सके हमें कॉल कर दें। अगर आपका खाना बन चुका है तो शायद रिफ़ंड न हो पाए, पर हम हमेशा सही करने की कोशिश करेंगे।",
       },
       {
         heading: "हमारा खाना",
