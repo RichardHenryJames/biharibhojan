@@ -17,6 +17,18 @@ param(
 
 $ErrorActionPreference = 'Stop'
 
+# Windows + `az acr build` streams a ✔ (U+2714) in the cloud build logs which
+# crashes the CLI under the default cp1252 console code page (UnicodeEncodeError
+# deep in colorama) — making the build "fail" even though the image built fine.
+# Force UTF-8 for the console + az's bundled Python so streaming never crashes.
+try {
+  & chcp.com 65001 | Out-Null
+  [Console]::OutputEncoding = [System.Text.Encoding]::UTF8
+  $OutputEncoding = [System.Text.Encoding]::UTF8
+} catch { }
+$env:PYTHONIOENCODING = 'utf-8'
+$env:PYTHONUTF8 = '1'
+
 # Run an az command and throw if it returns a non-zero exit code.
 function Invoke-Az {
   param([Parameter(Mandatory)][string[]]$AzArgs, [switch]$AllowFail)
@@ -106,7 +118,9 @@ try {
   }
 
   Write-Host '==> Building container image in the cloud (az acr build)...' -ForegroundColor Cyan
-  Invoke-Az @('acr', 'build', '--registry', $acrName, '--image', 'biharibhojan:latest', '--file', 'Dockerfile', '.', '--output', 'none')
+  # `--no-logs` avoids streaming the build logs (which contain a ✔ that crashes
+  # the CLI on Windows cp1252 consoles); the build still runs + waits + reports.
+  Invoke-Az @('acr', 'build', '--registry', $acrName, '--image', 'biharibhojan:latest', '--file', 'Dockerfile', '.', '--no-logs', '--output', 'none')
 
   Write-Host '==> Applying database schema + seed...' -ForegroundColor Cyan
   $env:DATABASE_URL = "sqlserver://${sqlFqdn}:1433;database=biharibhojan;user=bihariadmin;password=$($env:PG_ADMIN_PASSWORD);encrypt=true;trustServerCertificate=false"
