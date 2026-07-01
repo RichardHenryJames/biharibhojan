@@ -118,9 +118,18 @@ try {
   }
 
   Write-Host '==> Building container image in the cloud (az acr build)...' -ForegroundColor Cyan
+  # Unique, immutable tag per deploy (git short SHA + timestamp). Using a fresh
+  # tag every time is what forces Container Apps to roll a NEW revision — a
+  # static ':latest' keeps the Bicep template byte-identical, so Azure sees "no
+  # change" and the freshly-built image never actually goes live.
+  $gitSha = (git -C $repoRoot rev-parse --short HEAD 2>$null)
+  if ([string]::IsNullOrWhiteSpace($gitSha)) { $gitSha = 'nogit' }
+  $imageTag = "$gitSha-$(Get-Date -Format 'yyyyMMddHHmmss')"
+  Write-Host "    image tag: $imageTag" -ForegroundColor DarkGray
   # `--no-logs` avoids streaming the build logs (which contain a ✔ that crashes
   # the CLI on Windows cp1252 consoles); the build still runs + waits + reports.
-  Invoke-Az @('acr', 'build', '--registry', $acrName, '--image', 'biharibhojan:latest', '--file', 'Dockerfile', '.', '--no-logs', '--output', 'none')
+  # Tag both the unique tag AND :latest (latest = convenience/manual pulls).
+  Invoke-Az @('acr', 'build', '--registry', $acrName, '--image', "biharibhojan:$imageTag", '--image', 'biharibhojan:latest', '--file', 'Dockerfile', '.', '--no-logs', '--output', 'none')
 
   Write-Host '==> Applying database schema + seed...' -ForegroundColor Cyan
   $env:DATABASE_URL = "sqlserver://${sqlFqdn}:1433;database=biharibhojan;user=bihariadmin;password=$($env:PG_ADMIN_PASSWORD);encrypt=true;trustServerCertificate=false"
@@ -132,7 +141,7 @@ try {
   # ---- Phase 2: deploy the Container App with the real, freshly-built image ----
   Write-Host '==> [Phase 2] Deploying the Container App with the built image...' -ForegroundColor Cyan
   $env:DEPLOY_APP = 'true'
-  $env:CONTAINER_IMAGE = "$acrName.azurecr.io/biharibhojan:latest"
+  $env:CONTAINER_IMAGE = "$acrName.azurecr.io/biharibhojan:$imageTag"
   Invoke-Az @(
     'deployment', 'group', 'create',
     '--resource-group', $ResourceGroup,
