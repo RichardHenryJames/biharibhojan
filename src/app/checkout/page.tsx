@@ -6,12 +6,14 @@ import { useRouter } from "next/navigation";
 import { ArrowLeft, Banknote, Loader2, Lock, ShoppingBag, Smartphone } from "lucide-react";
 import { useCart } from "@/context/CartContext";
 import { cn, formatINR } from "@/lib/utils";
+import { useLanguage } from "@/context/LanguageContext";
 
 const FREE_DELIVERY_THRESHOLD = 399;
 const DELIVERY_FEE = 39;
 
 export default function CheckoutPage() {
   const router = useRouter();
+  const { t } = useLanguage();
   const { lines, subtotal, count, clear, hydrated } = useCart();
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -21,7 +23,7 @@ export default function CheckoutPage() {
     phone: "",
     email: "",
     address: "",
-    city: "Patna",
+    city: "",
     pincode: "",
     notes: "",
   });
@@ -50,7 +52,7 @@ export default function CheckoutPage() {
       });
       const data = await res.json();
       if (!res.ok) {
-        setError(data.error || "Something went wrong. Please try again.");
+        setError(data.error || t("checkout.errorGeneric"));
         setSubmitting(false);
         return;
       }
@@ -59,7 +61,7 @@ export default function CheckoutPage() {
         `/order-success?o=${encodeURIComponent(data.orderNumber)}&t=${data.total}`,
       );
     } catch {
-      setError("Network error. Please check your connection and try again.");
+      setError(t("checkout.errorNetwork"));
       setSubmitting(false);
     }
   };
@@ -71,12 +73,12 @@ export default function CheckoutPage() {
         <span className="grid h-24 w-24 place-items-center rounded-full bg-cream-200 text-5xl">
           🛒
         </span>
-        <h1 className="font-display text-3xl font-bold">Your cart is empty</h1>
+        <h1 className="font-display text-3xl font-bold">{t("checkout.emptyTitle")}</h1>
         <p className="max-w-sm text-masala-500">
-          Add some smoky litti chokha or a Champaran handi before checking out.
+          {t("checkout.emptyBody")}
         </p>
         <Link href="/menu" className="btn-primary mt-2">
-          Browse the menu
+          {t("checkout.emptyCta")}
         </Link>
       </div>
     );
@@ -88,11 +90,11 @@ export default function CheckoutPage() {
         href="/menu"
         className="mb-6 inline-flex items-center gap-1.5 text-sm font-semibold text-masala-500 hover:text-chili-600"
       >
-        <ArrowLeft className="h-4 w-4" /> Back to menu
+        <ArrowLeft className="h-4 w-4" /> {t("checkout.backToMenu")}
       </Link>
 
       <h1 className="section-title !text-4xl">
-        Checkout <span className="text-gradient">your thali</span>
+        {t("checkout.titleA")} <span className="text-gradient">{t("checkout.titleHighlight")}</span>
       </h1>
 
       <form onSubmit={onSubmit} className="mt-10 grid gap-8 lg:grid-cols-[1.3fr_1fr]">
@@ -100,69 +102,70 @@ export default function CheckoutPage() {
         <div className="space-y-6">
           <fieldset className="card-surface p-6">
             <legend className="px-2 font-display text-lg font-bold">
-              Delivery details
+              {t("checkout.deliveryDetails")}
             </legend>
             <div className="grid gap-4 pt-2 sm:grid-cols-2">
-              <Field label="Full name" full={false}>
+              <Field label={t("checkout.fullName")} full={false}>
                 <input
                   required
                   value={form.customerName}
                   onChange={update("customerName")}
-                  placeholder="Aditya Kumar"
+                  placeholder={t("checkout.fullNamePlaceholder")}
                   className="ck-input"
                 />
               </Field>
-              <Field label="Phone number">
+              <Field label={t("checkout.phone")}>
                 <input
                   required
                   type="tel"
                   value={form.phone}
                   onChange={update("phone")}
-                  placeholder="98765 43210"
+                  placeholder={t("checkout.phonePlaceholder")}
                   className="ck-input"
                 />
               </Field>
-              <Field label="Email (optional)" span>
+              <Field label={t("checkout.email")} span>
                 <input
                   type="email"
                   value={form.email}
                   onChange={update("email")}
-                  placeholder="you@email.com"
+                  placeholder={t("checkout.emailPlaceholder")}
                   className="ck-input"
                 />
               </Field>
-              <Field label="Delivery address" span>
+              <Field label={t("checkout.address")} span>
                 <textarea
                   required
                   rows={2}
                   value={form.address}
                   onChange={update("address")}
-                  placeholder="House no, street, area, landmark"
+                  placeholder={t("checkout.addressPlaceholder")}
                   className="ck-input resize-none"
                 />
               </Field>
-              <Field label="City">
+              <Field label={t("checkout.city")}>
                 <input
                   required
                   value={form.city}
                   onChange={update("city")}
+                  placeholder={t("checkout.cityDefault")}
                   className="ck-input"
                 />
               </Field>
-              <Field label="Pincode">
+              <Field label={t("checkout.pincode")}>
                 <input
                   required
                   value={form.pincode}
                   onChange={update("pincode")}
-                  placeholder="800001"
+                  placeholder={t("checkout.pincodePlaceholder")}
                   className="ck-input"
                 />
               </Field>
-              <Field label="Cooking / delivery notes (optional)" span>
+              <Field label={t("checkout.notes")} span>
                 <input
                   value={form.notes}
                   onChange={update("notes")}
-                  placeholder="Extra spicy, ring the bell twice…"
+                  placeholder={t("checkout.notesPlaceholder")}
                   className="ck-input"
                 />
               </Field>
@@ -171,21 +174,21 @@ export default function CheckoutPage() {
 
           {/* Payment */}
           <fieldset className="card-surface p-6">
-            <legend className="px-2 font-display text-lg font-bold">Payment method</legend>
+            <legend className="px-2 font-display text-lg font-bold">{t("checkout.paymentMethod")}</legend>
             <div className="grid gap-3 pt-2 sm:grid-cols-2">
               <PaymentOption
                 active={payment === "COD"}
                 onClick={() => setPayment("COD")}
                 icon={Banknote}
-                title="Cash on delivery"
-                sub="Pay when it arrives"
+                title={t("checkout.codTitle")}
+                sub={t("checkout.codSub")}
               />
               <PaymentOption
                 active={payment === "UPI"}
                 onClick={() => setPayment("UPI")}
                 icon={Smartphone}
-                title="UPI / Online"
-                sub="GPay, PhonePe, Paytm"
+                title={t("checkout.upiTitle")}
+                sub={t("checkout.upiSub")}
               />
             </div>
           </fieldset>
@@ -197,7 +200,7 @@ export default function CheckoutPage() {
             <div className="flex items-center gap-2 border-b border-masala-100 bg-cream-200/40 px-6 py-4">
               <ShoppingBag className="h-5 w-5 text-chili-600" />
               <h2 className="font-display text-lg font-bold">
-                Order summary{" "}
+                {t("checkout.orderSummary")}{" "}
                 <span className="text-masala-400">({count})</span>
               </h2>
             </div>
@@ -224,12 +227,12 @@ export default function CheckoutPage() {
             </div>
 
             <div className="space-y-2 border-t border-masala-100 px-6 py-4 text-sm">
-              <Row label="Subtotal" value={formatINR(subtotal)} />
+              <Row label={t("checkout.subtotal")} value={formatINR(subtotal)} />
               <Row
-                label="Delivery fee"
+                label={t("checkout.deliveryFee")}
                 value={
                   deliveryFee === 0 ? (
-                    <span className="font-semibold text-leaf-600">FREE</span>
+                    <span className="font-semibold text-leaf-600">{t("checkout.free")}</span>
                   ) : (
                     formatINR(deliveryFee)
                   )
@@ -237,12 +240,11 @@ export default function CheckoutPage() {
               />
               {deliveryFee > 0 && (
                 <p className="text-xs text-masala-400">
-                  Add {formatINR(FREE_DELIVERY_THRESHOLD - subtotal)} more for free
-                  delivery.
+                  {t("checkout.addMore", { amount: formatINR(FREE_DELIVERY_THRESHOLD - subtotal) })}
                 </p>
               )}
               <div className="flex items-center justify-between border-t border-masala-100 pt-3">
-                <span className="font-display text-lg font-bold">Total</span>
+                <span className="font-display text-lg font-bold">{t("checkout.total")}</span>
                 <span className="font-display text-2xl font-extrabold text-masala-900">
                   {formatINR(total)}
                 </span>
@@ -262,14 +264,14 @@ export default function CheckoutPage() {
               >
                 {submitting ? (
                   <>
-                    <Loader2 className="h-5 w-5 animate-spin" /> Placing order…
+                    <Loader2 className="h-5 w-5 animate-spin" /> {t("checkout.placing")}
                   </>
                 ) : (
-                  <>Place order · {formatINR(total)}</>
+                  <>{t("checkout.placeOrder")} · {formatINR(total)}</>
                 )}
               </button>
               <p className="mt-3 flex items-center justify-center gap-1.5 text-xs text-masala-400">
-                <Lock className="h-3.5 w-3.5" /> Safe &amp; secure checkout
+                <Lock className="h-3.5 w-3.5" /> {t("checkout.secure")}
               </p>
             </div>
           </div>

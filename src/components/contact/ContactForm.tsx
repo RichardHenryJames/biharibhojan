@@ -3,14 +3,17 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { CheckCircle2, Send } from "lucide-react";
+import { useLanguage } from "@/context/LanguageContext";
 
 export default function ContactForm() {
+  const { t, tRaw } = useLanguage();
+  const subjects = tRaw<string[]>("contact.form.subjects") ?? [];
   const [sent, setSent] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [form, setForm] = useState({
     name: "",
     email: "",
-    subject: "General enquiry",
+    subject: "",
     message: "",
   });
 
@@ -41,19 +44,18 @@ export default function ContactForm() {
             <span className="grid h-16 w-16 place-items-center rounded-full bg-leaf-100 text-leaf-600">
               <CheckCircle2 className="h-9 w-9" />
             </span>
-            <h3 className="font-display text-2xl font-bold">Message sent!</h3>
+            <h3 className="font-display text-2xl font-bold">{t("contact.form.sentTitle")}</h3>
             <p className="max-w-sm text-sm text-masala-500">
-              Thanks {form.name.split(" ")[0] || "friend"} — our team will get back to
-              you within a few hours. Meanwhile, go grab some litti! 🔥
+              {t("contact.form.sentBody", { name: form.name.split(" ")[0] || t("contact.form.friend") })}
             </p>
             <button
               onClick={() => {
                 setSent(false);
-                setForm({ name: "", email: "", subject: "General enquiry", message: "" });
+                setForm({ name: "", email: "", subject: "", message: "" });
               }}
               className="btn-ghost mt-2"
             >
-              Send another
+              {t("contact.form.sendAnother")}
             </button>
           </motion.div>
         ) : (
@@ -65,43 +67,42 @@ export default function ContactForm() {
             className="space-y-4"
           >
             <div className="grid gap-4 sm:grid-cols-2">
-              <Field label="Your name">
+              <Field label={t("contact.form.name")}>
                 <input
                   required
                   value={form.name}
                   onChange={update("name")}
-                  placeholder="Aditya Kumar"
+                  placeholder={t("contact.form.namePlaceholder")}
                   className="input"
                 />
               </Field>
-              <Field label="Email">
+              <Field label={t("contact.form.email")}>
                 <input
                   required
                   type="email"
                   value={form.email}
                   onChange={update("email")}
-                  placeholder="you@email.com"
+                  placeholder={t("contact.form.emailPlaceholder")}
                   className="input"
                 />
               </Field>
             </div>
 
-            <Field label="Subject">
-              <select value={form.subject} onChange={update("subject")} className="input">
-                <option>General enquiry</option>
-                <option>Bulk &amp; catering order</option>
-                <option>Feedback about my order</option>
-                <option>Partnership</option>
+            <Field label={t("contact.form.subject")}>
+              <select value={form.subject || subjects[0] || ""} onChange={update("subject")} className="input">
+                {subjects.map((s) => (
+                  <option key={s}>{s}</option>
+                ))}
               </select>
             </Field>
 
-            <Field label="Message">
+            <Field label={t("contact.form.message")}>
               <textarea
                 required
                 rows={5}
                 value={form.message}
                 onChange={update("message")}
-                placeholder="Tell us what's on your mind…"
+                placeholder={t("contact.form.messagePlaceholder")}
                 className="input resize-none"
               />
             </Field>
@@ -112,10 +113,10 @@ export default function ContactForm() {
               className="btn-primary w-full py-3.5 text-base"
             >
               {submitting ? (
-                "Sending…"
+                t("contact.form.sending")
               ) : (
                 <>
-                  Send message <Send className="h-4 w-4" />
+                  {t("contact.form.send")} <Send className="h-4 w-4" />
                 </>
               )}
             </button>
