@@ -38,6 +38,16 @@ export const DISH_IMAGE_SLUGS: ReadonlySet<string> = new Set([
   "kabuli-chana-masala",
   "poori",
   "soya-curry",
+  // batch 3
+  "bhindi-bhujia",
+  "parwal-bhujia",
+  "tamatar-chokha",
+  "green-chutney",
+  "papad",
+  "mixed-pickle",
+  "onion-salad",
+  "boondi-raita",
+  "plain-curd",
 ]);
 
 /** Returns the public path to a dish photo, or null if none exists for the slug. */
