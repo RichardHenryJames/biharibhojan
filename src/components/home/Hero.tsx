@@ -1,9 +1,11 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { ArrowRight, Clock, Star, UtensilsCrossed } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
+import { dishImage } from "@/data/dishImages";
 
 const container = {
   hidden: {},
@@ -14,12 +16,15 @@ const item = {
   show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] } },
 };
 
+// Hero centrepiece bowl — our signature dish, shown as a real photo.
+const HERO_DISH = { slug: "besan-aloo-sabzi", en: "Besan Aloo Sabzi", hi: "बेसन आलू सब्ज़ी" };
+
 const floats = [
   // `mobile` cards show on every screen; the others appear from sm+ to avoid clutter.
-  { emoji: "🥔", en: "Aloo Bhujia", hi: "आलू भुजिया", price: "₹59", cls: "-left-2 top-8 sm:left-0 sm:top-10", delay: "0s", mobile: true },
-  { emoji: "🍲", en: "Arhar Dal", hi: "अरहर दाल", price: "₹69", cls: "-right-1 top-2 sm:right-2 sm:top-0", delay: "1.1s", mobile: true },
-  { emoji: "🫘", en: "Rajma Masala", hi: "राजमा मसाला", price: "₹99", cls: "-right-3 bottom-24", delay: "0.6s", mobile: false },
-  { emoji: "🥔", en: "Aloo Chokha", hi: "आलू चोखा", price: "₹49", cls: "-left-3 bottom-12", delay: "1.6s", mobile: false },
+  { slug: "aloo-bhujia", emoji: "🥔", en: "Aloo Bhujia", hi: "आलू भुजिया", price: "₹59", cls: "-left-2 top-8 sm:left-0 sm:top-10", delay: "0s", mobile: true },
+  { slug: "arhar-dal-tadka", emoji: "🍲", en: "Arhar Dal", hi: "अरहर दाल", price: "₹69", cls: "-right-1 top-2 sm:right-2 sm:top-0", delay: "1.1s", mobile: true },
+  { slug: "rajma-masala", emoji: "🫘", en: "Rajma Masala", hi: "राजमा मसाला", price: "₹99", cls: "-right-3 bottom-24", delay: "0.6s", mobile: false },
+  { slug: "aloo-chokha", emoji: "🥔", en: "Aloo Chokha", hi: "आलू चोखा", price: "₹49", cls: "-left-3 bottom-12", delay: "1.6s", mobile: false },
 ];
 
 export default function Hero() {
@@ -140,20 +145,35 @@ export default function Hero() {
           <div className="absolute inset-0 rounded-full bg-gradient-to-br from-saffron-300/40 via-cream-200 to-chili-200/50 blur-xl" />
 
           {/* Plate */}
-          <div className="absolute inset-8 grid place-items-center rounded-full bg-gradient-to-br from-saffron-400 via-saffron-500 to-chili-600 shadow-glow">
-            <div className="absolute inset-3 rounded-full border-4 border-cream-50/30" />
-            {/* steam */}
-            <div className="absolute -top-2 flex gap-3">
+          <div className="absolute inset-8">
+            {/* steam rising above the bowl (kept outside the clip) */}
+            <div className="absolute -top-3 left-1/2 z-20 flex -translate-x-1/2 gap-3">
               {[0, 1, 2].map((i) => (
                 <span
                   key={i}
-                  className="h-8 w-1.5 animate-steam rounded-full bg-cream-50/70 blur-[2px]"
+                  className="h-8 w-1.5 animate-steam rounded-full bg-cream-50/80 blur-[2px]"
                   style={{ animationDelay: `${i * 0.5}s` }}
                 />
               ))}
             </div>
-            <span className="text-[6.5rem] drop-shadow-[0_10px_24px_rgba(0,0,0,0.3)] sm:text-[8rem]">🍛</span>
-            <span className="absolute bottom-8 rounded-full bg-masala-900/85 px-4 py-1.5 text-xs font-bold text-cream-50 backdrop-blur sm:text-sm">
+
+            {/* the bowl: real signature-dish photo in a circle */}
+            <div className="absolute inset-0 overflow-hidden rounded-full shadow-glow ring-[6px] ring-cream-50/50">
+              <Image
+                src={dishImage(HERO_DISH.slug) as string}
+                alt={lang === "hi" ? HERO_DISH.hi : HERO_DISH.en}
+                fill
+                priority
+                sizes="(max-width: 1024px) 80vw, 420px"
+                className="object-cover"
+              />
+              {/* warm wash keeps it on-brand and the badge legible */}
+              <div className="absolute inset-0 bg-gradient-to-t from-masala-900/55 via-transparent to-saffron-200/10" />
+              <div className="pointer-events-none absolute inset-2 rounded-full border border-cream-50/25" />
+            </div>
+
+            {/* price badge over the bowl */}
+            <span className="absolute inset-x-0 bottom-7 z-20 mx-auto w-max rounded-full bg-masala-900/85 px-4 py-1.5 text-xs font-bold text-cream-50 shadow-lg backdrop-blur sm:text-sm">
               {lang === "hi" ? "घर की थाली · ₹149" : "Ghar ki Thali · ₹149"}
             </span>
           </div>
@@ -166,8 +186,18 @@ export default function Hero() {
               style={{ animationDelay: f.delay }}
             >
               <div className="flex items-center gap-2 rounded-2xl border border-masala-100 bg-cream-50/95 px-3 py-2 shadow-card backdrop-blur sm:gap-2.5 sm:px-3.5 sm:py-2.5">
-                <span className="grid h-9 w-9 place-items-center rounded-xl bg-cream-200 text-xl sm:h-10 sm:w-10 sm:text-2xl">
-                  {f.emoji}
+                <span className="grid h-9 w-9 shrink-0 place-items-center overflow-hidden rounded-xl bg-cream-200 text-xl sm:h-11 sm:w-11 sm:text-2xl">
+                  {dishImage(f.slug) ? (
+                    <Image
+                      src={dishImage(f.slug) as string}
+                      alt={lang === "hi" ? f.hi : f.en}
+                      width={44}
+                      height={44}
+                      className="h-full w-full object-cover"
+                    />
+                  ) : (
+                    f.emoji
+                  )}
                 </span>
                 <div className="leading-tight">
                   <div className="text-xs font-bold text-masala-900">{lang === "hi" ? f.hi : f.en}</div>
