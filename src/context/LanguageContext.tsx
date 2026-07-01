@@ -46,7 +46,7 @@ function interpolate(str: string, params?: TParams) {
 }
 
 export function LanguageProvider({ children }: { children: React.ReactNode }) {
-  const [lang, setLangState] = useState<Lang>("en");
+  const [lang, setLangState] = useState<Lang>("hi");
   const [hydrated, setHydrated] = useState(false);
 
   useEffect(() => {

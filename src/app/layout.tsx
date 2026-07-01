@@ -89,7 +89,7 @@ export default function RootLayout({
 }) {
   return (
     <html
-      lang="en"
+      lang="hi"
       className={`${display.variable} ${sans.variable} ${hindi.variable} ${hindiSans.variable}`}
     >
       <body>

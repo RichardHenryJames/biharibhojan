@@ -91,11 +91,11 @@ export default function Navbar() {
                         : "text-masala-600 hover:text-masala-900",
                     )}
                   >
-                    {t(l.key)}
+                    <span className="relative z-10">{t(l.key)}</span>
                     {active && (
                       <motion.span
                         layoutId="nav-pill"
-                        className="absolute inset-0 -z-10 rounded-full bg-saffron-200/70"
+                        className="absolute inset-0 rounded-full bg-saffron-200/70"
                         transition={{ type: "spring", stiffness: 380, damping: 30 }}
                       />
                     )}

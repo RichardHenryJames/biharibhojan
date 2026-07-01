@@ -7,6 +7,7 @@ import { ArrowLeft, Banknote, Loader2, Lock, ShoppingBag, Smartphone } from "luc
 import { useCart } from "@/context/CartContext";
 import { cn, formatINR } from "@/lib/utils";
 import { useLanguage } from "@/context/LanguageContext";
+import UpiPayment from "@/components/checkout/UpiPayment";
 
 const FREE_DELIVERY_THRESHOLD = 399;
 const DELIVERY_FEE = 39;
@@ -104,7 +105,7 @@ export default function CheckoutPage() {
             <legend className="px-2 font-display text-lg font-bold">
               {t("checkout.deliveryDetails")}
             </legend>
-            <div className="grid gap-4 pt-2 sm:grid-cols-2">
+            <div className="grid gap-4 pt-4 sm:grid-cols-2">
               <Field label={t("checkout.fullName")} full={false}>
                 <input
                   required
@@ -175,7 +176,7 @@ export default function CheckoutPage() {
           {/* Payment */}
           <fieldset className="card-surface p-6">
             <legend className="px-2 font-display text-lg font-bold">{t("checkout.paymentMethod")}</legend>
-            <div className="grid gap-3 pt-2 sm:grid-cols-2">
+            <div className="grid gap-3 pt-4 sm:grid-cols-2">
               <PaymentOption
                 active={payment === "COD"}
                 onClick={() => setPayment("COD")}
@@ -191,6 +192,8 @@ export default function CheckoutPage() {
                 sub={t("checkout.upiSub")}
               />
             </div>
+
+            {payment === "UPI" && <UpiPayment amount={total} note={`BihariBhojan order`} />}
           </fieldset>
         </div>
 

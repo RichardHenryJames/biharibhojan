@@ -40,11 +40,13 @@ export default function LanguageToggle({
             {active && (
               <motion.span
                 layoutId="lang-pill"
-                className="absolute inset-0 -z-10 rounded-full bg-chili-600"
+                className="absolute inset-0 rounded-full bg-chili-600"
                 transition={{ type: "spring", stiffness: 380, damping: 30 }}
               />
             )}
-            <span className={l.code === "hi" ? "font-hindi-sans" : ""}>{l.short}</span>
+            <span className={cn("relative z-10", l.code === "hi" && "font-hindi-sans")}>
+              {l.short}
+            </span>
           </button>
         );
       })}
