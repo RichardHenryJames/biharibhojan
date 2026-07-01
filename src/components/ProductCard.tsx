@@ -1,10 +1,12 @@
 "use client";
 
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { Award, Clock, Flame, Minus, Plus, Star, Users } from "lucide-react";
 import { useCart } from "@/context/CartContext";
 import { useLanguage } from "@/context/LanguageContext";
 import { cn, formatINR, tintFor } from "@/lib/utils";
+import { dishImage } from "@/data/dishImages";
 import type { ProductDTO } from "@/lib/types";
 
 function SpiceMeter({ level }: { level: number }) {
@@ -38,6 +40,7 @@ export default function ProductCard({
   const name = lang === "hi" && item.nameHi ? item.nameHi : item.name;
   const description =
     lang === "hi" && item.descriptionHi ? item.descriptionHi : item.description;
+  const photo = dishImage(item.slug);
 
   return (
     <motion.article
@@ -47,25 +50,37 @@ export default function ProductCard({
       transition={{ duration: 0.4, delay: Math.min(index * 0.03, 0.24) }}
       className="group flex flex-col overflow-hidden rounded-2xl border border-masala-100/80 bg-cream-50 shadow-card transition-all duration-300 hover:-translate-y-1 hover:border-saffron-200 hover:shadow-warm"
     >
-      {/* Art zone: fixed aspect ratio, image-ready. Swap the plate for a photo later. */}
+      {/* Art zone: real dish photo when available, else a floating emoji plate. */}
       <div
         className={cn(
           "relative aspect-[5/4] overflow-hidden bg-gradient-to-br",
           tintFor(item.categorySlug),
         )}
       >
-        {/* soft radial highlight */}
-        <div className="pointer-events-none absolute -right-6 -top-8 h-28 w-28 rounded-full bg-white/40 blur-2xl" />
-        {/* emoji on a floating plate (placeholder for the real dish photo) */}
-        <div className="absolute inset-0 grid place-items-center">
-          <motion.div
-            className="grid h-[4.6rem] w-[4.6rem] place-items-center rounded-full bg-cream-50 text-[2.4rem] shadow-[0_10px_28px_-8px_rgba(36,25,16,0.35)] ring-1 ring-black/[0.04] sm:h-20 sm:w-20 sm:text-[2.75rem]"
-            whileHover={{ scale: 1.08, y: -2 }}
-            transition={{ type: "spring", stiffness: 260, damping: 16 }}
-          >
-            <span aria-hidden>{item.image}</span>
-          </motion.div>
-        </div>
+        {photo ? (
+          <Image
+            src={photo}
+            alt={name}
+            fill
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 350px"
+            className="object-cover transition-transform duration-500 group-hover:scale-105"
+          />
+        ) : (
+          <>
+            {/* soft radial highlight */}
+            <div className="pointer-events-none absolute -right-6 -top-8 h-28 w-28 rounded-full bg-white/40 blur-2xl" />
+            {/* emoji on a floating plate (placeholder for the real dish photo) */}
+            <div className="absolute inset-0 grid place-items-center">
+              <motion.div
+                className="grid h-[4.6rem] w-[4.6rem] place-items-center rounded-full bg-cream-50 text-[2.4rem] shadow-[0_10px_28px_-8px_rgba(36,25,16,0.35)] ring-1 ring-black/[0.04] sm:h-20 sm:w-20 sm:text-[2.75rem]"
+                whileHover={{ scale: 1.08, y: -2 }}
+                transition={{ type: "spring", stiffness: 260, damping: 16 }}
+              >
+                <span aria-hidden>{item.image}</span>
+              </motion.div>
+            </div>
+          </>
+        )}
 
         {/* Top badges */}
         <div className="absolute left-2.5 top-2.5 flex flex-col items-start gap-1.5">

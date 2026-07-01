@@ -1,12 +1,14 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Minus, Plus, ShoppingBag, Trash2, Truck, X } from "lucide-react";
 import { useCart } from "@/context/CartContext";
 import { useLanguage } from "@/context/LanguageContext";
 import { cn, formatINR } from "@/lib/utils";
+import { dishImage } from "@/data/dishImages";
 
 const FREE_DELIVERY_THRESHOLD = 399;
 
@@ -113,8 +115,18 @@ export default function CartDrawer() {
                       exit={{ opacity: 0, x: 40 }}
                       className="flex gap-3 rounded-2xl border border-masala-100 bg-cream-50 p-3"
                     >
-                      <div className="grid h-16 w-16 shrink-0 place-items-center rounded-xl bg-cream-200 text-3xl">
-                        {line.image}
+                      <div className="grid h-16 w-16 shrink-0 place-items-center overflow-hidden rounded-xl bg-cream-200 text-3xl">
+                        {dishImage(line.slug) ? (
+                          <Image
+                            src={dishImage(line.slug) as string}
+                            alt={line.name}
+                            width={64}
+                            height={64}
+                            className="h-full w-full object-cover"
+                          />
+                        ) : (
+                          line.image
+                        )}
                       </div>
                       <div className="flex flex-1 flex-col">
                         <div className="flex items-start justify-between gap-2">

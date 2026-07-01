@@ -35,3 +35,9 @@ next-env.d.ts
 # prisma / sqlite
 /prisma/*.db
 /prisma/*.db-journal
+
+# raw AI-generated source images (kept locally; the optimized webp in
+# public/dishes/ is what the site actually serves)
+ChatGPT Image*.png
+/_thumbs/
+_*.mjs

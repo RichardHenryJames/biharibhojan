@@ -2,11 +2,13 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { ArrowLeft, Banknote, Loader2, Lock, ShoppingBag, Smartphone } from "lucide-react";
 import { useCart } from "@/context/CartContext";
 import { cn, formatINR } from "@/lib/utils";
 import { useLanguage } from "@/context/LanguageContext";
+import { dishImage } from "@/data/dishImages";
 import UpiPayment from "@/components/checkout/UpiPayment";
 
 const FREE_DELIVERY_THRESHOLD = 399;
@@ -211,8 +213,18 @@ export default function CheckoutPage() {
             <div className="max-h-72 space-y-3 overflow-y-auto px-6 py-4">
               {lines.map((l) => (
                 <div key={l.slug} className="flex items-center gap-3">
-                  <span className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-cream-200 text-2xl">
-                    {l.image}
+                  <span className="grid h-11 w-11 shrink-0 place-items-center overflow-hidden rounded-xl bg-cream-200 text-2xl">
+                    {dishImage(l.slug) ? (
+                      <Image
+                        src={dishImage(l.slug) as string}
+                        alt={l.name}
+                        width={44}
+                        height={44}
+                        className="h-full w-full object-cover"
+                      />
+                    ) : (
+                      l.image
+                    )}
                   </span>
                   <div className="min-w-0 flex-1">
                     <p className="truncate text-sm font-semibold text-masala-900">
