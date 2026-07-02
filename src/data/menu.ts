@@ -490,6 +490,27 @@ export const menuData: MenuCategory[] = [
     sortOrder: 4,
     items: [
       {
+        name: "Ghar ki Thali",
+        nameHi: "घर की थाली",
+        slug: "ghar-ki-thali",
+        description:
+          "A full homestyle thali: steamed rice, fresh roti, dal, a dry and a gravy sabzi, chokha, chutney, pickle and raita. A complete Bihari home meal on one plate.",
+        descriptionHi:
+          "भरपूर घरेलू थाली: सादा चावल, ताज़ी रोटी, दाल, एक सूखी और एक तरी वाली सब्ज़ी, चोखा, चटनी, अचार और रायता। एक थाली में पूरा बिहारी घर का खाना।",
+        price: 149,
+        image: "🍛",
+        isVeg: true,
+        spiceLevel: 2,
+        isBestseller: true,
+        isSignature: true,
+        rating: 4.9,
+        reviews: 806,
+        prepTime: 30,
+        serves: "1",
+        region: "Hazaribagh",
+        tags: ["thali", "complete-meal", "homestyle"],
+      },
+      {
         name: "Steamed Rice",
         nameHi: "सादा चावल",
         slug: "steamed-rice",

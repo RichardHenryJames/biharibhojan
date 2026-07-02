@@ -16,8 +16,8 @@ const item = {
   show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] } },
 };
 
-// Hero centrepiece bowl — our signature dish, shown as a real photo.
-const HERO_DISH = { slug: "besan-aloo-sabzi", en: "Besan Aloo Sabzi", hi: "बेसन आलू सब्ज़ी" };
+// Hero centrepiece bowl — our signature homestyle thali, shown as a real photo.
+const HERO_DISH = { slug: "ghar-ki-thali", en: "Ghar ki Thali", hi: "घर की थाली" };
 
 const floats = [
   // `mobile` cards show on every screen; the others appear from sm+ to avoid clutter.

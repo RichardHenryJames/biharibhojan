@@ -2,6 +2,7 @@
 // Surfaces render the photo when present and fall back to the emoji otherwise,
 // so partial photo coverage never breaks the UI.
 export const DISH_IMAGE_SLUGS: ReadonlySet<string> = new Set([
+  "ghar-ki-thali",
   "aloo-bhujia",
   "matar-aloo-bhujia",
   "besan-aloo-sabzi",
