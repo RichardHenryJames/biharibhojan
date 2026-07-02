@@ -183,26 +183,6 @@ export const menuData: MenuCategory[] = [
         tags: ["beans", "aloo", "dry-sabzi"],
       },
       {
-        name: "Matar Aloo Bhujia",
-        nameHi: "मटर आलू भुजिया",
-        slug: "matar-aloo-bhujia",
-        description:
-          "Green peas and potato dry-cooked with cumin and coriander. Sweet, soft and comforting.",
-        descriptionHi:
-          "हरी मटर और आलू, जीरा और धनिया के साथ सूखे पके। मीठे, नरम और सुकून देने वाले।",
-        price: 69,
-        image: "🟢",
-        isVeg: true,
-        spiceLevel: 1,
-        isBestseller: true,
-        rating: 4.7,
-        reviews: 287,
-        prepTime: 20,
-        serves: "1-2",
-        region: "Hazaribagh",
-        tags: ["matar", "peas", "aloo"],
-      },
-      {
         name: "Mix Veg Bhujia",
         nameHi: "मिक्स वेज भुजिया",
         slug: "mix-veg-bhujia",
@@ -251,6 +231,26 @@ export const menuData: MenuCategory[] = [
     taglineHi: "हल्के मसाले वाली घरेलू तरकारी",
     sortOrder: 2,
     items: [
+      {
+        name: "Matar Aloo Sabzi",
+        nameHi: "मटर आलू सब्ज़ी",
+        slug: "matar-aloo-bhujia",
+        description:
+          "Green peas and potato simmered in a light onion-tomato gravy with cumin and coriander. Homely and comforting.",
+        descriptionHi:
+          "हरी मटर और आलू, हल्की प्याज़-टमाटर की तरी में जीरा और धनिया के साथ पके। घरेलू और सुकून देने वाले।",
+        price: 69,
+        image: "🥘",
+        isVeg: true,
+        spiceLevel: 1,
+        isBestseller: true,
+        rating: 4.7,
+        reviews: 287,
+        prepTime: 20,
+        serves: "1-2",
+        region: "Hazaribagh",
+        tags: ["matar", "peas", "aloo", "gravy-sabzi"],
+      },
       {
         name: "Besan Aloo Sabzi",
         nameHi: "बेसन आलू सब्ज़ी",
