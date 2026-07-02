@@ -8,7 +8,6 @@ export const DISH_IMAGE_SLUGS: ReadonlySet<string> = new Set([
   "aloo-dum",
   "kaddu-ki-sabzi",
   "arhar-dal-tadka",
-  "dal-tadka",
   "jeera-rice",
   "khichdi",
   "kala-chana-ghugni",
