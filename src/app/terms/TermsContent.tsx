@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import { ScrollText } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
 import { BRAND } from "@/data/i18n";
 
@@ -87,40 +86,33 @@ export default function TermsContent() {
 
   return (
     <>
-      <section className="relative overflow-hidden border-b border-masala-100 bg-cream-200/40">
-        <div className="pointer-events-none absolute -left-8 top-0 text-[9rem] opacity-10">
-          📜
-        </div>
-        <div className="container-bb relative py-14 lg:py-20">
-          <span className="eyebrow mb-3">
-            <ScrollText className="h-3.5 w-3.5" /> {c.eyebrow}
-          </span>
-          <h1 className="section-title max-w-3xl">
-            {c.titleA} <span className="text-gradient">{c.titleHighlight}</span>
-          </h1>
-          <p className="mt-4 max-w-2xl text-lg text-masala-600">{c.intro}</p>
-          <p className="mt-3 text-sm font-medium text-masala-400">{c.updated}</p>
+      <section className="legal-hero">
+        <div className="container-bb">
+          <span className="eyebrow">{c.eyebrow}</span>
+          <h1>{c.titleA} {c.titleHighlight}</h1>
+          <p>{c.intro}</p>
+          <time>{c.updated}</time>
         </div>
       </section>
 
-      <section className="container-bb py-16">
-        <div className="mx-auto max-w-3xl space-y-8">
+      <section className="legal-article container-bb">
+        <aside className="legal-article__aside">{c.titleHighlight}</aside>
+        <div className="legal-sections">
           {c.sections.map((s, i) => (
-            <div key={i} className="card-surface p-6 sm:p-7">
-              <h2 className="font-display text-xl font-bold text-masala-900">{s.heading}</h2>
-              <p className="mt-2.5 text-[15px] leading-relaxed text-masala-600">{s.body}</p>
+            <div key={i} className="legal-section">
+              <h2>{s.heading}</h2>
+              <p>{s.body}</p>
             </div>
           ))}
 
-          <div className="rounded-2xl bg-masala-900 px-6 py-6 text-cream-50">
-            <p className="font-display text-lg font-bold">{c.contactCta}</p>
-            <p className="mt-1.5 flex flex-wrap gap-x-4 gap-y-1 font-semibold text-saffron-300">
-              <Link href={`mailto:${BRAND.email}`} className="hover:text-saffron-200">
+          <div className="legal-contact">
+            <h3>{c.contactCta}</h3>
+            <p>
+              <Link href={`mailto:${BRAND.email}`}>
                 {BRAND.email}
               </Link>
               <Link
                 href={`tel:${BRAND.phone.replace(/\s/g, "")}`}
-                className="hover:text-saffron-200"
               >
                 {BRAND.phone}
               </Link>

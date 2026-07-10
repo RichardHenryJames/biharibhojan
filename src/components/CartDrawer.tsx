@@ -19,10 +19,15 @@ export default function CartDrawer() {
 
   useEffect(() => {
     document.body.style.overflow = isOpen ? "hidden" : "";
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") closeCart();
+    };
+    if (isOpen) window.addEventListener("keydown", onKeyDown);
     return () => {
       document.body.style.overflow = "";
+      window.removeEventListener("keydown", onKeyDown);
     };
-  }, [isOpen]);
+  }, [isOpen, closeCart]);
 
   const remaining = Math.max(0, FREE_DELIVERY_THRESHOLD - subtotal);
   const progress = Math.min(100, (subtotal / FREE_DELIVERY_THRESHOLD) * 100);
@@ -36,76 +41,67 @@ export default function CartDrawer() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={closeCart}
-            className="fixed inset-0 z-[90] bg-masala-950/50 backdrop-blur-sm"
+            className="cart-scrim"
           />
           <motion.aside
             initial={{ x: "100%" }}
             animate={{ x: 0 }}
             exit={{ x: "100%" }}
             transition={{ type: "spring", stiffness: 320, damping: 34 }}
-            className="fixed right-0 top-0 z-[100] flex h-full w-full max-w-md flex-col bg-cream-100 shadow-2xl"
+            className="cart-drawer"
           >
-            {/* Header */}
-            <div className="flex items-center justify-between border-b border-masala-100 bg-cream-50 px-5 py-4">
-              <div className="flex items-center gap-2">
-                <ShoppingBag className="h-5 w-5 text-chili-600" />
-                <h2 className="font-display text-lg font-bold">
+            <div className="cart-head">
+              <div className="flex items-center gap-3">
+                <ShoppingBag className="h-4 w-4" />
+                <h2>
                   {t("cart.title")}{" "}
-                  <span className="text-masala-400">({count})</span>
+                  <span>({count})</span>
                 </h2>
               </div>
               <button
                 onClick={closeCart}
                 aria-label="Close cart"
-                className="grid h-9 w-9 place-items-center rounded-full text-masala-500 hover:bg-cream-200"
+                className="cart-close"
               >
                 <X className="h-5 w-5" />
               </button>
             </div>
 
             {lines.length === 0 ? (
-              <div className="flex flex-1 flex-col items-center justify-center gap-4 px-8 text-center">
-                <div className="grid h-24 w-24 place-items-center rounded-full bg-cream-200 text-5xl">
-                  🍽️
-                </div>
-                <div>
-                  <p className="font-display text-xl font-bold">{t("cart.empty")}</p>
-                  <p className="mt-1 text-sm text-masala-500">
-                    {t("cart.emptyHint")}
-                  </p>
-                </div>
-                <button onClick={closeCart} className="btn-saffron">
+              <div className="cart-empty">
+                <span className="cart-empty__mark" aria-hidden>00</span>
+                <h3>{t("cart.empty")}</h3>
+                <p>{t("cart.emptyHint")}</p>
+                <button onClick={closeCart} className="btn-primary mt-6 px-6 py-3">
                   {t("cart.browse")}
                 </button>
               </div>
             ) : (
               <>
-                {/* Free delivery progress */}
-                <div className="border-b border-masala-100 bg-saffron-50 px-5 py-3">
-                  <p className="flex items-center gap-2 text-sm font-medium text-masala-700">
-                    <Truck className="h-4 w-4 text-saffron-600" />
+                <div className="cart-delivery">
+                  <p>
+                    <Truck className="h-4 w-4" />
                     {remaining > 0 ? (
                       <>
                         {t("cart.addMore")} <strong>{formatINR(remaining)}</strong>{" "}
                         {t("cart.forFreeDelivery")}
                       </>
                     ) : (
-                      <span className="font-semibold text-leaf-700">
+                      <span>
                         🎉 {t("cart.freeUnlocked")}
                       </span>
                     )}
                   </p>
-                  <div className="mt-2 h-1.5 overflow-hidden rounded-full bg-saffron-200">
+                  <div className="cart-delivery__track">
                     <motion.div
-                      className="h-full rounded-full bg-gradient-to-r from-saffron-400 to-chili-500"
+                      className="cart-delivery__fill"
                       animate={{ width: `${progress}%` }}
                       transition={{ type: "spring", stiffness: 200, damping: 26 }}
                     />
                   </div>
                 </div>
 
-                {/* Lines */}
-                <div className="flex-1 space-y-3 overflow-y-auto px-5 py-4">
+                <div className="cart-lines">
                   {lines.map((line) => (
                     <motion.div
                       key={line.slug}
@@ -113,27 +109,26 @@ export default function CartDrawer() {
                       initial={{ opacity: 0, y: 8 }}
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, x: 40 }}
-                      className="flex gap-3 rounded-2xl border border-masala-100 bg-cream-50 p-3"
+                      className="cart-line"
                     >
-                      <div className="grid h-16 w-16 shrink-0 place-items-center overflow-hidden rounded-xl bg-cream-200 text-3xl">
+                      <div className="cart-line__image">
                         {dishImage(line.slug) ? (
                           <Image
                             src={dishImage(line.slug) as string}
                             alt={line.name}
                             width={64}
                             height={64}
-                            className="h-full w-full object-cover"
                           />
                         ) : (
                           line.image
                         )}
                       </div>
-                      <div className="flex flex-1 flex-col">
-                        <div className="flex items-start justify-between gap-2">
-                          <p className="flex items-center gap-1.5 text-sm font-bold leading-tight text-masala-900">
+                      <div>
+                        <div className="cart-line__top">
+                          <p className="cart-line__name">
                             <span
                               className={cn(
-                                "diet-mark scale-90",
+                                "diet-mark",
                                 line.isVeg ? "diet-veg" : "diet-nonveg",
                               )}
                             />
@@ -142,34 +137,30 @@ export default function CartDrawer() {
                           <button
                             onClick={() => removeItem(line.slug)}
                             aria-label={`Remove ${line.name}`}
-                            className="text-masala-400 hover:text-chili-600"
+                            className="text-masala-400 transition-colors hover:text-chili-600"
                           >
                             <Trash2 className="h-4 w-4" />
                           </button>
                         </div>
-                        <div className="mt-auto flex items-center justify-between pt-2">
-                          <div className="flex items-center gap-1 rounded-full border border-masala-200 bg-cream-50 p-0.5">
+                        <div className="cart-line__bottom">
+                          <div className="cart-line__qty">
                             <button
                               onClick={() => setQty(line.slug, line.qty - 1)}
                               aria-label="Decrease"
-                              className="grid h-7 w-7 place-items-center rounded-full text-masala-700 hover:bg-cream-200"
                             >
                               <Minus className="h-3.5 w-3.5" />
                             </button>
-                            <span className="w-5 text-center text-sm font-bold tabular-nums">
-                              {line.qty}
-                            </span>
+                            <span>{line.qty}</span>
                             <button
                               onClick={() => setQty(line.slug, line.qty + 1)}
                               aria-label="Increase"
-                              className="grid h-7 w-7 place-items-center rounded-full text-masala-700 hover:bg-cream-200"
                             >
                               <Plus className="h-3.5 w-3.5" />
                             </button>
                           </div>
-                          <span className="text-sm font-bold text-masala-900">
+                          <strong className="text-sm">
                             {formatINR(line.price * line.qty)}
-                          </span>
+                          </strong>
                         </div>
                       </div>
                     </motion.div>
@@ -177,28 +168,27 @@ export default function CartDrawer() {
 
                   <button
                     onClick={clear}
-                    className="mx-auto mt-2 block text-xs font-medium text-masala-400 hover:text-chili-600"
+                    className="cart-clear"
                   >
                     {t("cart.clear")}
                   </button>
                 </div>
 
-                {/* Footer */}
-                <div className="border-t border-masala-100 bg-cream-50 p-5">
-                  <div className="mb-3 flex items-center justify-between">
-                    <span className="text-sm text-masala-500">{t("cart.subtotal")}</span>
-                    <span className="font-display text-2xl font-bold text-masala-900">
+                <div className="cart-foot">
+                  <div className="cart-foot__total">
+                    <span>{t("cart.subtotal")}</span>
+                    <strong>
                       {formatINR(subtotal)}
-                    </span>
+                    </strong>
                   </div>
                   <Link
                     href="/checkout"
                     onClick={closeCart}
-                    className="btn-primary w-full py-3.5 text-base"
+                    className="btn-primary w-full py-4"
                   >
                     {t("cart.checkout")}
                   </Link>
-                  <p className="mt-2 text-center text-xs text-masala-400">
+                  <p className="cart-foot__note">
                     {t("cart.taxesNote")}
                   </p>
                 </div>

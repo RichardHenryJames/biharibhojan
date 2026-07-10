@@ -1,31 +1,24 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
-import {
-  ArrowRight,
-  Flame,
-  Leaf,
-  Clock,
-  ShieldCheck,
-  Search,
-  ChefHat,
-  Bike,
-  Quote,
-} from "lucide-react";
-import { motion } from "framer-motion";
+import { ArrowRight } from "lucide-react";
 import SectionHeading from "@/components/SectionHeading";
 import Reveal from "@/components/Reveal";
 import ProductCard from "@/components/ProductCard";
 import { useLanguage } from "@/context/LanguageContext";
-import { gradientFor } from "@/lib/utils";
+import { BRAND } from "@/data/i18n";
+import { dishImage } from "@/data/dishImages";
 import type { ProductDTO, CategoryDTO } from "@/lib/types";
-
-const FEATURE_ICONS = [Flame, Leaf, Clock, ShieldCheck];
-const STEP_ICONS = [Search, ChefHat, Bike];
-const TESTIMONIAL_EMOJI = ["😋", "🤤", "🥰"];
 
 type TextItem = { title: string; body: string };
 type Testimonial = { quote: string; name: string; place: string };
+
+const GALLERY = [
+  { slug: "bihari-chicken-curry", en: "Bihari Chicken Curry", hi: "बिहारी चिकन करी" },
+  { slug: "aloo-bhujia", en: "Aloo Bhujia", hi: "आलू भुजिया" },
+  { slug: "arhar-dal-tadka", en: "Arhar Dal Tadka", hi: "अरहर दाल तड़का" },
+];
 
 export default function HomeSections({
   bestsellers,
@@ -35,7 +28,6 @@ export default function HomeSections({
   categories: CategoryDTO[];
 }) {
   const { t, tRaw, lang } = useLanguage();
-
   const features = tRaw<TextItem[]>("features.items") ?? [];
   const steps = tRaw<TextItem[]>("steps.items") ?? [];
   const testimonials = tRaw<Testimonial[]>("testimonials.items") ?? [];
@@ -46,228 +38,228 @@ export default function HomeSections({
 
   return (
     <>
-      {/* Categories */}
-      <section className="container-bb py-20">
-        <SectionHeading
-          eyebrow={t("categories.eyebrow")}
-          title={
-            <>
-              {t("categories.titleA")}{" "}
-              <span className="text-gradient">{t("categories.titleHighlight")}</span>
-            </>
-          }
-          subtitle={t("categories.subtitle")}
-        />
-
-        <div className="mt-12 grid grid-cols-2 gap-4 md:grid-cols-3 lg:gap-5">
-          {categories.map((c, i) => (
-            <Reveal key={c.slug} delay={i * 0.05}>
-              <Link
-                href={`/menu?c=${c.slug}`}
-                className={`group relative flex h-full flex-col justify-between overflow-hidden rounded-3xl bg-gradient-to-br p-6 text-white shadow-card transition-transform hover:-translate-y-1 ${gradientFor(
-                  c.slug,
-                )}`}
-              >
-                <div className="absolute inset-0 opacity-20 grain mix-blend-overlay" />
-                <div className="absolute -right-4 -top-4 text-7xl opacity-30 transition-transform duration-500 group-hover:scale-125 group-hover:rotate-12">
-                  {c.emoji}
-                </div>
-                <div className="relative">
-                  <span className="text-4xl">{c.emoji}</span>
-                  <h3 className="mt-3 font-display text-xl font-bold leading-tight">
-                    {catName(c)}
-                  </h3>
-                  <p className="mt-1 text-sm text-white/80">{catTagline(c)}</p>
-                </div>
-                <div className="relative mt-6 flex items-center justify-between">
-                  <span className="rounded-full bg-white/20 px-3 py-1 text-xs font-semibold backdrop-blur">
-                    {c.count} {t("categories.dishes")}
-                  </span>
-                  <span className="grid h-9 w-9 place-items-center rounded-full bg-white/20 transition-colors group-hover:bg-white group-hover:text-masala-900">
-                    <ArrowRight className="h-4 w-4" />
-                  </span>
-                </div>
-              </Link>
-            </Reveal>
-          ))}
-        </div>
-      </section>
-
-      {/* Bestsellers */}
-      <section className="relative bg-cream-200/50 py-20">
+      <section className="home-section home-signatures">
         <div className="container-bb">
-          <div className="flex flex-wrap items-end justify-between gap-4">
+          <div className="home-signatures__top">
             <SectionHeading
               align="left"
               eyebrow={t("bestsellers.eyebrow")}
               title={
                 <>
-                  {t("bestsellers.titleA")}{" "}
-                  <span className="text-gradient">
-                    {t("bestsellers.titleHighlight")}
-                  </span>
+                  {t("bestsellers.titleA")} {t("bestsellers.titleHighlight")}
                 </>
               }
             />
-            <Link
-              href="/menu"
-              className="group flex items-center gap-2 text-sm font-bold text-chili-700"
-            >
-              {t("bestsellers.viewFull")}
-              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+            <Link href="/menu" className="home-signatures__link">
+              {t("bestsellers.viewFull")} <ArrowRight className="h-4 w-4" />
             </Link>
           </div>
 
-          <div className="mt-10 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
-            {bestsellers.map((item, i) => (
-              <ProductCard key={item.slug} item={item} index={i} />
+          <div className="home-signatures__grid">
+            {bestsellers.slice(0, 5).map((product, index) => (
+              <ProductCard
+                key={product.slug}
+                item={product}
+                index={index}
+                variant="feature"
+              />
             ))}
           </div>
         </div>
       </section>
 
-      {/* Why us */}
-      <section className="container-bb py-20">
-        <SectionHeading
-          eyebrow={t("features.eyebrow")}
-          title={
-            <>
-              {t("features.titleA")}{" "}
-              <span className="text-gradient">{t("features.titleHighlight")}</span>
-            </>
-          }
-          subtitle={t("features.subtitle")}
-        />
-        <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-          {features.map((f, i) => {
-            const Icon = FEATURE_ICONS[i % FEATURE_ICONS.length];
-            return (
-              <Reveal key={f.title} delay={i * 0.07}>
-                <div className="card-surface h-full p-6">
-                  <span className="grid h-12 w-12 place-items-center rounded-2xl bg-gradient-to-br from-saffron-400 to-chili-600 text-white shadow-warm">
-                    <Icon className="h-6 w-6" />
-                  </span>
-                  <h3 className="mt-4 font-display text-lg font-bold">{f.title}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-masala-500">{f.body}</p>
-                </div>
-              </Reveal>
-            );
-          })}
-        </div>
-      </section>
-
-      {/* How it works */}
-      <section className="relative overflow-hidden bg-masala-950 py-20 text-cream-100">
-        <div className="absolute inset-0 opacity-[0.06] grain" />
-        <div className="pointer-events-none absolute left-1/2 top-0 h-64 w-64 -translate-x-1/2 rounded-full bg-saffron-500/20 blur-3xl" />
-        <div className="container-bb relative">
-          <SectionHeading
-            eyebrow={t("steps.eyebrow")}
-            title={
-              <span className="text-cream-50">
-                {t("steps.titleA")}{" "}
-                <span className="text-saffron-400">{t("steps.titleHighlight")}</span>
-              </span>
-            }
-            subtitle={<span className="text-cream-100/70">{t("steps.subtitle")}</span>}
-          />
-          <div className="mt-14 grid gap-8 md:grid-cols-3">
-            {steps.map((s, i) => {
-              const Icon = STEP_ICONS[i % STEP_ICONS.length];
-              return (
-                <Reveal key={s.title} delay={i * 0.1}>
-                  <div className="relative text-center">
-                    <span className="absolute -top-6 left-1/2 -translate-x-1/2 font-display text-7xl font-black text-cream-100/5">
-                      {i + 1}
-                    </span>
-                    <span className="relative mx-auto grid h-16 w-16 place-items-center rounded-3xl bg-gradient-to-br from-saffron-400 to-chili-600 text-white shadow-warm">
-                      <Icon className="h-7 w-7" />
-                    </span>
-                    <h3 className="relative mt-5 font-display text-xl font-bold text-cream-50">
-                      {s.title}
-                    </h3>
-                    <p className="relative mx-auto mt-2 max-w-xs text-sm leading-relaxed text-cream-100/65">
-                      {s.body}
-                    </p>
-                  </div>
-                </Reveal>
-              );
-            })}
+      <section className="home-story">
+        <Reveal className="home-story__photos" y={0}>
+          <div className="home-story__photo-main">
+            <Image
+              src={dishImage("aloo-bhujia") as string}
+              alt={lang === "hi" ? "आलू भुजिया" : "Aloo Bhujia"}
+              fill
+              sizes="(max-width: 900px) 90vw, 58vw"
+            />
           </div>
-        </div>
-      </section>
-
-      {/* Testimonials */}
-      <section className="container-bb py-20">
-        <SectionHeading
-          eyebrow={t("testimonials.eyebrow")}
-          title={
-            <>
-              {t("testimonials.titleA")}{" "}
-              <span className="text-gradient">
-                {t("testimonials.titleHighlight")}
-              </span>
-            </>
-          }
-        />
-        <div className="mt-12 grid gap-5 md:grid-cols-3">
-          {testimonials.map((tm, i) => (
-            <Reveal key={tm.name} delay={i * 0.08}>
-              <figure className="card-surface flex h-full flex-col p-7">
-                <Quote className="h-8 w-8 text-saffron-400" />
-                <blockquote className="mt-4 flex-1 text-[15px] leading-relaxed text-masala-700">
-                  “{tm.quote}”
-                </blockquote>
-                <figcaption className="mt-6 flex items-center gap-3 border-t border-masala-100 pt-5">
-                  <span className="grid h-11 w-11 place-items-center rounded-full bg-saffron-200 text-xl">
-                    {TESTIMONIAL_EMOJI[i % TESTIMONIAL_EMOJI.length]}
-                  </span>
-                  <span>
-                    <span className="block text-sm font-bold text-masala-900">
-                      {tm.name}
-                    </span>
-                    <span className="block text-xs text-masala-500">{tm.place}</span>
-                  </span>
-                  <span className="ml-auto text-saffron-500">★★★★★</span>
-                </figcaption>
-              </figure>
-            </Reveal>
-          ))}
-        </div>
-      </section>
-
-      {/* Final CTA */}
-      <section className="container-bb pb-8">
-        <Reveal>
-          <div className="relative overflow-hidden rounded-[2.5rem] bg-gradient-to-br from-chili-600 via-chili-700 to-masala-900 px-8 py-14 text-center text-cream-50 shadow-warm sm:px-16 sm:py-20">
-            <div className="absolute inset-0 opacity-10 grain" />
-            <div className="pointer-events-none absolute -left-10 -top-10 text-9xl opacity-15">
-              🍲
-            </div>
-            <div className="pointer-events-none absolute -bottom-12 -right-6 text-9xl opacity-15">
-              🍚
-            </div>
-            <div className="relative mx-auto max-w-2xl">
-              <h2 className="font-display text-3xl font-extrabold sm:text-5xl">
-                {t("cta.title")}
-              </h2>
-              <p className="mx-auto mt-4 max-w-md text-cream-100/80">
-                {t("cta.subtitle")}
-              </p>
-              <div className="mt-8 flex flex-wrap justify-center gap-3">
-                <Link href="/menu" className="btn-saffron h-12 px-8 text-base">
-                  {t("cta.orderNow")} <ArrowRight className="h-5 w-5" />
-                </Link>
-                <Link
-                  href="/about"
-                  className="btn h-12 border border-cream-100/30 px-7 text-base text-cream-50 hover:bg-cream-100/10"
-                >
-                  {t("cta.readStory")}
-                </Link>
-              </div>
-            </div>
+          <div className="home-story__photo-small">
+            <Image
+              src={dishImage("bihari-chicken-curry") as string}
+              alt={lang === "hi" ? "बिहारी चिकन करी" : "Bihari Chicken Curry"}
+              fill
+              sizes="(max-width: 900px) 45vw, 26vw"
+            />
           </div>
+          <div className="home-story__caption">{t("about.cardTitle")}</div>
         </Reveal>
+
+        <Reveal className="home-story__copy">
+          <span className="eyebrow">{t("about.beganEyebrow")}</span>
+          <h2>{t("about.beganTitle")}</h2>
+          <p>{t("about.beganP1")}</p>
+          <p>{t("about.beganP2")}</p>
+          <Link href="/about" className="menu-section-link">
+            {t("hero.ourStory")} <ArrowRight className="h-4 w-4" />
+          </Link>
+        </Reveal>
+      </section>
+
+      <section className="home-section home-menu-ledger">
+        <div className="home-menu-ledger__layout container-bb">
+          <div className="home-menu-ledger__intro">
+            <span className="eyebrow">{t("categories.eyebrow")}</span>
+            <h2>
+              {t("categories.titleA")} {t("categories.titleHighlight")}
+            </h2>
+            <p>{t("categories.subtitle")}</p>
+          </div>
+
+          <div className="home-menu-ledger__list">
+            {categories.map((category, index) => (
+              <Reveal key={category.slug} delay={index * 0.045} y={14}>
+                <Link href={`/menu?c=${category.slug}`} className="category-ledger-item">
+                  <span className="category-ledger-item__index">0{index + 1}</span>
+                  <span>
+                    <h3>{catName(category)}</h3>
+                    <p>{catTagline(category)}</p>
+                  </span>
+                  <span className="category-ledger-item__count">
+                    {category.count} {t("categories.dishes")}
+                  </span>
+                </Link>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="home-section home-kitchen">
+        <div className="container-bb">
+          <div className="home-kitchen__header">
+            <span className="eyebrow">{t("steps.eyebrow")}</span>
+            <h2>
+              {t("steps.titleA")} {t("steps.titleHighlight")}
+            </h2>
+          </div>
+
+          <div className="home-kitchen__steps">
+            {steps.map((step, index) => (
+              <Reveal key={step.title} className="kitchen-step" delay={index * 0.1}>
+                <span className="kitchen-step__number">0{index + 1}</span>
+                <h3>{step.title}</h3>
+                <p>{step.body}</p>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="home-gallery" aria-label={t("features.eyebrow")}>
+        <div className="home-gallery__grid">
+          <Reveal className="gallery-tile" y={0}>
+            <Image
+              src={dishImage(GALLERY[0].slug) as string}
+              alt={lang === "hi" ? GALLERY[0].hi : GALLERY[0].en}
+              fill
+              sizes="(max-width: 900px) 100vw, 42vw"
+            />
+            <span className="gallery-tile__label">
+              {lang === "hi" ? GALLERY[0].hi : GALLERY[0].en}
+            </span>
+          </Reveal>
+          <Reveal className="gallery-tile" y={0} delay={0.08}>
+            <Image
+              src={dishImage(GALLERY[1].slug) as string}
+              alt={lang === "hi" ? GALLERY[1].hi : GALLERY[1].en}
+              fill
+              sizes="(max-width: 900px) 50vw, 24vw"
+            />
+            <span className="gallery-tile__label">
+              {lang === "hi" ? GALLERY[1].hi : GALLERY[1].en}
+            </span>
+          </Reveal>
+          <Reveal className="gallery-tile gallery-tile--text" y={0} delay={0.14}>
+            <h2>
+              {t("features.titleA")} {t("features.titleHighlight")}
+            </h2>
+            <p>{t("features.subtitle")}</p>
+          </Reveal>
+          <Reveal className="gallery-tile" y={0} delay={0.1}>
+            <Image
+              src={dishImage(GALLERY[2].slug) as string}
+              alt={lang === "hi" ? GALLERY[2].hi : GALLERY[2].en}
+              fill
+              sizes="(max-width: 900px) 100vw, 50vw"
+            />
+            <span className="gallery-tile__label">
+              {lang === "hi" ? GALLERY[2].hi : GALLERY[2].en}
+            </span>
+          </Reveal>
+        </div>
+      </section>
+
+      <section className="home-section home-values">
+        <div className="container-bb">
+          <div className="home-values__grid">
+            {features.map((feature, index) => (
+              <Reveal key={feature.title} className="home-value" delay={index * 0.06}>
+                <span className="home-value__number">0{index + 1}</span>
+                <h3>{feature.title}</h3>
+                <p>{feature.body}</p>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="home-section home-reviews">
+        <div className="home-reviews__layout container-bb">
+          <div className="home-reviews__title">
+            <span className="eyebrow">{t("testimonials.eyebrow")}</span>
+            <h2>
+              {t("testimonials.titleA")} {t("testimonials.titleHighlight")}
+            </h2>
+          </div>
+
+          <div className="review-ledger">
+            {testimonials.map((testimonial, index) => (
+              <Reveal key={testimonial.name} y={14} delay={index * 0.07}>
+                <figure className="review-entry">
+                  <blockquote>{testimonial.quote}</blockquote>
+                  <figcaption>
+                    <strong>{testimonial.name}</strong>
+                    {testimonial.place}
+                    <span className="review-entry__stars" aria-label="5 out of 5 stars">
+                      ★★★★★
+                    </span>
+                  </figcaption>
+                </figure>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="home-closing">
+        <div className="home-closing__order">
+          <span className="eyebrow">{t("cta.title")}</span>
+          <h2>{t("cta.title")}</h2>
+          <p>{t("cta.subtitle")}</p>
+          <div className="home-closing__actions">
+            <Link href="/menu" className="btn-saffron px-7 py-4">
+              {t("cta.orderNow")} <ArrowRight className="h-4 w-4" />
+            </Link>
+            <Link href="/about" className="btn-ghost home-hero__secondary px-7 py-4">
+              {t("cta.readStory")}
+            </Link>
+          </div>
+        </div>
+
+        <div className="home-closing__location">
+          <span className="eyebrow">{BRAND.city[lang]}</span>
+          <h3>{t("about.cardTitle")}</h3>
+          <div className="home-closing__details">
+            <span>{BRAND.addressLine[lang]}</span>
+            <span>{BRAND.hours[lang]}</span>
+            <span>{BRAND.phone}</span>
+          </div>
+        </div>
       </section>
     </>
   );

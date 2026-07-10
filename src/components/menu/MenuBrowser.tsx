@@ -2,7 +2,6 @@
 
 import { useMemo, useState, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
-import { motion } from "framer-motion";
 import { Search, X, Leaf, ArrowUpDown } from "lucide-react";
 import ProductCard from "@/components/ProductCard";
 import { useLanguage } from "@/context/LanguageContext";
@@ -87,25 +86,21 @@ export default function MenuBrowser({
   const total = grouped.reduce((s, g) => s + g.items.length, 0);
 
   return (
-    <div className="container-bb pb-20">
-      {/* Sticky filter bar */}
-      <div className="sticky top-[76px] z-30 -mx-5 mb-8 border-b border-masala-100 bg-cream-100/90 px-5 py-4 backdrop-blur-xl lg:-mx-8 lg:px-8">
-        <div className="flex flex-col gap-3">
-          {/* search + controls */}
-          <div className="flex flex-wrap items-center gap-3">
-            <div className="relative flex-1 min-w-[220px]">
-              <Search className="pointer-events-none absolute left-3.5 top-1/2 h-5 w-5 -translate-y-1/2 text-masala-400" />
+    <div className="menu-browser">
+      <div className="menu-tools">
+        <div className="menu-tools__inner container-bb">
+          <div className="menu-tools__top">
+            <div className="menu-search">
+              <Search aria-hidden />
               <input
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
                 placeholder={t("menu.searchPlaceholder")}
-                className="w-full rounded-full border border-masala-200 bg-cream-50 py-2.5 pl-11 pr-10 text-sm font-medium text-masala-800 outline-none transition focus:border-saffron-400 focus:ring-2 focus:ring-saffron-200"
               />
               {query && (
                 <button
                   onClick={() => setQuery("")}
                   aria-label="Clear search"
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-masala-400 hover:text-chili-600"
                 >
                   <X className="h-4 w-4" />
                 </button>
@@ -115,22 +110,20 @@ export default function MenuBrowser({
             <button
               onClick={() => setVegOnly((v) => !v)}
               className={cn(
-                "btn h-11 gap-2 px-4 text-sm",
-                vegOnly
-                  ? "bg-leaf-500 text-white shadow-soft"
-                  : "border border-masala-200 bg-cream-50 text-masala-700",
+                "menu-control",
+                vegOnly && "is-active",
               )}
             >
               <Leaf className="h-4 w-4" />
               {t("menu.vegOnly")}
             </button>
 
-            <div className="relative">
-              <ArrowUpDown className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-masala-400" />
+            <div className="menu-sort">
+              <ArrowUpDown aria-hidden />
               <select
                 value={sort}
                 onChange={(e) => setSort(e.target.value as SortKey)}
-                className="h-11 appearance-none rounded-full border border-masala-200 bg-cream-50 pl-9 pr-9 text-sm font-semibold text-masala-700 outline-none focus:border-saffron-400"
+                aria-label="Sort menu"
               >
                 {SORTS.map((s) => (
                   <option key={s.key} value={s.key}>
@@ -141,86 +134,75 @@ export default function MenuBrowser({
             </div>
           </div>
 
-          {/* category pills */}
-          <div className="no-scrollbar -mx-1 flex gap-2 overflow-x-auto px-1 pb-0.5">
+          <div className="menu-categories">
             <Pill
               active={activeCat === "all"}
               onClick={() => setActiveCat("all")}
-              label={`🍽️ ${t("menu.all")}`}
+              label={t("menu.all")}
             />
             {categories.map((c) => (
               <Pill
                 key={c.slug}
                 active={activeCat === c.slug}
                 onClick={() => setActiveCat(c.slug)}
-                label={`${c.emoji} ${catName(c)}`}
+                label={catName(c)}
               />
             ))}
           </div>
         </div>
       </div>
 
-      <p className="mb-6 text-sm font-medium text-masala-500">
-        {total} {total === 1 ? t("menu.dish") : t("menu.dishes")}
-        {activeCat !== "all" && (
-          <>
-            {" "}
-            {t("menu.in")}{" "}
-            <span className="font-bold text-masala-800">
-              {(() => {
-                const c = categories.find((x) => x.slug === activeCat);
-                return c ? catName(c) : "";
-              })()}
-            </span>
-          </>
-        )}
-      </p>
+      <div className="container-bb">
+        <p className="menu-results-count">
+          {total} {total === 1 ? t("menu.dish") : t("menu.dishes")}
+          {activeCat !== "all" && (
+            <>
+              {" "}{t("menu.in")}{" "}
+              <strong>
+                {(() => {
+                  const c = categories.find((x) => x.slug === activeCat);
+                  return c ? catName(c) : "";
+                })()}
+              </strong>
+            </>
+          )}
+        </p>
 
-      {grouped.length === 0 ? (
-        <div className="flex flex-col items-center justify-center gap-3 rounded-3xl border border-dashed border-masala-200 bg-cream-50 py-20 text-center">
-          <span className="text-5xl">🔍</span>
-          <p className="font-display text-xl font-bold">{t("menu.noResults")}</p>
-          <p className="max-w-sm text-sm text-masala-500">
-            {t("menu.noResultsHint")}
-          </p>
-          <button
-            onClick={() => {
-              setQuery("");
-              setVegOnly(false);
-              setActiveCat("all");
-            }}
-            className="btn-ghost mt-2"
-          >
-            {t("menu.resetFilters")}
-          </button>
-        </div>
-      ) : (
-        <div className="space-y-14">
-          {grouped.map(({ cat, items }) => (
-            <section key={cat.slug} id={cat.slug} className="scroll-mt-40">
-              <div className="mb-6 flex items-center gap-3">
-                <span className="grid h-12 w-12 place-items-center rounded-2xl bg-cream-200 text-2xl">
-                  {cat.emoji}
-                </span>
-                <div>
-                  <h2 className="font-display text-2xl font-bold text-masala-900">
-                    {catName(cat)}
-                  </h2>
-                  <p className="text-sm text-masala-500">{catTagline(cat)}</p>
+        {grouped.length === 0 ? (
+          <div className="menu-empty">
+            <span aria-hidden>00</span>
+            <h2>{t("menu.noResults")}</h2>
+            <p>{t("menu.noResultsHint")}</p>
+            <button
+              onClick={() => {
+                setQuery("");
+                setVegOnly(false);
+                setActiveCat("all");
+              }}
+              className="btn-ghost mt-6 px-6 py-3"
+            >
+              {t("menu.resetFilters")}
+            </button>
+          </div>
+        ) : (
+          <div className="menu-groups">
+            {grouped.map(({ cat, items }, groupIndex) => (
+              <section key={cat.slug} id={cat.slug} className="menu-group">
+                <div className="menu-group__heading">
+                  <span className="menu-group__index">0{groupIndex + 1}</span>
+                  <h2>{catName(cat)}</h2>
+                  <p>{catTagline(cat)}</p>
                 </div>
-              </div>
-              <motion.div
-                layout
-                className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
-              >
-                {items.map((item, i) => (
-                  <ProductCard key={item.slug} item={item} index={i} />
-                ))}
-              </motion.div>
-            </section>
-          ))}
-        </div>
-      )}
+                <div className="menu-group__items">
+                  {items.map((item, i) => (
+                    <ProductCard key={item.slug} item={item} index={i} variant="menu" />
+                  ))}
+                </div>
+              </section>
+            ))}
+          </div>
+        )}
+      </div>
     </div>
   );
 }
@@ -237,9 +219,10 @@ function Pill({
   return (
     <button
       onClick={onClick}
+      aria-pressed={active}
       className={cn(
-        "chip shrink-0 whitespace-nowrap",
-        active && "chip-active",
+        "menu-category-tab",
+        active && "is-active",
       )}
     >
       {label}

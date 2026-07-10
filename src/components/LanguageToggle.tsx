@@ -1,11 +1,10 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { useLanguage } from "@/context/LanguageContext";
 import { LANGUAGES } from "@/data/i18n";
 import { cn } from "@/lib/utils";
 
-/** Segmented EN | हिं pill toggle — sliding highlight, like big-app language switchers. */
+/** Compact bilingual switch, styled like a printed language notation. */
 export default function LanguageToggle({
   className,
   size = "md",
@@ -18,7 +17,7 @@ export default function LanguageToggle({
   return (
     <div
       className={cn(
-        "relative inline-flex items-center rounded-full border border-masala-200 bg-cream-50 p-0.5",
+        "language-switch",
         className,
       )}
       role="group"
@@ -32,19 +31,11 @@ export default function LanguageToggle({
             onClick={() => setLang(l.code)}
             aria-pressed={active}
             className={cn(
-              "relative rounded-full font-bold transition-colors",
+              "transition-colors",
               size === "sm" ? "px-2.5 py-1 text-xs" : "px-3 py-1.5 text-sm",
-              active ? "text-cream-50" : "text-masala-500 hover:text-masala-800",
             )}
           >
-            {active && (
-              <motion.span
-                layoutId="lang-pill"
-                className="absolute inset-0 rounded-full bg-chili-600"
-                transition={{ type: "spring", stiffness: 380, damping: 30 }}
-              />
-            )}
-            <span className={cn("relative z-10", l.code === "hi" && "font-hindi-sans")}>
+            <span className={cn(l.code === "hi" && "font-hindi-sans")}>
               {l.short}
             </span>
           </button>
