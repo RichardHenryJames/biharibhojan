@@ -1,12 +1,11 @@
 import type { Metadata, Viewport } from "next";
 import {
-  Cormorant_Garamond,
-  Karla,
+  Playfair_Display,
+  Plus_Jakarta_Sans,
   Tiro_Devanagari_Hindi,
   Noto_Sans_Devanagari,
 } from "next/font/google";
 import "./globals.css";
-import "./brand.css";
 import { LanguageProvider } from "@/context/LanguageContext";
 import { CartProvider } from "@/context/CartContext";
 import Navbar from "@/components/Navbar";
@@ -14,18 +13,17 @@ import Footer from "@/components/Footer";
 import CartDrawer from "@/components/CartDrawer";
 import SplashScreen from "@/components/SplashScreen";
 
-const display = Cormorant_Garamond({
+const display = Playfair_Display({
   subsets: ["latin"],
   variable: "--font-display",
   display: "swap",
-  weight: ["400", "500", "600", "700"],
+  weight: ["500", "600", "700", "800", "900"],
 });
 
-const sans = Karla({
+const sans = Plus_Jakarta_Sans({
   subsets: ["latin"],
   variable: "--font-sans",
   display: "swap",
-  weight: ["400", "500", "600", "700", "800"],
 });
 
 const hindi = Tiro_Devanagari_Hindi({
@@ -109,7 +107,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#32170F",
+  themeColor: "#E8890B",
 };
 
 export default function RootLayout({
@@ -199,7 +197,7 @@ export default function RootLayout({
         <LanguageProvider>
           <CartProvider>
             <Navbar />
-            <main className="site-main min-h-screen">{children}</main>
+            <main className="min-h-screen">{children}</main>
             <Footer />
             <CartDrawer />
           </CartProvider>

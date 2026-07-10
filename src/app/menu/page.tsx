@@ -24,7 +24,7 @@ export default async function MenuPage() {
     <>
       <MenuHeader dishCount={products.length} categoryCount={categories.length} />
 
-      <div>
+      <div className="pt-6">
         <Suspense fallback={<div className="container-bb py-20 text-center text-masala-500">Loading…</div>}>
           <MenuBrowser products={products} categories={categories} />
         </Suspense>

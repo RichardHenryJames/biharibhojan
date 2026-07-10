@@ -156,8 +156,8 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
             transition={{ type: "spring", stiffness: 380, damping: 28 }}
             className="fixed bottom-6 left-1/2 z-[120] -translate-x-1/2"
           >
-            <div className="cart-toast">
-              <span className="cart-toast__check">
+            <div className="flex items-center gap-2.5 rounded-full bg-masala-900 px-5 py-3 text-sm font-semibold text-cream-50 shadow-warm">
+              <span className="grid h-5 w-5 place-items-center rounded-full bg-leaf-500">
                 <Check className="h-3.5 w-3.5 text-white" strokeWidth={3} />
               </span>
               {toast}

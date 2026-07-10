@@ -1,6 +1,8 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
+import { Instagram, Facebook, Twitter, MapPin, Phone, Mail } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
 import { BRAND } from "@/data/i18n";
 
@@ -23,62 +25,121 @@ export default function Footer() {
   ];
 
   return (
-    <footer className="site-footer">
-      <div className="site-footer__hindi" aria-hidden>बिहारी भोजन</div>
-      <div className="site-footer__top container-bb">
-        <div className="site-footer__brand">
-          <h2>Bihari <em>Bhojan.</em></h2>
-          <p>
-              {t("footer.blurb")}
-          </p>
-          <Link href="/menu" className="site-footer__order btn-saffron">
-            {t("nav.orderNow")}
-          </Link>
-          <div className="site-footer__social">
-            <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer">Instagram</a>
-            <a href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer">Facebook</a>
-            <a href="https://x.com/" target="_blank" rel="noopener noreferrer">X / Twitter</a>
-          </div>
-        </div>
+    <footer className="relative mt-24 overflow-hidden bg-masala-950 text-cream-100">
+      <div className="absolute inset-0 opacity-[0.06] grain" />
+      <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-saffron-500/60 to-transparent" />
 
-        <div className="site-footer__columns">
-          <div className="site-footer__column">
-            <h3>{t("footer.explore")}</h3>
-            <ul>
+      <div className="container-bb relative py-16">
+        <div className="grid gap-12 lg:grid-cols-[1.4fr_1fr_1fr_1.2fr]">
+          {/* Brand */}
+          <div>
+            <Link href="/" className="flex items-center gap-3">
+              <span className="grid h-12 w-12 place-items-center overflow-hidden rounded-2xl bg-cream-50">
+                <Image
+                  src="/biharibhojanlogo-nosub.png"
+                  alt="BihariBhojan"
+                  width={48}
+                  height={48}
+                  className="h-full w-full object-contain"
+                />
+              </span>
+              <span className="leading-none">
+                <span className="block font-display text-xl font-extrabold">
+                  Bihari<span className="text-saffron-400">Bhojan</span>
+                </span>
+                <span className="font-hindi text-[13px] text-cream-100/60">
+                  बिहारी भोजन
+                </span>
+              </span>
+            </Link>
+            <p className="mt-5 max-w-xs text-sm leading-relaxed text-cream-100/65">
+              {t("footer.blurb")}
+            </p>
+            <div className="mt-6 flex gap-3">
+              {[
+                { Icon: Instagram, href: "https://www.instagram.com/", label: "Instagram" },
+                { Icon: Facebook, href: "https://www.facebook.com/", label: "Facebook" },
+                { Icon: Twitter, href: "https://x.com/", label: "X" },
+              ].map(({ Icon, href, label }) => (
+                <a
+                  key={label}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={label}
+                  className="grid h-10 w-10 place-items-center rounded-full border border-cream-100/15 text-cream-100/70 transition-colors hover:border-saffron-400 hover:bg-saffron-400 hover:text-masala-900"
+                >
+                  <Icon className="h-5 w-5" />
+                </a>
+              ))}
+            </div>
+          </div>
+
+          <div>
+            <h4 className="font-display text-base font-bold text-cream-50">
+              {t("footer.explore")}
+            </h4>
+            <ul className="mt-4 space-y-2.5">
               {exploreLinks.map((l) => (
                 <li key={l.href + l.label}>
-                  <Link href={l.href}>{l.label}</Link>
+                  <Link
+                    href={l.href}
+                    className="text-sm text-cream-100/65 transition-colors hover:text-saffron-400"
+                  >
+                    {l.label}
+                  </Link>
                 </li>
               ))}
             </ul>
           </div>
 
-          <div className="site-footer__column">
-            <h3>{t("footer.company")}</h3>
-            <ul>
+          <div>
+            <h4 className="font-display text-base font-bold text-cream-50">
+              {t("footer.company")}
+            </h4>
+            <ul className="mt-4 space-y-2.5">
               {companyLinks.map((l) => (
                 <li key={l.href + l.label}>
-                  <Link href={l.href}>{l.label}</Link>
+                  <Link
+                    href={l.href}
+                    className="text-sm text-cream-100/65 transition-colors hover:text-saffron-400"
+                  >
+                    {l.label}
+                  </Link>
                 </li>
               ))}
             </ul>
           </div>
 
-          <div className="site-footer__column">
-            <h3>{t("footer.getInTouch")}</h3>
-            <ul>
-              <li><span>{BRAND.addressLine[lang]}</span></li>
-              <li><a href={`tel:${BRAND.phone.replace(/\s/g, "")}`}>{BRAND.phone}</a></li>
-              <li><a href={`mailto:${BRAND.email}`}>{BRAND.email}</a></li>
-              <li><span>{BRAND.hours[lang]}</span></li>
+          {/* Contact */}
+          <div>
+            <h4 className="font-display text-base font-bold text-cream-50">
+              {t("footer.getInTouch")}
+            </h4>
+            <ul className="mt-4 space-y-3 text-sm text-cream-100/70">
+              <li className="flex items-start gap-2.5">
+                <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-saffron-400" />
+                {BRAND.addressLine[lang]}
+              </li>
+              <li className="flex items-center gap-2.5">
+                <Phone className="h-4 w-4 shrink-0 text-saffron-400" />
+                {BRAND.phone}
+              </li>
+              <li className="flex items-center gap-2.5">
+                <Mail className="h-4 w-4 shrink-0 text-saffron-400" />
+                {BRAND.email}
+              </li>
             </ul>
+            <div className="mt-5 inline-flex items-center gap-2 rounded-full bg-leaf-500/15 px-3 py-1.5 text-xs font-semibold text-leaf-400">
+              <span className="h-2 w-2 animate-pulse rounded-full bg-leaf-400" />
+              {t("footer.openNow")}
+            </div>
           </div>
         </div>
-      </div>
 
-      <div className="site-footer__bottom container-bb">
-        <p>© {new Date().getFullYear()} BihariBhojan. {t("footer.madeWith")}</p>
-          <p className="site-footer__bottom-links">
+        <div className="mt-14 flex flex-col items-center justify-between gap-4 border-t border-cream-100/10 pt-6 text-sm text-cream-100/50 sm:flex-row">
+          <p>© {new Date().getFullYear()} BihariBhojan. {t("footer.madeWith")}</p>
+          <p className="flex items-center gap-4">
             <Link href="/privacy" className="hover:text-saffron-400">
               {t("footer.privacy")}
             </Link>
@@ -87,6 +148,7 @@ export default function Footer() {
             </Link>
             <span>biharibhojan.com</span>
           </p>
+        </div>
       </div>
     </footer>
   );

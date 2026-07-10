@@ -72,11 +72,15 @@ export default function CheckoutPage() {
   // Empty cart
   if (hydrated && count === 0) {
     return (
-      <div className="checkout-empty container-bb">
-        <span className="checkout-empty__mark" aria-hidden>00</span>
-        <h1>{t("checkout.emptyTitle")}</h1>
-        <p>{t("checkout.emptyBody")}</p>
-        <Link href="/menu" className="btn-primary mt-6 px-6 py-3">
+      <div className="container-bb flex min-h-[60vh] flex-col items-center justify-center gap-4 py-20 text-center">
+        <span className="grid h-24 w-24 place-items-center rounded-full bg-cream-200 text-5xl">
+          🛒
+        </span>
+        <h1 className="font-display text-3xl font-bold">{t("checkout.emptyTitle")}</h1>
+        <p className="max-w-sm text-masala-500">
+          {t("checkout.emptyBody")}
+        </p>
+        <Link href="/menu" className="btn-primary mt-2">
           {t("checkout.emptyCta")}
         </Link>
       </div>
@@ -84,25 +88,26 @@ export default function CheckoutPage() {
   }
 
   return (
-    <div className="checkout-page container-bb">
+    <div className="container-bb py-12">
       <Link
         href="/menu"
-        className="checkout-back"
+        className="mb-6 inline-flex items-center gap-1.5 text-sm font-semibold text-masala-500 hover:text-chili-600"
       >
         <ArrowLeft className="h-4 w-4" /> {t("checkout.backToMenu")}
       </Link>
 
-      <h1 className="checkout-title">
-        {t("checkout.titleA")} {t("checkout.titleHighlight")}
+      <h1 className="section-title !text-4xl">
+        {t("checkout.titleA")} <span className="text-gradient">{t("checkout.titleHighlight")}</span>
       </h1>
 
-      <form onSubmit={onSubmit} className="checkout-layout">
-        <div className="checkout-column">
-          <fieldset className="checkout-section">
-            <legend>
+      <form onSubmit={onSubmit} className="mt-10 grid gap-8 lg:grid-cols-[1.3fr_1fr]">
+        {/* Left: details */}
+        <div className="space-y-6">
+          <fieldset className="card-surface p-6">
+            <legend className="px-2 font-display text-lg font-bold">
               {t("checkout.deliveryDetails")}
             </legend>
-            <div className="checkout-fields">
+            <div className="grid gap-4 pt-4 sm:grid-cols-2">
               <Field label={t("checkout.fullName")} full={false}>
                 <input
                   required
@@ -170,9 +175,10 @@ export default function CheckoutPage() {
             </div>
           </fieldset>
 
-          <fieldset className="checkout-section">
-            <legend>{t("checkout.paymentMethod")}</legend>
-            <div className="payment-grid">
+          {/* Payment */}
+          <fieldset className="card-surface p-6">
+            <legend className="px-2 font-display text-lg font-bold">{t("checkout.paymentMethod")}</legend>
+            <div className="grid gap-3 pt-4 sm:grid-cols-2">
               <PaymentOption
                 active={payment === "COD"}
                 onClick={() => setPayment("COD")}
@@ -193,79 +199,83 @@ export default function CheckoutPage() {
           </fieldset>
         </div>
 
-        <div className="checkout-summary-wrap">
-          <div className="checkout-summary">
-            <div className="checkout-summary__head">
-              <h2>
+        {/* Right: summary */}
+        <div className="lg:sticky lg:top-24 lg:self-start">
+          <div className="card-surface overflow-hidden">
+            <div className="flex items-center gap-2 border-b border-masala-100 bg-cream-200/40 px-6 py-4">
+              <ShoppingBag className="h-5 w-5 text-chili-600" />
+              <h2 className="font-display text-lg font-bold">
                 {t("checkout.orderSummary")}{" "}
-                <span>({count})</span>
+                <span className="text-masala-400">({count})</span>
               </h2>
-              <ShoppingBag className="h-4 w-4" />
             </div>
 
-            <div className="checkout-summary__lines">
+            <div className="max-h-72 space-y-3 overflow-y-auto px-6 py-4">
               {lines.map((l) => (
-                <div key={l.slug} className="checkout-summary__line">
-                  <span className="checkout-summary__image">
+                <div key={l.slug} className="flex items-center gap-3">
+                  <span className="grid h-11 w-11 shrink-0 place-items-center overflow-hidden rounded-xl bg-cream-200 text-2xl">
                     {dishImage(l.slug) ? (
                       <Image
                         src={dishImage(l.slug) as string}
                         alt={l.name}
                         width={44}
                         height={44}
+                        className="h-full w-full object-cover"
                       />
                     ) : (
                       l.image
                     )}
                   </span>
-                  <div className="min-w-0">
-                    <strong>{l.name}</strong>
-                    <small>
+                  <div className="min-w-0 flex-1">
+                    <p className="truncate text-sm font-semibold text-masala-900">
+                      {l.name}
+                    </p>
+                    <p className="text-xs text-masala-500">
                       {formatINR(l.price)} × {l.qty}
-                    </small>
+                    </p>
                   </div>
-                  <span className="checkout-summary__price">
+                  <span className="text-sm font-bold text-masala-900">
                     {formatINR(l.price * l.qty)}
                   </span>
                 </div>
               ))}
             </div>
 
-            <div className="checkout-totals">
+            <div className="space-y-2 border-t border-masala-100 px-6 py-4 text-sm">
               <Row label={t("checkout.subtotal")} value={formatINR(subtotal)} />
               <Row
                 label={t("checkout.deliveryFee")}
                 value={
                   deliveryFee === 0 ? (
-                    <strong>{t("checkout.free")}</strong>
+                    <span className="font-semibold text-leaf-600">{t("checkout.free")}</span>
                   ) : (
                     formatINR(deliveryFee)
                   )
                 }
               />
               {deliveryFee > 0 && (
-                <p className="mt-2 text-xs opacity-50">
+                <p className="text-xs text-masala-400">
                   {t("checkout.addMore", { amount: formatINR(FREE_DELIVERY_THRESHOLD - subtotal) })}
                 </p>
               )}
-              <div className="checkout-totals-row checkout-totals__grand">
-                <span>{t("checkout.total")}</span>
-                <span>
+              <div className="flex items-center justify-between border-t border-masala-100 pt-3">
+                <span className="font-display text-lg font-bold">{t("checkout.total")}</span>
+                <span className="font-display text-2xl font-extrabold text-masala-900">
                   {formatINR(total)}
                 </span>
               </div>
             </div>
 
-            <div className="checkout-submit">
+            <div className="px-6 pb-6">
               {error && (
-                <p className="form-error mb-3">
+                <p className="mb-3 rounded-xl bg-chili-100 px-4 py-2.5 text-sm font-medium text-chili-700">
                   {error}
                 </p>
               )}
               <button
                 type="submit"
                 disabled={submitting}
-                className="btn-primary w-full py-4"
+                className="btn-primary w-full py-3.5 text-base"
               >
                 {submitting ? (
                   <>
@@ -275,7 +285,7 @@ export default function CheckoutPage() {
                   <>{t("checkout.placeOrder")} · {formatINR(total)}</>
                 )}
               </button>
-              <p className="checkout-secure">
+              <p className="mt-3 flex items-center justify-center gap-1.5 text-xs text-masala-400">
                 <Lock className="h-3.5 w-3.5" /> {t("checkout.secure")}
               </p>
             </div>
@@ -283,6 +293,24 @@ export default function CheckoutPage() {
         </div>
       </form>
 
+      <style jsx global>{`
+        .ck-input {
+          width: 100%;
+          border-radius: 0.9rem;
+          border: 1px solid #e0d1c2;
+          background: #fffdf9;
+          padding: 0.7rem 0.95rem;
+          font-size: 0.9rem;
+          font-weight: 500;
+          color: #241910;
+          outline: none;
+          transition: border-color 0.15s, box-shadow 0.15s;
+        }
+        .ck-input:focus {
+          border-color: #f4a52c;
+          box-shadow: 0 0 0 3px rgba(252, 215, 141, 0.5);
+        }
+      `}</style>
     </div>
   );
 }
@@ -298,8 +326,8 @@ function Field({
   full?: boolean;
 }) {
   return (
-    <label className={cn("form-field", span && "sm:col-span-2")}>
-      <span className="form-field__label">{label}</span>
+    <label className={cn("block", span && "sm:col-span-2")}>
+      <span className="mb-1.5 block text-sm font-semibold text-masala-700">{label}</span>
       {children}
     </label>
   );
@@ -307,9 +335,9 @@ function Field({
 
 function Row({ label, value }: { label: string; value: React.ReactNode }) {
   return (
-    <div className="checkout-totals-row">
-      <span>{label}</span>
-      <span>{value}</span>
+    <div className="flex items-center justify-between">
+      <span className="text-masala-500">{label}</span>
+      <span className="font-semibold text-masala-800">{value}</span>
     </div>
   );
 }
@@ -331,18 +359,24 @@ function PaymentOption({
     <button
       type="button"
       onClick={onClick}
-      aria-pressed={active}
       className={cn(
-        "payment-option",
-        active && "is-active",
+        "flex items-center gap-3 rounded-2xl border-2 p-4 text-left transition-all",
+        active
+          ? "border-chili-500 bg-chili-50/60 shadow-soft"
+          : "border-masala-200 bg-cream-50 hover:border-masala-300",
       )}
     >
-      <span className="payment-option__icon">
+      <span
+        className={cn(
+          "grid h-10 w-10 place-items-center rounded-xl",
+          active ? "bg-chili-600 text-white" : "bg-cream-200 text-masala-600",
+        )}
+      >
         <Icon className="h-5 w-5" />
       </span>
       <span>
-        <strong>{title}</strong>
-        <small>{sub}</small>
+        <span className="block text-sm font-bold text-masala-900">{title}</span>
+        <span className="block text-xs text-masala-500">{sub}</span>
       </span>
     </button>
   );

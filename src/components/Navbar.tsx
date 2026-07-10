@@ -5,7 +5,7 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { Menu, ShoppingBag, X } from "lucide-react";
+import { Flame, Menu, ShoppingBag, X, MapPin, Phone } from "lucide-react";
 import { useCart } from "@/context/CartContext";
 import { useLanguage } from "@/context/LanguageContext";
 import { BRAND } from "@/data/i18n";
@@ -35,95 +35,104 @@ export default function Navbar() {
 
   useEffect(() => setMobileOpen(false), [pathname]);
 
-  useEffect(() => {
-    document.body.style.overflow = mobileOpen ? "hidden" : "";
-    const onKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") setMobileOpen(false);
-    };
-    if (mobileOpen) window.addEventListener("keydown", onKeyDown);
-    return () => {
-      document.body.style.overflow = "";
-      window.removeEventListener("keydown", onKeyDown);
-    };
-  }, [mobileOpen]);
-
   return (
     <>
-      <div className="site-utility">
-        <div className="site-utility__inner container-bb">
-          <span className="site-utility__offer">
-            {t("nav.freeDelivery")} <strong>₹399</strong>
+      {/* Announcement strip */}
+      <div className="hidden bg-masala-900 text-cream-100 sm:block">
+        <div className="container-bb flex h-9 items-center justify-between text-xs">
+          <span className="flex items-center gap-2">
+            <Flame className="h-3.5 w-3.5 text-saffron-400" />
+            {t("nav.freeDelivery")} <strong className="text-saffron-300">₹399</strong>
           </span>
-          <span className="site-utility__contact">
-            <a href={`tel:${BRAND.phone.replace(/\s/g, "")}`}>{BRAND.phone}</a>
-            <span>{BRAND.city[lang]}</span>
+          <span className="flex items-center gap-4">
+            <a href={`tel:${BRAND.phone.replace(/\s/g, "")}`} className="flex items-center gap-1.5 hover:text-saffron-300">
+              <Phone className="h-3.5 w-3.5" /> {BRAND.phone}
+            </a>
+            <span className="flex items-center gap-1.5">
+              <MapPin className="h-3.5 w-3.5 text-chili-400" /> {BRAND.city[lang]}
+            </span>
           </span>
         </div>
       </div>
 
       <header
         className={cn(
-          "site-header",
-          scrolled && "is-scrolled",
+          "sticky top-0 z-50 transition-all duration-300",
+          scrolled
+            ? "border-b border-masala-100 bg-cream-50/85 shadow-soft backdrop-blur-xl"
+            : "bg-transparent",
         )}
       >
-        <nav className="site-nav container-bb" aria-label="Primary navigation">
-          <Link href="/" className="site-brand">
+        <nav className="container-bb flex h-[var(--header-h)] items-center justify-between gap-4">
+          {/* Logo */}
+          <Link href="/" className="group flex items-center gap-2.5">
             <Image
               src="/biharibhojanlogo-nosub.png"
               alt="BihariBhojan"
-              width={57}
-              height={57}
-              loading="eager"
-              className="site-brand__mark"
+              width={48}
+              height={48}
+              priority
+              className="h-12 w-12 object-contain transition-transform group-hover:scale-105"
             />
-            <span>
-              <span className="site-brand__name">
-                Bihari<em>Bhojan</em>
+            <span className="leading-none">
+              <span className="block font-display text-xl font-extrabold tracking-tight text-masala-900">
+                Bihari<span className="text-chili-600">Bhojan</span>
               </span>
-              <span className="site-brand__hindi">घर जैसा स्वाद, बिहारी अंदाज़</span>
+              <span className="font-hindi text-[13px] text-masala-500">बिहारी भोजन</span>
             </span>
           </Link>
 
-          <ul className="site-links">
+          {/* Desktop links */}
+          <ul className="hidden items-center gap-1 lg:flex">
             {LINKS.map((l) => {
               const active = pathname === l.href;
               return (
                 <li key={l.href}>
                   <Link
                     href={l.href}
-                    className={cn("site-link", active && "is-active")}
-                    aria-current={active ? "page" : undefined}
+                    className={cn(
+                      "relative rounded-full px-4 py-2 text-sm font-semibold transition-colors",
+                      active
+                        ? "text-chili-700"
+                        : "text-masala-600 hover:text-masala-900",
+                    )}
                   >
-                    {t(l.key)}
+                    <span className="relative z-10">{t(l.key)}</span>
+                    {active && (
+                      <motion.span
+                        layoutId="nav-pill"
+                        className="absolute inset-0 rounded-full bg-saffron-200/70"
+                        transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                      />
+                    )}
                   </Link>
                 </li>
               );
             })}
           </ul>
 
-          <div className="site-actions">
-            <LanguageToggle />
+          {/* Actions */}
+          <div className="flex items-center gap-2">
+            <LanguageToggle className="hidden sm:inline-flex" />
 
-            <Link href="/menu" className="site-order-link">
+            <Link href="/menu" className="btn-saffron hidden h-11 md:inline-flex">
               {t("nav.orderNow")}
             </Link>
 
             <button
               onClick={openCart}
               aria-label={t("nav.openCart")}
-              className="site-cart"
+              className="relative grid h-11 w-11 place-items-center rounded-full border border-masala-200 bg-cream-50 text-masala-800 transition-colors hover:border-saffron-400 hover:text-chili-600"
             >
-              <ShoppingBag className="h-4 w-4" />
-              <span>{t("cart.title")}</span>
+              <ShoppingBag className="h-5 w-5" />
               <AnimatePresence>
-                {hydrated && (
+                {hydrated && count > 0 && (
                   <motion.span
                     key={count}
                     initial={{ scale: 0 }}
                     animate={{ scale: 1 }}
                     exit={{ scale: 0 }}
-                    className="site-cart__count"
+                    className="absolute -right-1 -top-1 grid h-5 min-w-5 place-items-center rounded-full bg-chili-600 px-1 text-[11px] font-bold text-white"
                   >
                     {count}
                   </motion.span>
@@ -134,59 +143,49 @@ export default function Navbar() {
             <button
               onClick={() => setMobileOpen((v) => !v)}
               aria-label="Toggle menu"
-              aria-expanded={mobileOpen}
-              className="site-menu-trigger"
+              className="grid h-11 w-11 place-items-center rounded-full border border-masala-200 bg-cream-50 text-masala-800 lg:hidden"
             >
-              {mobileOpen ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
-              <span>{mobileOpen ? "Close" : "Menu"}</span>
+              {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
             </button>
           </div>
         </nav>
-      </header>
 
-      <AnimatePresence>
-        {mobileOpen && (
-          <motion.div
-            initial={{ opacity: 0, clipPath: "inset(0 0 100% 0)" }}
-            animate={{ opacity: 1, clipPath: "inset(0 0 0% 0)" }}
-            exit={{ opacity: 0, clipPath: "inset(0 0 100% 0)" }}
-            transition={{ duration: 0.48, ease: [0.16, 1, 0.3, 1] }}
-            className="mobile-menu"
-            role="dialog"
-            aria-modal="true"
-            aria-label="Mobile navigation"
-          >
-            <div className="mobile-menu__links">
-              <ul>
-                {LINKS.map((l, index) => (
+        {/* Mobile menu */}
+        <AnimatePresence>
+          {mobileOpen && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: "auto" }}
+              exit={{ opacity: 0, height: 0 }}
+              className="overflow-hidden border-t border-masala-100 bg-cream-50/95 backdrop-blur-xl lg:hidden"
+            >
+              <ul className="container-bb flex flex-col gap-1 py-4">
+                {LINKS.map((l) => (
                   <li key={l.href}>
                     <Link
                       href={l.href}
-                      className="mobile-menu__link"
-                      aria-current={pathname === l.href ? "page" : undefined}
+                      className={cn(
+                        "block rounded-xl px-4 py-3 text-base font-semibold",
+                        pathname === l.href
+                          ? "bg-saffron-200/70 text-chili-700"
+                          : "text-masala-700 hover:bg-cream-200",
+                      )}
                     >
-                      <span>0{index + 1}</span>
-                      <span>{t(l.key)}</span>
+                      {t(l.key)}
                     </Link>
                   </li>
                 ))}
+                <li className="mt-2 flex items-center justify-between gap-3">
+                  <Link href="/menu" className="btn-saffron flex-1">
+                    {t("nav.orderNow")}
+                  </Link>
+                  <LanguageToggle />
+                </li>
               </ul>
-              <div className="mobile-menu__foot">
-                <LanguageToggle />
-                <a href={`tel:${BRAND.phone.replace(/\s/g, "")}`}>{BRAND.phone}</a>
-              </div>
-            </div>
-            <div className="mobile-menu__image">
-              <Image
-                src="/dishes/bihari-chicken-curry.webp"
-                alt="Bihari chicken curry"
-                fill
-                sizes="45vw"
-              />
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </header>
     </>
   );
 }

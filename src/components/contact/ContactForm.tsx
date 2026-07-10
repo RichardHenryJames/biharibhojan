@@ -51,19 +51,20 @@ export default function ContactForm() {
   };
 
   return (
-    <div className="contact-form-shell">
-      <h2 className="contact-form-title">{t("contact.eyebrow")}</h2>
+    <div className="card-surface relative overflow-hidden p-6 sm:p-8">
       <AnimatePresence mode="wait">
         {sent ? (
           <motion.div
             key="done"
             initial={{ opacity: 0, scale: 0.96 }}
             animate={{ opacity: 1, scale: 1 }}
-            className="form-success"
+            className="flex flex-col items-center justify-center gap-3 py-12 text-center"
           >
-            <CheckCircle2 className="h-10 w-10" />
-            <h3>{t("contact.form.sentTitle")}</h3>
-            <p>
+            <span className="grid h-16 w-16 place-items-center rounded-full bg-leaf-100 text-leaf-600">
+              <CheckCircle2 className="h-9 w-9" />
+            </span>
+            <h3 className="font-display text-2xl font-bold">{t("contact.form.sentTitle")}</h3>
+            <p className="max-w-sm text-sm text-masala-500">
               {t("contact.form.sentBody", { name: form.name.split(" ")[0] || t("contact.form.friend") })}
             </p>
             <button
@@ -72,7 +73,7 @@ export default function ContactForm() {
                 setError(null);
                 setForm({ name: "", email: "", subject: "", message: "" });
               }}
-              className="btn-ghost mt-6 px-6 py-3"
+              className="btn-ghost mt-2"
             >
               {t("contact.form.sendAnother")}
             </button>
@@ -83,16 +84,16 @@ export default function ContactForm() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             onSubmit={onSubmit}
-            className="form-grid"
+            className="space-y-4"
           >
-            <div className="form-grid form-grid--two">
+            <div className="grid gap-4 sm:grid-cols-2">
               <Field label={t("contact.form.name")}>
                 <input
                   required
                   value={form.name}
                   onChange={update("name")}
                   placeholder={t("contact.form.namePlaceholder")}
-                  className="bb-input"
+                  className="input"
                 />
               </Field>
               <Field label={t("contact.form.email")}>
@@ -102,13 +103,13 @@ export default function ContactForm() {
                   value={form.email}
                   onChange={update("email")}
                   placeholder={t("contact.form.emailPlaceholder")}
-                  className="bb-input"
+                  className="input"
                 />
               </Field>
             </div>
 
             <Field label={t("contact.form.subject")}>
-              <select value={form.subject || subjects[0] || ""} onChange={update("subject")} className="bb-input">
+              <select value={form.subject || subjects[0] || ""} onChange={update("subject")} className="input">
                 {subjects.map((s) => (
                   <option key={s}>{s}</option>
                 ))}
@@ -122,12 +123,12 @@ export default function ContactForm() {
                 value={form.message}
                 onChange={update("message")}
                 placeholder={t("contact.form.messagePlaceholder")}
-                className="bb-input resize-none"
+                className="input resize-none"
               />
             </Field>
 
             {error && (
-              <p className="form-error">
+              <p className="rounded-xl bg-chili-100 px-4 py-2.5 text-sm font-medium text-chili-700">
                 {error}
               </p>
             )}
@@ -135,7 +136,7 @@ export default function ContactForm() {
             <button
               type="submit"
               disabled={submitting}
-              className="btn-saffron mt-2 w-full py-4"
+              className="btn-primary w-full py-3.5 text-base"
             >
               {submitting ? (
                 t("contact.form.sending")
@@ -148,14 +149,33 @@ export default function ContactForm() {
           </motion.form>
         )}
       </AnimatePresence>
+
+      <style jsx>{`
+        :global(.input) {
+          width: 100%;
+          border-radius: 0.9rem;
+          border: 1px solid #e0d1c2;
+          background: #fffdf9;
+          padding: 0.7rem 0.95rem;
+          font-size: 0.9rem;
+          font-weight: 500;
+          color: #241910;
+          outline: none;
+          transition: border-color 0.15s, box-shadow 0.15s;
+        }
+        :global(.input:focus) {
+          border-color: #f4a52c;
+          box-shadow: 0 0 0 3px rgba(252, 215, 141, 0.5);
+        }
+      `}</style>
     </div>
   );
 }
 
 function Field({ label, children }: { label: string; children: React.ReactNode }) {
   return (
-    <label className="form-field">
-      <span className="form-field__label">{label}</span>
+    <label className="block">
+      <span className="mb-1.5 block text-sm font-semibold text-masala-700">{label}</span>
       {children}
     </label>
   );

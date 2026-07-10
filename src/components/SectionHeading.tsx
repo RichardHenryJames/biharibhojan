@@ -17,18 +17,23 @@ export default function SectionHeading({
   return (
     <div
       className={cn(
-        "editorial-heading",
-        align === "center" && "editorial-heading--center",
+        "max-w-2xl",
+        align === "center" ? "mx-auto text-center" : "text-left",
         className,
       )}
     >
       {eyebrow && (
-        <span className="eyebrow">{eyebrow}</span>
+        <span className="eyebrow mb-3">
+          <span className="h-px w-6 bg-chili-500" />
+          {eyebrow}
+        </span>
       )}
-      <div className="editorial-heading__copy">
-        <h2 className="section-title text-balance">{title}</h2>
-        {subtitle && <p className="editorial-heading__subtitle">{subtitle}</p>}
-      </div>
+      <h2 className="section-title text-balance">{title}</h2>
+      {subtitle && (
+        <p className="mt-4 text-base leading-relaxed text-masala-500 sm:text-lg">
+          {subtitle}
+        </p>
+      )}
     </div>
   );
 }
